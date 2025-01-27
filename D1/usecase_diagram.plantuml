@@ -1,29 +1,31 @@
 @startuml
-actor User
-actor "Human Expert" as HumanExpert
-actor Dealership
-actor "Reverse Image Search" as ReverseImageSearch
-actor "Vertex AI Image Model" as VertexAIImageModel
+left to right direction
+actor User 
 actor Expert
 
-package System {
+package "RideRecon System" as System {
+    usecase "Provide Input" as ProvideInput
     usecase "Text Input" as TextInput
     usecase "Image Input" as ImageInput
     usecase "Identify Car" as IdentifyCar
-    usecase "Register Account" as RegisterAccount
-    usecase "Link Dealership" as LinkDealership
+    usecase "Resolve Conflicts" as ResolveConflicts
+    usecase "Provide Car Fact" as ProvideCarFact
+    usecase "Provide Purchase Sources" as ProvidePurchaseSources
 }
 
-User --> TextInput
-User --> ImageInput
-TextInput --> IdentifyCar
-ImageInput --> IdentifyCar
-IdentifyCar <-- Expert
-Expert <|-- HumanExpert
-Expert <|-- ReverseImageSearch
-Expert <|-- VertexAIImageModel
+actor "Vertex AI Image Model" as VertexAIImageModel
+actor "Reverse Image Search" as ReverseImageSearch
+actor "4o-mini Text LLM" as TextLLM
+actor "Trained ML Model" as TrainedMLModel
+actor "Car Dealerships" as Sources
 
-User --> RegisterAccount
-RegisterAccount --> LinkDealership
-LinkDealership --> Dealership
+User --> ProvideInput
+ProvideInput ..> TextInput : <<include>>
+ProvideInput ..> ImageInput : <<include>>
+
+Expert --> IdentifyCar
+Expert <|-- VertexAIImageModel
+Expert <|-- ReverseImageSearch
+Expert <|-- TextLLM
+Expert <|-- TrainedMLModel
 @enduml
