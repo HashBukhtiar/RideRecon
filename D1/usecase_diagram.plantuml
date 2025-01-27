@@ -1,0 +1,29 @@
+@startuml
+actor User
+actor "Human Expert" as HumanExpert
+actor Dealership
+actor "Reverse Image Search" as ReverseImageSearch
+actor "Vertex AI Image Model" as VertexAIImageModel
+actor Expert
+
+package System {
+    usecase "Text Input" as TextInput
+    usecase "Image Input" as ImageInput
+    usecase "Identify Car" as IdentifyCar
+    usecase "Register Account" as RegisterAccount
+    usecase "Link Dealership" as LinkDealership
+}
+
+User --> TextInput
+User --> ImageInput
+TextInput --> IdentifyCar
+ImageInput --> IdentifyCar
+IdentifyCar <-- Expert
+Expert <|-- HumanExpert
+Expert <|-- ReverseImageSearch
+Expert <|-- VertexAIImageModel
+
+User --> RegisterAccount
+RegisterAccount --> LinkDealership
+LinkDealership --> Dealership
+@enduml
