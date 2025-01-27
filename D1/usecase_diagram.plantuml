@@ -1,7 +1,10 @@
 @startuml
 left to right direction
 actor User 
-actor Expert
+actor "Vertex AI Image Model" as VertexAIImageModel
+actor "Reverse Image Search" as ReverseImageSearch
+actor "4o-mini Text LLM" as TextLLM
+actor "Trained ML Model" as TrainedMLModel
 
 package "RideRecon System" as System {
     usecase "Provide Input" as ProvideInput
@@ -11,21 +14,28 @@ package "RideRecon System" as System {
     usecase "Resolve Conflicts" as ResolveConflicts
     usecase "Provide Car Fact" as ProvideCarFact
     usecase "Provide Purchase Sources" as ProvidePurchaseSources
+    usecase "Finalize Output" as FinalizeOutput
 }
 
-actor "Vertex AI Image Model" as VertexAIImageModel
-actor "Reverse Image Search" as ReverseImageSearch
-actor "4o-mini Text LLM" as TextLLM
-actor "Trained ML Model" as TrainedMLModel
-actor "Car Dealerships" as Sources
+actor Expert as Expert
+actor Finalizer as Finalizer
+
+TextLLM --> ProvideCarFact
+TextLLM --> ProvidePurchaseSources
 
 User --> ProvideInput
 ProvideInput ..> TextInput : <<include>>
 ProvideInput ..> ImageInput : <<include>>
 
+Finalizer --> FinalizeOutput
+FinalizeOutput ..> ResolveConflicts : <<include>>
+
 Expert --> IdentifyCar
-Expert <|-- VertexAIImageModel
-Expert <|-- ReverseImageSearch
-Expert <|-- TextLLM
-Expert <|-- TrainedMLModel
+VertexAIImageModel -up-|> Expert
+ReverseImageSearch -up-|> Expert
+TextLLM -up-|> Expert
+TrainedMLModel -up-|> Expert
+
+System -[hidden]-> Expert
+System -[hidden]-> Finalizer
 @enduml
