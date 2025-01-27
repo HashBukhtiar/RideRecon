@@ -1,0 +1,4 @@
+# Ignore everything with the name "SE3A04_D1_Group8" (recipes) except for .tex and .pdf files
+SE3A04_D1_Group8*
+!SE3A04_D1_Group8*.tex
+!SE3A04_D1_Group8*.pdf
