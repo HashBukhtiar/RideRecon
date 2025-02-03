@@ -171,6 +171,14 @@
 % Begin SubSection
 \begin{itemize}
 	\item Provide a general description of any constraints that will limit the developer's options
+	
+	\item The system must have an active \textbf{internet connection} to perform car identification.
+    \item The app must be compatible with \textbf{Android 8.0 (Oreo) and above}.
+    \item The device must have at least \textbf{2GB of RAM} for smooth operation.
+    \item Captured images must have a \textbf{minimum resolution of 720p} to ensure accurate car identification.
+    \item The AI model may not recognize \textbf{damaged or heavily modified cars} accurately.
+    \item The system must comply with \textbf{privacy laws} regarding the storage and processing of user-uploaded images.
+
 \end{itemize}
 % End SubSection
 
@@ -185,6 +193,20 @@
 	\begin{itemize}
 		\item \textbf{Example}: An assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly.
 	\end{itemize}
+
+	\item \textbf{Assumptions:}
+    \begin{itemize}
+        \item Users will have stable internet access while using the app.
+        \item The AI model can identify most common car brands and models.
+        \item Dealerships will provide accurate and up-to-date pricing.
+    \end{itemize}
+    \item \textbf{Dependencies:}
+    \begin{itemize}
+        \item The AI model relies on an external \textbf{machine learning API} to process images.
+        \item The system depends on a third-party \textbf{reverse image search API} (e.g., Google Lens, TinEye) for validation.
+        \item Pricing and specifications are sourced from \textbf{external dealership databases}.
+    \end{itemize}
+
 \end{itemize}
 % End SubSection
 
@@ -193,6 +215,9 @@
 % Begin SubSection
 \begin{itemize}
 	\item Identify requirements that may be delayed until future versions of the system
+	\item \textbf{Offline Mode}: The app currently requires internet access; an offline model will be explored in future versions.
+    \item \textbf{Multiple Car Detection}: Initially, the app will support one car per image; future updates may allow multiple cars.
+    \item \textbf{Personalized Car Recommendations}: The first version won’t suggest similar cars, but this may be added later.
 \end{itemize}
 % End SubSection
 
@@ -696,7 +721,7 @@ Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \
 1.1, 1.2, 1.3, 1.4, 1.5 & 5.3, 5.4, 5.5, 5.8 & 5.1, 5.2, 5.6, 5.7 & 2.1, 2.2, 2.3 & 2.4, 2.5, 2.6 \\ 
 Section 3 & BE2 in Section 4 & BE3 in Section 4 & BE4 in Section 4 & BE5 in Section 4 \\ 
 BE1 in Section 4 & & & & \\ \hline
-\includegraphics[height=1cm]{hashim_signature.png} & SIGNATURE & SIGNATURE & SIGNATURE & SIGNATURE \\ \hline
+\includegraphics[height=1cm]{hashim_signature.png} & SIGNATURE & SIGNATURE & SIGNATURE & \includegraphics[height=0.5cm]{omar_signature.png} \\ \hline
 \end{tabular}
 \caption{Division of Labour}
 \label{tab:division_of_labour}
