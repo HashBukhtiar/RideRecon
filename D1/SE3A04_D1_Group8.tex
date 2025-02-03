@@ -14,6 +14,7 @@
 %\usepackage{setspace}
 %\usepackage{xcolor}
 \usepackage{color}
+\usepackage{parskip}
 %------------------------------------------------------------------------------
 
 % Header and Footer
@@ -58,7 +59,7 @@
 \newpage
 \section{Introduction}
 \label{sec:introduction}
-The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RAMQ, a taxi rideshare application. 
+The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RideRecon, a taxi rideshare application. 
 This document will discuss the purpose of RideRecon, the scope of the application, user characteristics, product requirements, and use case diagrams.
 
 
@@ -69,24 +70,27 @@ The purpose of this SRS is to define the software’s objectives, scope, and fun
 
 \subsection{Scope}
 \label{sub:scope}
-% Begin SubSection
-\begin{itemize}
-	\item Identify the software product(s) to be produced, and name each (e.g., Host DBMS, Report Generator, etc.)
-	\item Explain what the software product(s) will do (and, if necessary, also state what they will not do).
-	\item Describe the application of the software being specified, including relevant benefits, objectives, and goals.
-%	\item Be consistent with similar statements in higher-level specifications (e.g., the system requirements specification), if they exist
-\end{itemize}
-% End SubSection
+
+RideRecon, the car identification application, will allow users to upload an image and text about a vehicle that they want to identify, consulting up to four “Experts” who will use all or some of the user’s input to determine the make and model of the car that has been depicted.
+
+Users are required to register an account on RideRecon in order to access the car identification service. The service includes four experts: “RIS”, “G8M”, “4oE” and ”vAI”. The “RIS” expert performs a reverse image search with the user’s given image to identify the car. The “G8M” expert is a trained machine learning model by the developers that utilizes an optimized database of car images and their corresponding makes and models to identify the user’s car. The ”4oE” expert is the Large Language Model GPT-4o-mini, accessed through OpenAI’s API, which will utilize both the image and the text description to identify the car. Finally, the “vAI” expert is also an LLM, this one hosted on Google Cloud Platform using Vertex AI, specifically the Gemini 1.0 Flash Model, also accessed through its API.
+
+RideRecon’s objective is not only to identify users’ vehicles, but also to deliver other innovative and creative features. For example, once the car has been identified, 4oE will provide an interesting fact about the car, adding more depth and intrigue to it, as well as provide sources and listings for where to purchase the car, allowing the user to go one step further and save time if they are interested in making that vehicle their own.
+
+One of the goals of the software is to increase users, as more users will lead to more cars being identified and added to the optimized database of G8M, and thus better car identification overall, which is even better for future users. Another goal would be to to monetize its user base by offering premium features like better expert access, exclusive community forums, or partnerships with car-related businesses, thereby creating additional revenue streams beyond the core car identification service. This diversification will improve long-term sustainability and profitability.
 
 
 \subsection{Definitions, Acronyms, and Abbreviations}
 \label{sub:definitions_acronyms_and_abbreviations}
-% Begin SubSection
-\begin{itemize}
-	\item Provide the definitions of all terms, acronyms, and abbreviations required to properly interpret the SRS.
-	\item This should be in alphabetical order.
-\end{itemize}
-% End SubSection
+\textbf{LLM}: Large Language Model. A sophisticated artificial intelligence that can understand, generate, and translate human language, often used for tasks like text generation, question answering, and translation.
+
+\textbf{RIS}: Reverse Image Search. This is the idea of using an image as a search query in a browser to find results, rather than using text as traditional browser searches as performed.
+
+\textbf{G8M}: Group 8 Model. This is the model trained by the developers of RideRecon to identify cars. It will utilize an optimized dataset of car images and makes and models.
+
+\textbf{4oE}: GPT-4o-mini. This is an LLM that uses text and images to determine the make and model of the user's car.
+
+\textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
 
 \subsection{References}
 \label{sub:references}
