@@ -17,6 +17,7 @@
 \usepackage{parskip}
 \usepackage{comment}
 \usepackage{enumitem}
+\usepackage{hyperref}
 %------------------------------------------------------------------------------
 
 % Header and Footer
@@ -43,8 +44,11 @@
 {\bf Group Number:} G8 \\
 {\bf Group Members:} Hashim Bukhtiar, Jaden Moore, James Ariache, Olivia Reich, Omar Abdelhamid
 \begin{itemize}
-	\item Group Member Name (as listed in Avenue)
-	\item You do not need to use student \#s or macid (keep those private).
+        \item Hashim Bukhtiar
+        \item Jaden Moore
+        \item James Ariache
+        \item Olivia Reich
+        \item Omar Abdelhamid
 \end{itemize}
 
 \section*{IMPORTANT NOTES}
@@ -94,20 +98,23 @@ One of the goals of the software is to increase users, as more users will lead t
 
 \textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
 
+\textbf{Finalizer}: The component of the system that consolidates and finalizes the output, including resolving conflicts between experts and outputting the fun fact about the car and where to purchase it.
+
 \subsection{References}
 \label{sub:references}
 % Begin SubSection
 \begin{itemize}
-	\item Provide a complete list of all documents referenced elsewhere in the SRS.
-	\item Identify each document by title, report number (if applicable), date, and publishing organization.
-	\item Specify the sources from which the references can be obtained.
-	\item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
+    \item Provide a complete list of all documents referenced elsewhere in the SRS.
+    \item Identify each document by title, report number (if applicable), date, and publishing organization.
+    \item Specify the sources from which the references can be obtained.
+    \item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
 \end{itemize}
 
 \begin{itemize}
-	\item https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1
-	\item https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA
+    \item \url{https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1}
+    \item \url{https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA}
 \end{itemize}
+
 % End SubSection
 
 \subsection{Overview}
@@ -336,43 +343,153 @@ There will be 3 modules in the product. Each module focuses on different major f
 \end{itemize}
 
 \noindent {\bf Main Business Events:} List out all the main business events you are presenting. If you sub-divided into smaller ones, you don't need to include the smaller ones in this list.\\
-
 \begin{itemize}
-	\item BE1 Create Account
-	\item BE2 Authenticate Account
-	\item BE3 Upload Input
-	\item BE4 Compare Expert Answers
-	\item BE5 Present Identification Information
-	\item BE6 Add to Car Collection
+        \item BE1. Create Account
+        \item BE2. Authenticate User
+        \item BE3. Upload Text and/or Image as Input
+        \item BE4. Compare Expert Answers
+        \item BE5. Present Final Output With Identification Information
+        \item BE6. Add to or Remove From Car Collection
 \end{itemize}
 
 \noindent {\bf Viewpoints:} List out all the viewpoints you will be considering.\\
-
 \begin{itemize}
-	\item VP1 Users
-	\item VP2 Marketing (RideRecon)
-	\item VP3 Customer Support (RideRecon)
-	\item VP4 Identification Accuracy
+	\item VP1. Users
+	\item VP2. Customer Support (RideRecon)
+	\item VP3. Marketing (RideRecon)
+	\item VP4. Accounting (RideRecon)
+	\item VP5. Dealership
 \end{itemize}
 
 \noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
+\begin{itemize}
+	\item NA.
+\end{itemize}
 
-\begin{enumerate}[{\bf BE1.}]
-	\item Business Event Name \#1
-		\begin{enumerate}[{\bf VP1.}]
-			\item Viewpoint Name \#1 \\
+\begin{enumerate}[label={\bf BE\arabic*.}]
+	\item Create Account \#1
+		\begin{enumerate}[label=\textbf{VP\arabic*.}]
+			\item Users \#1 \\
 				\textcolor{red}{Insert Scenario Here}
-			\item Viewpoint Name \#2 \\
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Dealership \#5 \\
 				\textcolor{red}{Insert Scenario Here}
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#2
-	\begin{enumerate}[{\bf VP1.}]
-		\item Viewpoint Name \#1 \\
+	\item Authenticate User \#2
+	\begin{enumerate}[label={\bf VP\arabic*.}]
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
+	\end{enumerate}
+	{\bf Global Scenario:}\\
+	\textcolor{red}{Insert Scenario Here}
+	\item Upload Text adn Image as Input \#3
+		\begin{enumerate}[label=\textbf{VP\arabic*.}]
+			\item Users \#1 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Dealership \#5 \\
+				\textcolor{red}{Insert Scenario Here}
+		\end{enumerate}
+		{\bf Global Scenario:}\\
 		\textcolor{red}{Insert Scenario Here}
-		\item Viewpoint Name \#2 \\
-		\textcolor{red}{Insert Scenario Here}
+	\item Compare Expert Answers \#4
+	\begin{enumerate}[label={\bf VP\arabic*.}]
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
+	\end{enumerate}
+	{\bf Global Scenario:}\\
+	\textcolor{red}{Insert Scenario Here}
+	\item Finalize and Present Output With Identification Information \#5 \\
+		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
+		\begin{enumerate}[label=\textbf{VP\arabic*.}]
+			\item Users \#1 \\
+				\textbf{Main Success Scenario} \\
+				\textcolor{red}{1. User opens the RideRecon app on their device.} \\
+				\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\
+				\textcolor{red}{3. User enters login credentials.} \\
+				\textcolor{red}{4. System authenticates the user.} \\
+				\textcolor{red}{5. System prompts the user to upload an image and text description of the car they want to identify.} \\
+				\textcolor{red}{6. User uploads an image with some text description of their car.} \\
+				\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
+				\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
+				\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+				\textbf{Secondary Scenario} \\
+				\textcolor{red}{6i. User doesn't have both forms of input.} \\
+				\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
+				\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
+				\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
+				\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+				\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{NA}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{NA}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{NA}
+			\item Dealership \#5 \\
+				\textcolor{red}{9i. The given dealership was not chosen as a source of purchase.} \\
+				\textcolor{red}{9ii. They can contact RideRecon to ensure that they are more likely to be chosen as the preferred purchase source.}
+
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+			\textbf{Main Success Scenario} \\
+			\textcolor{red}{1. User opens the RideRecon app on their device.} \\
+			\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\
+			\textcolor{red}{3. User enters login credentials.} \\
+			\textcolor{red}{4. System authenticates the user.} \\
+			\textcolor{red}{5. System prompts the user to upload an image and text description of the car they want to identify.} \\
+			\textcolor{red}{6. User uploads an image with some text description of their car.} \\
+			\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
+			\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
+			\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+			\textbf{Secondary Scenario} \\
+			\textcolor{red}{6i. User doesn't have both forms of input.} \\
+			\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
+			\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
+			\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
+			\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+			\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+			
+	\item Add to or Remove From Car Collection \#6
+	\begin{enumerate}[label={\bf VP\arabic*.}]
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
@@ -511,16 +628,16 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Appearance Requirements}
 \label{ssub:appearance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LF-A}1. ]
-	\item 
+\begin{enumerate}[label={LF-A\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Style Requirements}
 \label{ssub:style_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LF-S}1. ]
-	\item 
+\begin{enumerate}[label={LF-S\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -533,40 +650,40 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Ease of Use Requirements}
 \label{ssub:ease_of_use_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{UH-EOU}1. ]
-	\item 
+\begin{enumerate}[label={UH-EOU\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Personalization and Internationalization Requirements}
 \label{ssub:personalization_and_internationalization_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{UH-PI}1. ]
-	\item 
+\begin{enumerate}[label={UH-PI\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Learning Requirements}
 \label{ssub:learning_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{UH-L}1. ]
-	\item 
+\begin{enumerate}[label={UH-L\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Understandability and Politeness Requirements}
 \label{ssub:understandability_and_politeness_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{UH-UP}1. ]
-	\item 
+\begin{enumerate}[label={UH-UP\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Accessibility Requirements}
 \label{ssub:accessibility_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{UH-A}1. ]
-	\item 
+\begin{enumerate}[label={UH-A\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -579,64 +696,64 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Speed and Latency Requirements}
 \label{ssub:speed_and_latency_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SL}1. ]
-	\item 
+\begin{enumerate}[label={PR-SL\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Safety-Critical Requirements}
 \label{ssub:safety_critical_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SC}1. ]
-	\item 
+\begin{enumerate}[label={PR-SC\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Precision or Accuracy Requirements}
 \label{ssub:precision_or_accuracy_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-PA}1. ]
-	\item 
+\begin{enumerate}[label={PR-PA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Reliability and Availability Requirements}
 \label{ssub:reliability_and_availability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-RA}1. ]
-	\item 
+\begin{enumerate}[label={PR-RA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Robustness or Fault-Tolerance Requirements}
 \label{ssub:robustness_or_fault_tolerance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-RFT}1. ]
-	\item 
+\begin{enumerate}[label={PR-RFT\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Capacity Requirements}
 \label{ssub:capacity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-C}1. ]
-	\item 
+\begin{enumerate}[label={PR-C\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Scalability or Extensibility Requirements}
 \label{ssub:scalability_or_extensibility_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SE}1. ]
-	\item 
+\begin{enumerate}[label={PR-SE\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Longevity Requirements}
 \label{ssub:longevity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-L}1. ]
-	\item 
+\begin{enumerate}[label={PR-L\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -649,32 +766,32 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Expected Physical Environment}
 \label{ssub:expected_physical_environment}
 % Begin SubSubSection
-\begin{enumerate}[{OE-EPE}1. ]
-	\item 
+\begin{enumerate}[label={OE-EPE\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Requirements for Interfacing with Adjacent Systems}
 \label{ssub:requirements_for_interfacing_with_adjacent_systems}
 % Begin SubSubSection
-\begin{enumerate}[{OE-IA}1. ]
-	\item 
+\begin{enumerate}[label={OE-IA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Productization Requirements}
 \label{ssub:productization_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{OE-P}1. ]
-	\item 
+\begin{enumerate}[label={OE-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Release Requirements}
 \label{ssub:release_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{OE-R}1. ]
-	\item 
+\begin{enumerate}[label={OE-R\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -687,24 +804,24 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Maintenance Requirements}
 \label{ssub:maintenance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-M}1. ]
-	\item 
+\begin{enumerate}[label={MS-M\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Supportability Requirements}
 \label{ssub:supportability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-S}1. ]
-	\item 
+\begin{enumerate}[label={MS-S\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Adaptability Requirements}
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-A}1. ]
-	\item 
+\begin{enumerate}[label={MS-A\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -717,40 +834,40 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Access Requirements}
 \label{ssub:access_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-AC}1. ]
-	\item 
+\begin{enumerate}[label={SR-AC\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Integrity Requirements}
 \label{ssub:integrity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-INT}1. ]
-	\item 
+\begin{enumerate}[label={SR-INT\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Privacy Requirements}
 \label{ssub:privacy_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-P}1. ]
-	\item 
+\begin{enumerate}[label={SR-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Audit Requirements}
 \label{ssub:audit_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-AU}1. ]
-	\item 
+\begin{enumerate}[label={SR-AU\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Immunity Requirements}
 \label{ssub:immunity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-IM}1. ]
-	\item 
+\begin{enumerate}[label={SR-IM\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -763,16 +880,16 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Cultural Requirements}
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{CP-C}1. ]
-	\item 
+\begin{enumerate}[label={CP-C\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Political Requirements}
 \label{ssub:political_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{CP-P}1. ]
-	\item 
+\begin{enumerate}[label={CP-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -785,19 +902,18 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsubsection{Compliance Requirements}
 \label{ssub:compliance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LR-COMP}1. ]
-	\item 
+\begin{enumerate}[label={LR-COMP\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Standards Requirements}
 \label{ssub:standards_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LR-STD}1. ]
-	\item 
+\begin{enumerate}[label={LR-STD\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
-
 % End SubSection
 
 % End Section
@@ -814,8 +930,8 @@ Include a Division of Labour sheet which indicates the contributions of each tea
 \hline
 Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \\ \hline
 1.1, 1.2, 1.3, 1.4, 1.5 & 5.3, 5.4, 5.5, 5.8 & 5.1, 5.2, 5.6, 5.7 & 2.1, 2.2, 2.3 & 2.4, 2.5, 2.6 \\ 
-Section 3 & BE2 in Section 4 & BE3 in Section 4 & BE4 in Section 4 & BE5 in Section 4 \\ 
-BE1 in Section 4 & & & & \\ \hline
+Section 3 & BE2 in Section 4 & BE1 in Section 4 & BE6 in Section 4 & BE3 in Section 4 \\ 
+BE5 in Section 4 & & BE4 in Section 4 & & \\ \hline
 \includegraphics[height=1cm]{images/hashim_signature.png} & \includegraphics[height=1cm]{images/Jaden_signature.jpg} &
 \includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & SIGNATURE \\ \hline
 \end{tabular}
@@ -839,4 +955,3 @@ BE1 in Section 4 & & & & \\ \hline
 
 
 \end{document}
-%------------------------------------------------------------------------------
