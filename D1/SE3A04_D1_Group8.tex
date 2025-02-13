@@ -478,22 +478,49 @@ There will be 3 modules in the product. Each module focuses on different major f
 			\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
 			\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
 			
-	\item Add to or Remove From Car Collection \#6
-	\begin{enumerate}[label={\bf VP\arabic*.}]
+	\item Add to Car Collection \#6 \\
+	\textbf{Pre-Condition:} The user must be logged into their account.
+	\begin{enumerate}[label=\textbf{VP\arabic*.}]
 		\item Users \#1 \\
-			\textcolor{red}{Insert Scenario Here}
+		\textbf{Main Success Scenario} \\
+		1. User accesses their car collections through the icon on the homepage. \\
+		2. User chooses the add to car collection icon. \\
+		3. System prompts the user to choose a car from their past identification history. \\
+		4. User selected an identified car. \\
+		5. System prompts the user to choose a car collection. \\
+		6. User selects an existing car collection to add the identified car to. \\
+		7. The input data is sent to the Experts for processing. \\
+		8. System provides a review of changes to car collection and prompts the user for verification. \\
+		9. User verifies changes and returns to homepage. \\
+		\textbf{Secondary Scenario} \\
+		1i. User chooses to add a car to a collection immediately after identification. Skip VP1.2 \& VP1.3. \\
+		2i. No past identified car. Return to homepage. \\
+		8i. User declines changes. No modification made to car collection and return to homepage. \\
 		\item Customer Support (RideRecon) \#2 \\
-			\textcolor{red}{Insert Scenario Here}
+		\textcolor{red}{NA}
 		\item Marketing (RideRecon) \#3 \\
-			\textcolor{red}{Insert Scenario Here}
+		\textcolor{red}{NA}
 		\item Accounting (RideRecon) \#4 \\
-			\textcolor{red}{Insert Scenario Here}
+		\textcolor{red}{NA}
 		\item Dealership \#5 \\
-			\textcolor{red}{Insert Scenario Here}
+		\textcolor{red}{NA}
+
 	\end{enumerate}
 	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}
-\end{enumerate}
+	\textbf{Main Success Scenario} \\
+	1. User accesses their car collections through the icon on the homepage. \\
+	2. User chooses the add to car collection icon. \\
+	3. System prompts the user to choose a car from their past identification history. \\
+	4. User selected an identified car. \\
+	5. System prompts the user to choose a car collection. \\
+	6. User selects an existing car collection to add the identified car to. \\
+	7. The input data is sent to the Experts for processing. \\
+	8. System provides a review of changes to car collection and prompts the user for verification. \\
+	9. User verifies changes and returns to homepage. \\
+	\textbf{Secondary Scenario} \\
+	1i. User chooses to add a car to a collection immediately after identification. Skip VP1.2 \& VP1.3. \\
+	2i. No past identified car. Return to homepage. \\
+	8i. User declines changes. No modification made to car collection and return to homepage. \\
 
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]
