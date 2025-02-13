@@ -98,6 +98,8 @@ One of the goals of the software is to increase users, as more users will lead t
 
 \textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
 
+\textbf{Finalizer}: The component of the system that consolidates and finalizes the output, including resolving conflicts between experts and outputting the fun fact about the car and where to purchase it.
+
 \subsection{References}
 \label{sub:references}
 % Begin SubSection
@@ -365,57 +367,105 @@ There will be 3 modules in the product. Each module focuses on different major f
 \end{itemize}
 
 \begin{enumerate}[label={\bf BE\arabic*.}]
-	\item Business Event Name \#1
+	\item Create Account \#1
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
-			\item Viewpoint Name \#1 \\
+			\item Users \#1 \\
 				\textcolor{red}{Insert Scenario Here}
-			\item Viewpoint Name \#2 \\
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Dealership \#5 \\
 				\textcolor{red}{Insert Scenario Here}
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#2
+	\item Authenticate User \#2
 	\begin{enumerate}[label={\bf VP\arabic*.}]
-		\item Viewpoint Name \#1 \\
-		\textcolor{red}{Insert Scenario Here}
-		\item Viewpoint Name \#2 \\
-		\textcolor{red}{Insert Scenario Here}
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#3
+	\item Upload Text adn Image as Input \#3
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
-			\item Viewpoint Name \#1 \\
+			\item Users \#1 \\
 				\textcolor{red}{Insert Scenario Here}
-			\item Viewpoint Name \#2 \\
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Dealership \#5 \\
 				\textcolor{red}{Insert Scenario Here}
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#4
+	\item Compare Expert Answers \#4
 	\begin{enumerate}[label={\bf VP\arabic*.}]
-		\item Viewpoint Name \#1 \\
-		\textcolor{red}{Insert Scenario Here}
-		\item Viewpoint Name \#2 \\
-		\textcolor{red}{Insert Scenario Here}
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#5
+	\item Finalize and Present Output With Identification Information \#5 \\
+		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
-			\item Viewpoint Name \#1 \\
+			\item Users \#1 \\
+				\textbf{Main Success Scenario} \\
+				\textcolor{red}{1. User uploads an image with some text description of their car.} \\
+				\textcolor{red}{2. The input data is sent to the Experts for processing.} \\
+				\textcolor{red}{3. All Experts come to the same conclusion about the make and model of the car.} \\
+				\textcolor{red}{4. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+				\textbf{Secondary Scenario} \\
+				\textcolor{red}{1i. User doesn't have both forms of input.} \\
+				\textcolor{red}{1ii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
+				\textcolor{red}{3i. The Experts come to different conclusions about the make and model of the car.} \\
+				\textcolor{red}{4i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+				\textcolor{red}{4ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+				
+			\item Customer Support (RideRecon) \#2 \\
 				\textcolor{red}{Insert Scenario Here}
-			\item Viewpoint Name \#2 \\
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{Insert Scenario Here}
+			\item Dealership \#5 \\
 				\textcolor{red}{Insert Scenario Here}
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textcolor{red}{Insert Scenario Here}
-	\item Business Event Name \#6
+	\item Add to or Remove From Car Collection \#6
 	\begin{enumerate}[label={\bf VP\arabic*.}]
-		\item Viewpoint Name \#1 \\
-		\textcolor{red}{Insert Scenario Here}
-		\item Viewpoint Name \#2 \\
-		\textcolor{red}{Insert Scenario Here}
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
