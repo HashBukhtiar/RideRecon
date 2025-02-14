@@ -14,6 +14,9 @@
 %\usepackage{setspace}
 %\usepackage{xcolor}
 \usepackage{color}
+\usepackage{parskip}
+\usepackage{comment}
+\usepackage{enumitem}
 %------------------------------------------------------------------------------
 
 % Header and Footer
@@ -58,41 +61,38 @@
 \newpage
 \section{Introduction}
 \label{sec:introduction}
-% Begin Section
-
-\begin{itemize}
-	\item Provide an overview of the document/SRS.
-\end{itemize}
+The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RideRecon, a taxi rideshare application. 
+This document will discuss the purpose of RideRecon, the scope of the application, user characteristics, product requirements, and use case diagrams.
 
 
 \subsection{Purpose}
 \label{sub:purpose}
-% Begin SubSection
-\begin{itemize}
-	\item Specify the purpose of the SRS.
-	\item Specify the intended audience for the SRS.
-\end{itemize}
-% End SubSection
+The document focuses on software requirements, user characteristics, and use cases for RideRecon.
+The purpose of this SRS is to define the software’s objectives, scope, and functionalities. This document is intended for internal RideRecon stakeholders, including but not limited to, project managers, developers, domain experts, and RideRecon team members/investors. No prior readings are required.
 
 \subsection{Scope}
 \label{sub:scope}
-% Begin SubSection
-\begin{itemize}
-	\item Identify the software product(s) to be produced, and name each (e.g., Host DBMS, Report Generator, etc.)
-	\item Explain what the software product(s) will do (and, if necessary, also state what they will not do).
-	\item Describe the application of the software being specified, including relevant benefits, objectives, and goals.
-%	\item Be consistent with similar statements in higher-level specifications (e.g., the system requirements specification), if they exist
-\end{itemize}
-% End SubSection
+
+RideRecon, the car identification application, will allow users to upload an image and text about a vehicle that they want to identify, consulting up to four “Experts” who will use all or some of the user’s input to determine the make and model of the car that has been depicted.
+
+Users are required to register an account on RideRecon in order to access the car identification service. The service includes four experts: “RIS”, “G8M”, “4oE” and ”vAI”. The “RIS” expert performs a reverse image search with the user’s given image to identify the car. The “G8M” expert is a trained machine learning model by the developers that utilizes an optimized database of car images and their corresponding makes and models to identify the user’s car. The ”4oE” expert is the Large Language Model GPT-4o-mini, accessed through OpenAI’s API, which will utilize both the image and the text description to identify the car. Finally, the “vAI” expert is also an LLM, this one hosted on Google Cloud Platform using Vertex AI, specifically the Gemini 1.0 Flash Model, also accessed through its API.
+
+RideRecon’s objective is not only to identify users’ vehicles, but also to deliver other innovative and creative features. For example, once the car has been identified, 4oE will provide an interesting fact about the car, adding more depth and intrigue to it, as well as provide sources and listings for where to purchase the car, allowing the user to go one step further and save time if they are interested in making that vehicle their own.
+
+One of the goals of the software is to increase users, as more users will lead to more cars being identified and added to the optimized database of G8M, and thus better car identification overall, which is even better for future users. Another goal would be to to monetize its user base by offering premium features like better expert access, exclusive community forums, or partnerships with car-related businesses, thereby creating additional revenue streams beyond the core car identification service. This diversification will improve long-term sustainability and profitability.
+
 
 \subsection{Definitions, Acronyms, and Abbreviations}
 \label{sub:definitions_acronyms_and_abbreviations}
-% Begin SubSection
-\begin{itemize}
-	\item Provide the definitions of all terms, acronyms, and abbreviations required to properly interpret the SRS.
-	\item This should be in alphabetical order.
-\end{itemize}
-% End SubSection
+\textbf{LLM}: Large Language Model. A sophisticated artificial intelligence that can understand, generate, and translate human language, often used for tasks like text generation, question answering, and translation.
+
+\textbf{RIS}: Reverse Image Search. This is the idea of using an image as a search query in a browser to find results, rather than using text as traditional browser searches as performed.
+
+\textbf{G8M}: Group 8 Model. This is the model trained by the developers of RideRecon to identify cars. It will utilize an optimized dataset of car images and makes and models.
+
+\textbf{4oE}: GPT-4o-mini. This is an LLM that uses text and images to determine the make and model of the user's car.
+
+\textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
 
 \subsection{References}
 \label{sub:references}
@@ -103,45 +103,70 @@
 	\item Specify the sources from which the references can be obtained.
 	\item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
 \end{itemize}
+
+\begin{itemize}
+	\item https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1
+	\item https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA
+\end{itemize}
 % End SubSection
 
 \subsection{Overview}
 \label{sub:overview}
-% Begin SubSection
-\begin{itemize}
-	\item Describe what the remainder of the document/SRS contains.\\
-	(e.g. "Section 2 discusses...Section 3...")
-%	\item Explain how the SRS is organized
-\end{itemize}
-% End SubSection
+
+\textbf{Section 2} discusses the overall product description talking about the product perspective, product functions, user characteristics, assumptions and dependencies, and apportioning of requirements. 
+
+\textbf{Section 3} contains the Use Case Diagram for the use case scenario of creating a carpool. 
+
+\textbf{Section 4} contains the highlights of functional requirements talking about main business events and viewpoints. 
+
+\textbf{Section 5} contains the Non-Functional Requirements talking about Look and Feel Requirements, Usability and Humanity Requirements, Performance Requirements, Operational and Environmental Requirements, Maintainability and Support Requirements, Security Requirements, Cultural and Political Requirements and Legal Requirements. 
+
+Lastly, \textbf{Section A} contains the Division of Labour.
+
 
 % End Section
-
+\newpage
 \section{Overall Product Description}
 \label{sec:overall_description}
 % Begin Section
-
+\begin{comment}
 \begin{itemize}
 	\item This section should describe the general factors that affect the product and its requirements. 
 	\item It does not state specific requirements.
 	\item It provides a \emph{background} for those requirements and makes them easier to understand.
 \end{itemize}
-
+\end{comment}
 
 \subsection{Product Perspective}
 \label{sub:product_perspective}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Put the product into perspective with other related products, i.e., context
 	\item If the product is independent and totally self-contained, it should be stated here
 	\item If the SRS defines a product that is a component of a larger system, then this subsection should relate the requirements of that larger system to the functionality of the software being developed. Identify interfaces between that larger system and the software to be developed.
 	\item A block diagram showing the major components of the larger system, interconnections, and external interfaces can be helpful
 \end{itemize}
+\end{comment}
+
+RideRecon is a mobile app for car identification that is developed to be compatible with the Android platform.Similar to products such as AvtoPix [insert reference] and CarsSnap [insert reference], it will allow car identification through images while also enhancing search capabilities by also allowing identification through textual descriptions. The product will allow users to create a profile and edit account information linked to that profile. This includes the creation of virtual car collections using car images submitted in the app.
+
+Once an image is selected by the user, the product will have an interface that allows it to interact with different reverse image search technologies. Specifically, it will be able to access a Vertex AI image model and the Reverse Image Search Tool via Google.
+
+If provided textual input by the user, the product will have an interface to interact with Google Search. This interface will also be used to search for relevant car facts that can be returned to the user upon identifying pivotal car identification information.
+
+\begin{center}
+	\includegraphics[width=0.9\textwidth]{images/system_diagram.png} \\
+	\textbf{Figure X. } System Diagram
+\end{center}
+
 % End SubSection
 
+\newpage
 \subsection{Product Functions}
 \label{sub:product_functions}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Provide a \emph{summary} of the major functions that the software will perform.
 	\begin{itemize}
@@ -154,15 +179,88 @@
 		\item Such a diagram is not intended to show a design of a product, but simply shows the logical relationships among variables
 	\end{itemize} 
 \end{itemize}
+\end{comment}
+
+There will be 3 modules in the product. Each module focuses on different major functions within the product, which have been defined in the table below.
+
+\begin{tabular}{|p{3cm}|p{13cm}|}
+	\hline
+	Modules & Functions \\
+	\hline
+	Account Services &
+	\begin{itemize} [left=2pt]
+		\item Create an account
+		\item Login and logout of account
+		\item Update account information
+		\item Account recovery
+		\begin{itemize}
+			\item allow user to reset password if forgotten
+		\end{itemize}
+		\item Authenticate account
+		\begin{itemize}
+			\item verifies contact information only done during account creation or recovery
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+	Search Services &
+	\begin{itemize} [left=2pt]
+		\item Image search
+		\begin{itemize}
+			\item allow user to request car identification through an image
+		\end{itemize}
+		\item Text search
+		\begin{itemize}
+			\item allow user to request car identification through  text descriptors
+		\end{itemize}
+		\item Present car information
+		\begin{itemize}
+			\item displays all relevant identification information
+			\item displays ‘fun fact’ information
+		\end{itemize}
+		\item Confirm car identification
+		\begin{itemize}
+			\item allow user to confirm whether the identified information matches the car
+		\end{itemize}
+		\item Add car to collection
+		\begin{itemize}
+			\item allow user to add identified car to specified ‘Car Collection’
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+	Collection Manager &
+	\begin{itemize} [left=2pt]
+		\item Create new collection
+		\begin{itemize}
+			\item allow user to create new sub-class in their car collection
+		\end{itemize}
+		\item View collection
+		\begin{itemize}
+			\item allow user to select and view a car collection
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+\end{tabular}
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/state_diagram.png} \\
+	\textbf{Figure X. } State Diagram
+\end{center}
 % End SubSection
 
 \subsection{User Characteristics}
 \label{sub:user_characteristics}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Describe those general characteristics of the intended users of the product including educational level, experience, and technical expertise 
 	\item Since there will be many users, you may wish to divide into different user types or personas
 %	\item Do not state specific requirements, but rather provide the reasons why certain specific requirements are later specified
+\end{itemize}
+\end{comment}
+\begin{itemize}
+	\item \textbf{Educational Level:} Users must have basic literacy skills which includes the fundamental ability to understand information through reading, writing, listening, and speaking.
+	\item \textbf{Technical Expertise:} Users should have a basic understanding of how to operate and navigate an Android smartphone, including downloading apps, as this application is designed specifically for the Android platform.
+	\item \textbf{Technical Experience:} Users do not require any prior experience or knowledge with cars in order to utilize the app. Aside from the basic technical expertise outlined above, no extra experience will be required to navigate and utilize the features of the app as it will prioritize an intuitive design.
 \end{itemize}
 % End SubSection
 
@@ -231,6 +329,12 @@
 %	\item Provide \emph{one} use case diagram for the most important Business Event.
 %	\item The text of all use cases will be specified under "Highlights of Functional Requirements"
 \end{itemize}
+
+\begin{center}
+\includegraphics[height=13cm]{images/Use Case Diagram D1.png} \\
+\textbf{Figure X. } Use Case Diagram
+\end{center}
+
 %In this section, select the most important Business Event that your system responds to and give its use case diagram.  Only one use case diagram is needed.  Give a brief textual description of the use case without repeating what is in the scenarios of the corresponding Business Event.
 
 %
@@ -258,7 +362,23 @@
 
 \noindent {\bf Main Business Events:} List out all the main business events you are presenting. If you sub-divided into smaller ones, you don't need to include the smaller ones in this list.\\
 
+\begin{itemize}
+	\item BE1 Create Account
+	\item BE2 Authenticate Account
+	\item BE3 Upload Input
+	\item BE4 Compare Expert Answers
+	\item BE5 Present Identification Information
+	\item BE6 Add to Car Collection
+\end{itemize}
+
 \noindent {\bf Viewpoints:} List out all the viewpoints you will be considering.\\
+
+\begin{itemize}
+	\item VP1 Users
+	\item VP2 Marketing (RideRecon)
+	\item VP3 Customer Support (RideRecon)
+	\item VP4 Identification Accuracy
+\end{itemize}
 
 \noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
 
@@ -721,7 +841,8 @@ Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \
 1.1, 1.2, 1.3, 1.4, 1.5 & 5.3, 5.4, 5.5, 5.8 & 5.1, 5.2, 5.6, 5.7 & 2.1, 2.2, 2.3 & 2.4, 2.5, 2.6 \\ 
 Section 3 & BE2 in Section 4 & BE3 in Section 4 & BE4 in Section 4 & BE5 in Section 4 \\ 
 BE1 in Section 4 & & & & \\ \hline
-\includegraphics[height=1cm]{hashim_signature.png} & SIGNATURE & SIGNATURE & SIGNATURE & \includegraphics[height=0.5cm]{omar_signature.png} \\ \hline
+\includegraphics[height=1cm]{images/hashim_signature.png} & \includegraphics[height=1cm]{images/Jaden_signature.jpg} &
+\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & \includegraphics[height=0.6cm]{images/omar_signature.png} \\ \hline
 \end{tabular}
 \caption{Division of Labour}
 \label{tab:division_of_labour}
