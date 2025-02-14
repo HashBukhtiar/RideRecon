@@ -984,7 +984,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:speed_and_latency_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-SL\arabic*.}]
-    \item 
+    \item The response time of all core APIs should be under 1 second for 90\% of requests and must not exceed 5 seconds.\\ 
+	\textbf{Rationale:} Research on mobile application UX shows that users expect instantaneous responses, with 1 second or less considered a high-performing API response time. At 2 seconds, delays become noticeable, and beyond 5 seconds, users are likely to abandon the interaction or log off the app.
+	\item A cold start (first launch or after app closure) must be under 5 seconds, while a hot start (reopening from background memory) must be under 1.5 seconds.\\
+	\textbf{Rationale:} Google’s Android App Performance Best Practices indicate that mobile apps should launch within 5 seconds for cold starts and under 1.5 seconds for hot starts to maintain user engagement. A slow start-up time increases drop-off rates, as users may assume the app is unresponsive or broken.
+	\item Uploading a photo should take less than 2 seconds under normal mobile network conditions.\\
+	\textbf{Rationale:} Google’s Mobile UX Research states that 90\% of mobile users abandon an interaction if an image takes longer than 5 seconds to load. Since RideRecon relies on image uploads for vehicle identification, ensuring fast upload speeds is critical to maintaining user engagement.
+	\item Identifying a car must take under 3 seconds for 80\% of requests.\\
+	\textbf{Rationale:} Users expect AI-driven systems to return results quickly, particularly for image recognition tasks, where they anticipate near-instant feedback. The 3-second goal aligns with industry benchmarks for real-time image classification models. If external APIs take longer than 5 seconds, users will get frustrated.
 \end{enumerate}
 % End SubSubSection
 
@@ -992,7 +999,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:safety_critical_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-SC\arabic*.}]
-    \item 
+    \item N/A
 \end{enumerate}
 % End SubSubSection
 
@@ -1000,7 +1007,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:precision_or_accuracy_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-PA\arabic*.}]
-    \item 
+    \item The system must achieve an accuracy of at least 90\% in correctly identifying car make and model.\\
+	\textbf{Rationale:} High identification accuracy is crucial for user trust. Machine learning models trained on large, diverse datasets should reach this threshold, but real-world accuracy should be measured using benchmark tests on real user images. If accuracy is below this level, model retraining or additional expert validation is necessary.
+	\item The confidence score of each expert’s prediction must be included with the result.\\
+	\textbf{Rationale:} Since multiple experts provide input, some may be more confident than others. Showing confidence scores allows users to make informed decisions instead of blindly trusting the system.
+	\item The image search expert (RIS) should correctly match at least 95\% of input images when the car exists in the database.\\
+	\textbf{Rationale:} Reverse image search should work reliably for known cars. If the car is not found, the system should clearly indicate this rather than returning a false match.
 \end{enumerate}
 % End SubSubSection
 
@@ -1008,7 +1020,13 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:reliability_and_availability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-RA\arabic*.}]
-    \item 
+    \item The system must maintain a minimum uptime of 99.5\% over any rolling 30-day period.\\
+    \textbf{Rationale:} Availability is critical for user retention. An uptime of 99.5\% aligns with industry best practices for consumer applications, meaning downtime does not exceed 3.6 hours per month. If the system becomes unreliable, users may abandon it in favour of alternatives.
+	\item The system must be able to handle at least 2000 concurrent users without significant degradation in performance.\\
+	\textbf{Rationale:} Ensuring the system can handle high traffic loads prevents server crashes due to excessive load, increased response times negatively affecting user experience, and poor scalability as the user base grows.
+	\item The system must detect external API failures automatically to prioritize internal processing and notify users of limited functionality.\\
+	\textbf{Rationale:} Dependence on third-party APIs introduces potential points of failure. A fallback mechanism ensures that core functionalities, such as image recognition and classification, remain operational while providing users with clear explanations instead of vague errors. This enhances system resilience, preventing a complete breakdown if an API becomes slow or unresponsive.
+
 \end{enumerate}
 % End SubSubSection
 
@@ -1016,7 +1034,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:robustness_or_fault_tolerance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-RFT\arabic*.}]
-    \item 
+    \item The system must detect invalid, corrupt, or unsupported image uploads and provide users with actionable guidance.\\
+	\textbf{Rationale:} Users may attempt to upload incorrect file types, oversized images, or corrupted files, leading to failed identification attempts.
+	\item The system must detect ambiguous text descriptions.\\
+	\textbf{Rationale:} User-submitted descriptions such as “blue car” may be too vague for accurate identification.
 \end{enumerate}
 % End SubSubSection
 
@@ -1024,7 +1045,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:capacity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-C\arabic*.}]
-    \item 
+    \item The system must support storage for at least 1 million images, with an average image size of 5MB.\\
+	\textbf{Rationale:} As user activity increases, a scalable storage solution is required to ensure historical searches remain accessible. Cloud storage solutions such as AWS S3 or Google Cloud Storage should be considered to provide cost-effective scalability without impacting performance. 
+	\item The system must optimize bandwidth efficiency to ensure that total data usage does not exceed 3MB per processed request on average.\\
+	\textbf{Rationale:} Since many users will access RideRecon from mobile devices, excessive data usage can lead to long load times and increased costs for users with limited data plans. The system should implement techniques to minimize bandwidth consumption.
 \end{enumerate}
 % End SubSubSection
 
@@ -1032,7 +1056,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:scalability_or_extensibility_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-SE\arabic*.}]
-    \item 
+    \item The system must follow SOLID design principles and implement modular architecture to support future enhancements.\\ 
+	\textbf{Rationale:} A well-structured and modular codebase allows for easy modifications and feature expansion without breaking existing functionality. By adhering to SOLID principles, we can integrate new expert models or improve the system without requiring major code refactoring.
+	\item The system must support dynamic addition and removal of AI experts without requiring a full system redeployment.\\ 
+	\textbf{Rationale:} As AI models improve over time, the system should allow for seamless integration of new expert modules. This ensures RideRecon remains competitive by using the latest advancements in AI-based object recognition.
+	\item The system should support multi-platform accessibility, allowing for future deployment on web and iOS platforms.\\
+	\textbf{Rationale:} Although RideRecon is initially developed for Android, future expansion to web and iOS platforms will increase accessibility.
 \end{enumerate}
 % End SubSubSection 
 
@@ -1040,7 +1069,13 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:longevity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={PR-L\arabic*.}]
-    \item 
+    \item The system must support periodic model retraining and dataset updates to maintain high identification accuracy.\\
+	\textbf{Rationale:} Machine learning models degrade over time as new car models enter the market, and retraining the models will ensure that identification remains accurate and up to date.
+	\item The system should be designed to support future AI model improvements.\\
+	\textbf{Rationale:} As AI research advances, more efficient architectures may become industry standards. The system should be flexible enough to integrate these advancements without requiring major architectural changes.
+	\item The source code and documentation must be maintained with clear version control and developer guidelines for the duration of development.\\
+	\textbf{Rationale:} Proper documentation and version control ensure that future developers can understand and modify the system efficiently, preventing code degradation and technical debt.
+
 \end{enumerate}
 % End SubSubSection
 
@@ -1054,7 +1089,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:expected_physical_environment}
 % Begin SubSubSection
 \begin{enumerate}[label={OE-EPE\arabic*.}]
-    \item 
+    \item The system must function in a variety of lighting conditions for image capture, including low-light and high-glare environments.\\
+   \textbf{Rationale:} Users may take photos of vehicles in dimly lit parking lots, bright sunlight, or reflective surfaces, which can impact image quality. The system should use adaptive preprocessing techniques such as contrast adjustment to improve recognition accuracy across different lighting conditions.
+   \item The system must be designed to function efficiently on mobile devices with limited hardware capabilities.\\
+   \textbf{Rationale:} Not all users will have high-end smartphones. The application should be optimized for devices with lower processing power, low RAM, and slow internet connections. Techniques such as model quantization should be used to ensure a smooth user experience.
 \end{enumerate}
 % End SubSubSection
 
@@ -1062,7 +1100,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:requirements_for_interfacing_with_adjacent_systems}
 % Begin SubSubSection
 \begin{enumerate}[label={OE-IA\arabic*.}]
-    \item 
+    \item The system must support integration with third-party APIs, including Google Vision API, OpenAI, and other AI-based identification services.\\
+	\textbf{Rationale:} RideRecon depends on multiple AI models and image recognition APIs to provide accurate results. The architecture must allow seamless communication between these external services, ensuring modularity and flexibility for potential future integrations.
+	\item The system must allow interoperability with cloud storage services for secure image storage and retrieval.\\
+	\textbf{Rationale:} Users may want to save their past identifications or access reports. The system should integrate with cloud storage providers to securely manage image uploads and retrievals while ensuring data privacy.
 \end{enumerate}
 % End SubSubSection
 
@@ -1070,7 +1111,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:productization_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={OE-P\arabic*.}]
-    \item 
+    \item N/A
 \end{enumerate}
 % End SubSubSection
 
@@ -1078,7 +1119,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:release_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={OE-R\arabic*.}]
-    \item 
+    \item The application must be compatible with Android 9.0 and above.\\
+	\textbf{Rationale:} Ensuring compatibility with older but still widely used Android versions allows broader accessibility. Android 9.0 provides sufficient support for modern AI and image processing capabilities without compromising performance.
+	\item The system must undergo beta testing with at least 10 users before public release.\\	
+	\textbf{Rationale:} A beta testing phase ensures that real-world feedback is collected before full deployment. This helps identify issues and unexpected performance bottlenecks, reducing the likelihood of post-launch failures.
+	\item The application must comply with Google Play Store policies, including data privacy and API usage guidelines.\\	
+	\textbf{Rationale:} To ensure the application is accepted and remains available in the Play Store, it must adhere to Google’s developer guidelines regarding privacy policies, data handling, and API rate limits. Violating these guidelines could lead to the app being delisted.
 \end{enumerate}
 % End SubSubSection
 
@@ -1092,7 +1138,11 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:maintenance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={MS-M\arabic*.}]
-    \item 
+    \item The system must receive monthly software updates to address bugs, improve performance, and enhance security.\\
+   \textbf{Rationale:} Regular maintenance updates ensure the system remains stable, secure, and efficient. Monthly updates allow us to patch vulnerabilities, optimize code performance, and introduce incremental improvements based on user feedback.
+   \item The system must support rollback functionality to revert to a stable version in case of a failed update.\\
+   \textbf{Rationale:} Software updates sometimes introduce unintended bugs or compatibility issues. Implementing a rollback mechanism ensures that users can revert to a previously stable version while we can address the issue, minimizing disruptions to service availability.
+
 \end{enumerate}
 % End SubSubSection
 
@@ -1100,7 +1150,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:supportability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={MS-S\arabic*.}]
-    \item 
+    \item The application must include an in-app FAQ and troubleshooting guide for common issues.\\
+   \textbf{Rationale:} Providing users with an easily accessible FAQ section reduces reliance on customer support. A structured troubleshooting guide can assist users in resolving common problems without requiring direct assistance.
+   \item The system must provide a support ticketing mechanism for users to report unresolved issues.\\
+   \textbf{Rationale:} Some issues may require our direct intervention. A support ticketing system allows users to submit reporting ensuring the prioritization of user-reported problems.
 \end{enumerate}
 % End SubSubSection
 
@@ -1108,7 +1161,11 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={MS-A\arabic*.}]
-    \item 
+    \item The system must be designed to support future updates with minimal changes to core functionality.\\
+   \textbf{Rationale:} As AI models and image recognition technologies improve, the system should accommodate improvements without requiring extensive rework. Using modular design principles ensures that new features or optimizations can be implemented easily. 
+   \item The system must be configurable to adjust recognition parameters based on different regions and datasets.\\
+   \textbf{Rationale:} Vehicle models and identification patterns may vary across countries and regions. The system should allow customization of recognition parameters to improve accuracy in different environments.
+ 
 \end{enumerate}
 % End SubSubSection
 
@@ -1190,7 +1247,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:compliance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={LR-COMP\arabic*.}]
-    \item 
+    \item The system must comply with PIPEDA (Personal Information Protection and Electronic Documents Act) for handling user data in Canada.\\
+   \textbf{Rationale:} RideRecon collects and processes user-submitted images and metadata. Under PIPEDA, personal information must be collected with user consent, securely stored, and only used for stated purposes. The system must include a privacy policy detailing data collection, storage, and sharing practices.
+   \item The system must comply with GDPR (General Data Protection Regulation) if accessible in the European Union.\\
+   \textbf{Rationale:} If RideRecon is available in the EU, it must adhere to GDPR principles, including user consent, data minimization, and the right to be forgotten. The system should allow users to request data deletion and should not store personally identifiable information beyond what is necessary.
+   \item The application must comply with Google Play Developer Distribution Agreement.\\
+   \textbf{Rationale:} To be approved and remain listed on the Google Play Store, RideRecon must follow Google’s data usage policies, user consent requirements, and restricted API guidelines. Failure to comply could result in app suspension or removal.
+   \item The system must include a legally adequate Terms of Service and Privacy Policy accessible from within the app.\\
+   \textbf{Rationale:} Users must be informed about their rights, data usage policies, and liability limitations before using the app. The Terms of Service should outline acceptable use, intellectual property rights, disclaimers, and dispute resolution mechanisms. 
 \end{enumerate}
 % End SubSubSection
 
@@ -1198,7 +1262,13 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:standards_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={LR-STD\arabic*.}]
-    \item 
+	\item The system must use industry-standard encryption protocols (e.g., AES-256) for data transmission and storage.\\
+   \textbf{Rationale:} To protect user-uploaded images and metadata, the system must encrypt sensitive data during transmission and at rest. This ensures compliance with security best practices and helps prevent data breaches.
+   \item The system must not log personally identifiable information in plaintext storage or logs.\\
+   \textbf{Rationale:} To comply with privacy laws and security best practices, logs should not store sensitive user data in plaintext. Any logging mechanism should mask or anonymize sensitive data before storage to reduce exposure in case of a breach adhering to OWASP best practices.
+   \item The system must adhere to fair use and copyright laws when handling third-party images.\\
+   \textbf{Rationale:} Users may upload images sourced from third-party websites or copyrighted materials. RideRecon should not process or store copyrighted content without permission, and it must include disclaimers clarifying user responsibility for uploaded images, to adhere to DMCA laws(The Notice and Notice regime in Canada).
+
 \end{enumerate}
 % End SubSubSection
 % End SubSection
