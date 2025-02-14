@@ -238,15 +238,119 @@
 \noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
 
 \begin{enumerate}[{\bf BE1.}]
-	\item Business Event Name \#1
+	\item Create an Account \#1\\
+		\textbf{Preconditions:} The user is not logged in, thus the log-in screen is displayed
 		\begin{enumerate}[{\bf VP1.}]
-			\item Viewpoint Name \#1 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Viewpoint Name \#2 \\
-				\textcolor{red}{Insert Scenario Here}
+			\item User \#1\\
+			\textbf{Main Success Scenario:}
+			\begin{enumerate}[{\bf 1.}]
+				\color{red}
+				\item User opens the RideRecon app
+				\item The system responds by showing the user the log-in screen interface.
+				\item User selects create account
+				\item The system displays a screen to request information from the user relating to their account.
+				\item The user provides information to make the account and selects the option to confirm the account creation.
+				\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
+			\end{enumerate}
+			\textbf{Secondary Scenario:}
+			\begin{enumerate}
+				\color{red}
+				\item[\textbf{3i.}] User selects "sign in as guest"
+				\begin{enumerate}
+					\item[\textbf{3i.1}] User selects "sign in as guest"
+					\item[\textbf{3i.2}] System grants user access to RideRecon app in guest mode.
+				\end{enumerate}
+				\item[\textbf{5i.}] User cancels the operation
+				\begin{enumerate}
+					\item[\textbf{5i.1}] User cancels the operation
+					\item[\textbf{5i.2}] System returns them to the log-in menu
+				\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+				\begin{enumerate}
+					\item[\textbf{6i.1}] The system detects the user's information is invalid
+					\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
+					\item[\textbf{6i.3}] The user acknowledges the message.
+					\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}
+				\end{enumerate}
+				\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+				\begin{enumerate}
+					\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
+					\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred.
+					\item[\textbf{6ii.3}] The user acknowledges the error.
+					\item[\textbf{6ii.4}] The system returns the user to the information request screen in step \textbf{5.}
+				\end{enumerate}
+			\end{enumerate}
+		\item Customer Support \#2			
+			\begin{enumerate}
+				\color{red}
+%				\item[\textbf{5xi.}] User selects terms of service option to see terms of service.
+%				\begin{enumerate}
+%					\item[\textbf{5xi.1}] User selects "how to sign up" option to get more information on how to sign up
+%					\item[\textbf{5xi.2}] User is redirected to 
+%				\end{enumerate}
+				\item[\textbf{5i.}] User selects get support option to speak with customer support regarding signup
+				\begin{enumerate}
+					\item[\textbf{5i.1}] User selects get support option to speak with customer support regarding signup
+					\item[\textbf{5i.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+				\end{enumerate}
+				\item[\textbf{6i.}] An error occurs and the user's information cannot be validated.
+				\begin{enumerate}
+					\item[\textbf{6i.1}] An error occurs and the user's information cannot be validated.
+					\item[\textbf{6i.2}] The system sends a message to the user asking if they want to submit a crash report for analysis.
+					\item[\textbf{6i.3}] The user selects yes or no.
+					\item[\textbf{6i.4}] If yes is selected, the system sends a crash report of the error to the system maintainers. If no is selected, nothing happens.
+					\item[\textbf{6i.5}] The system returns the user to the information request screen in \textbf{step 5.}
+				\end{enumerate}
+			\end{enumerate}
+			\item Marketing \#3\\
+			N/A
+			\item Accounting \#4\\
+			N/A
+			\item Dealership \#5\\
+			N/A
 		\end{enumerate}
 		{\bf Global Scenario:}\\
-		\textcolor{red}{Insert Scenario Here}
+		\textbf{Main Success Scenario:}
+			\begin{enumerate}[{\bf 1.}]
+				\color{red}
+				\item User opens the RideRecon app
+				\item The system responds by showing the user the log-in screen interface.
+				\item User selects create account
+				\item The system displays a screen to request information from the user relating to their account.
+				\item The user provides information to make the account and selects the option to confirm the account creation.
+				\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
+			\end{enumerate}
+			\textbf{Secondary Scenario:}
+			\begin{enumerate}
+			\color{red}
+			\item[\textbf{3i.}] User selects "sign in as guest"
+			\begin{enumerate}
+				\item[\textbf{3i.1}] User selects "sign in as guest"
+				\item[\textbf{3i.2}] User gains access to the system in guest mode.  
+			\end{enumerate}
+			\item[\textbf{5i.}] User cancels the operation
+			\begin{enumerate}
+				\item[\textbf{5i.1}] User cancels the operation
+				\item[\textbf{5i.2}] System returns them to the log-in menu
+			\end{enumerate}						
+			\item[\textbf{5ii.}] User selects get support option to speak with customer support regarding signup
+			\begin{enumerate}
+				\item[\textbf{5ii.1}] User selects get support option to speak with customer support regarding signup
+				\item[\textbf{5ii.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+			\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+			\begin{enumerate}
+				\item[\textbf{6i.1}] The system detects the user's information is invalid
+				\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
+				\item[\textbf{6i.3}] The user acknowledges the message.
+				\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}				 	\end{enumerate}
+			\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+			\begin{enumerate}
+				\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
+				\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred. Alongside the message, the system prompts the user to submit a crash report to the system maintainers for analysis.
+				\item[\textbf{6ii.4}] The user selects either yes or no to submitting a crash report.
+				\item[\textbf{6ii.5}] If the user selected yes, a crash report of the error is submitted to the system maintainers. If no is selected, nothing happens.
+				\item[\textbf{6ii.6}] The system returns the user to the information request screen in step \textbf{5.}
+			\end{enumerate}
+		\end{enumerate}
 	\item Business Event Name \#2
 	\begin{enumerate}[{\bf VP1.}]
 		\item Viewpoint Name \#1 \\
@@ -256,10 +360,31 @@
 	\end{enumerate}	
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}	
-	\item Compare Expert Answers \#4
+	\item Business Event Name \#3
 	\begin{enumerate}[\bf VP1.]
 		\item Viewpoint Name \#1
 		\item Viewpoint Name \#2
+	\end{enumerate}
+	{\bf Global Scenario:}\\
+	\textcolor{red}{Insert Scenario Here}
+	\item Compare Expert Answers \#4
+	\begin{enumerate}[\bf VP1.]
+		\item User \#1\\
+		\textbf{Main Success Scenario:}
+		\begin{enumerate}[\bf 1.]
+			\color{red}
+			\item User provides the information of a car for the system to process.
+			\item System feeds input to all of its experts
+			\item Experts provide the system with their answer on information about the car.
+			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
+			\item The finalizer processes the data from the experts for output.
+		\end{enumerate}
+		\textbf{Secondary Scenario:}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{1i.}]
+		\end{enumerate}
+		\item Customer Support \#2
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
@@ -418,8 +543,10 @@
 	\textbf{Rationale:} Device screens come in all shapes and sizes, thus the application should be able accommodate all kinds of screen sizes.
 	\item Additional options or menus should be hidden under one to a small handful of dropdown menus.\\
 	\textbf{Rationale:} The user's screen should not be cluttered with an abundance of buttons that makes the application hard to navigate.
-	\item On system startup, if the user is logged in, the system should display the frame that allows the user to identify a car.\\
-	\textbf{Rationale:} The system should display the frame that highlights its main functionality to communicate the intended purpose of the system.
+	\item The system should adhere to general practices for making applications for android devices\\
+	\textbf{Rationale:} Since the system is made for android devices, we need to follow general practices for making android applications to 
+%	\item On system startup, if the user is logged in, the system should display the frame that allows the user to identify a car.\\
+%	\textbf{Rationale:} The system should display the frame that highlights its main functionality to communicate the intended purpose of the system.
 
 \end{enumerate}
 % End SubSubSection
@@ -453,11 +580,13 @@
 \subsubsection{Learning Requirements}
 \label{ssub:learning_requirements}
 % Begin SubSubSection
+% Mention modern conventions
 \begin{enumerate}[{UH-L}1. ]
-	\item The system should require a user to know how to take a picture with their camera.\\
-	\textbf{Rationale:} Camera would be a form of input for the user so familiarity with using it is essential.\\
-	\item The system should require a user to know how to use their phone keyboard.\\
-	\textbf{Rationale:} Another form of input for the user.
+	\item it is clear how to access the camera through the a	
+	%\item The system should require a user to know how to take a picture with their camera.\\
+	%\textbf{Rationale:} Camera would be a form of input for the user so familiarity with using it is essential.
+	%\item The system should require a user to know how to use their phone keyboard.\\
+	%\textbf{Rationale:} Another form of input for the user.
 \end{enumerate}
 % End SubSubSection
 
@@ -467,6 +596,8 @@
 \begin{enumerate}[{UH-UP}1. ]
 	\item Any icons used in the system without explanation should be universally understood by users or easy to learn.\\
 	\textbf{Rationale:} An icon that can be quickly understood or universally known will make it easier for users to understand what our system does.
+	\item The system should be usable on a lower device brightness.\\
+	\textbf{Rationale:} Users will not always have their device at full brightness, so if the device becomes harder to use at these low brightness settings the user will find the system more tedious to work with.
 \end{enumerate}
 % End SubSubSection
 
