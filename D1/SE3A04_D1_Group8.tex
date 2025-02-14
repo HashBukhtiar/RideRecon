@@ -242,7 +242,7 @@
 		\textbf{Preconditions:} The user is not logged in, thus the log-in screen is displayed
 		\begin{enumerate}[{\bf VP1.}]
 			\item User \#1\\
-			\textbf{Main Success Scenario:}
+			\textbf{Main Success Scenario}
 			\begin{enumerate}[{\bf 1.}]
 				\color{red}
 				\item User opens the RideRecon app
@@ -252,7 +252,7 @@
 				\item The user provides information to make the account and selects the option to confirm the account creation.
 				\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
 			\end{enumerate}
-			\textbf{Secondary Scenario:}
+			\textbf{Secondary Scenario}
 			\begin{enumerate}
 				\color{red}
 				\item[\textbf{3i.}] User selects "sign in as guest"
@@ -309,7 +309,7 @@
 			N/A
 		\end{enumerate}
 		{\bf Global Scenario:}\\
-		\textbf{Main Success Scenario:}
+		\textbf{Main Success Scenario}
 			\begin{enumerate}[{\bf 1.}]
 				\color{red}
 				\item User opens the RideRecon app
@@ -319,7 +319,7 @@
 				\item The user provides information to make the account and selects the option to confirm the account creation.
 				\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
 			\end{enumerate}
-			\textbf{Secondary Scenario:}
+			\textbf{Secondary Scenario}
 			\begin{enumerate}
 			\color{red}
 			\item[\textbf{3i.}] User selects "sign in as guest"
@@ -370,7 +370,7 @@
 	\item Compare Expert Answers \#4
 	\begin{enumerate}[\bf VP1.]
 		\item User \#1\\
-		\textbf{Main Success Scenario:}
+		\textbf{Main Success Scenario}
 		\begin{enumerate}[\bf 1.]
 			\color{red}
 			\item User provides the information of a car for the system to process.
@@ -379,15 +379,67 @@
 			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
 			\item The finalizer processes the data from the experts for output.
 		\end{enumerate}
-		\textbf{Secondary Scenario:}
+		\textbf{Secondary Scenario}
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{1i.}]
+			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
+				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input.
+				\item[\textbf{4i.5}] The user acknowledges the message.
+				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+			\end{enumerate}
 		\end{enumerate}
 		\item Customer Support \#2
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{4i.}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+				\item[\textbf{4i.2}] The user can select yes or no to this prompt.
+				\item[\textbf{4i.3}] If the user selects no, nothing happens and the system is returned to a state where the user can provide input for identifying a car again. If the user selects yes, the system will prompt them for their feedback and any other important information.
+				\item[\textbf{4i.4}] The user inputs their feedback.
+				\item[\textbf{4i.5}] The system thanks the user for their feedback and returns them to a state where they can provide input for identifying a car again.
+			\end{enumerate}
+		\end{enumerate}
+		\item Marketing\\
+		N/A
+		\item Accounting\\
+		N/A
+		\item Dealership\\
+		N/A
 	\end{enumerate}
 	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}
+	\textbf{Main Success Scenario}
+	\begin{enumerate}[1.]
+		\color{red}
+		\item User provides the information of a car for the system to process.
+		\item System feeds input to all of its experts
+		\item Experts provide the system with their answer on information about the car.
+		\item The finalizer recognizes the experts agree on what kind of car the user inputs.
+		\item The finalizer processes the data from the experts for output.
+	\end{enumerate}
+	\textbf{Secondary Scenario}
+	\begin{enumerate}
+		\color{red}
+		\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+		\begin{enumerate}
+			\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
+			\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+			\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
+			\item[\textbf{4i.5}] The user acknowledges the message and chooses not to give feedback.
+			\begin{enumerate}
+				\item[\textbf{4i.5.i.1}] The user decides to give feedback.
+				\item[\textbf{4i.5.i.2}] The system will prompt the user for their feedback and any other important information.
+				\item[\textbf{4i.5.i.3}] The user inputs their feedback.
+				\item[\textbf{4i.5.i.4}] The system thanks them for their response.
+			\end{enumerate}
+			\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+		\end{enumerate} 
+	\end{enumerate}
 \end{enumerate}
 
 %	Below, we organize by Business Event.
