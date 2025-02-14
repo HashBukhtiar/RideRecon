@@ -422,21 +422,66 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
-	\item Upload Text adn Image as Input \#3
-		\begin{enumerate}[label=\textbf{VP\arabic*.}]
-			\item Users \#1 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Customer Support (RideRecon) \#2 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Marketing (RideRecon) \#3 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Accounting (RideRecon) \#4 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Dealership \#5 \\
-				\textcolor{red}{Insert Scenario Here}
-		\end{enumerate}
-		{\bf Global Scenario:}\\
-		\textcolor{red}{Insert Scenario Here}
+
+	\item Upload Text and/or Image as Input \#3 \\  
+    \textbf{Pre-Condition:} The user must be authenticated in the system and must have an active internet connection. The user must either provide an image of the car or enter a textual description. If using an image, the device must have a functioning camera or access to stored images.
+  
+
+    \begin{enumerate}[label=\textbf{VP\arabic*.}]
+        \item Users \#1 \\  
+            \textbf{Main Success Scenario} \\  
+            \textcolor{red}{1. The user selects an image OR enters text describing a car.} \\  
+            \textcolor{red}{2. If an image is provided, the system checks its quality:
+			If acceptable, the system processes the image.
+			If blurry, the system prompts the user to retake the photo.} \\  
+            \textcolor{red}{3. If text is provided, the system extracts key information and performs a database search.} \\  
+            \textcolor{red}{4. The system provides instant feedback while processing.} \\  
+            \textcolor{red}{5. The user receives results, including car specifications and pricing (if available).} \\  
+            \textcolor{red}{6. The system sends the input data to the Experts for processing.} \\  
+            
+            \textbf{Secondary Scenario} \\  
+            \textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
+            \textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
+            \textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
+            \textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
+            \textcolor{red}{6v. The Experts detect that the provided image and text do not match the same car model.} \\  
+            \textcolor{red}{6vi. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
+
+        \item Customer Support (RideRecon) \#2 \\  
+            \textcolor{red}{NA}  
+
+        \item Marketing (RideRecon) \#3 \\  
+            \textcolor{red}{NA}  
+
+        \item Accounting (RideRecon) \#4 \\  
+            \textcolor{red}{NA}  
+
+        \item Dealership \#5 \\  
+            \textcolor{red}{9i. The system determines that the dealership database lacks a match for the provided input.} \\  
+            \textcolor{red}{9ii. The dealership can request to update the system database to ensure their listings appear in future searches.} \\  
+    \end{enumerate}
+
+    {\bf Global Scenario:} \\  
+        \textbf{Main Success Scenario} \\  
+        \textcolor{red}{1. User opens the RideRecon app on their device.} \\  
+        \textcolor{red}{2. System requires the user to log in and displays the login fields.} \\  
+        \textcolor{red}{3. User enters login credentials.} \\  
+        \textcolor{red}{4. System authenticates the user.} \\  
+        \textcolor{red}{5. System prompts the user to upload an image or enter a text description of the car they want to identify.} \\  
+        \textcolor{red}{6. User uploads an image or enters a text description.} \\  
+        \textcolor{red}{7. System verifies the uploaded image quality and processes it.} \\  
+        \textcolor{red}{8. System processes the text description using language processing and matches potential vehicles.} \\  
+        \textcolor{red}{9. System sends the input data to the Experts for processing.} \\  
+
+        \textbf{Secondary Scenario} \\  
+        \textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
+        \textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
+        \textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
+        \textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
+        \textcolor{red}{9i. The Experts detect that the provided image and text do not match the same car model.} \\  
+        \textcolor{red}{9ii. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
+
+
 	\item Compare Expert Answers \#4
 	\begin{enumerate}[label={\bf VP\arabic*.}]
 		\item Users \#1 \\
@@ -452,6 +497,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}
+
+
 	\item Finalize and Present Output With Identification Information \#5 \\
 		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
@@ -985,7 +1032,7 @@ Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \
 Section 3 & BE2 in Section 4 & BE1 in Section 4 & BE6 in Section 4 & BE3 in Section 4 \\ 
 BE5 in Section 4 & & BE4 in Section 4 & & \\ \hline
 \includegraphics[height=1cm]{images/hashim_signature.png} & \includegraphics[height=1cm]{images/Jaden_signature.jpg} &
-\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & SIGNATURE \\ \hline
+\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & \includegraphics[height=0.6cm]{images/omar_signature.png}  \\ \hline
 \end{tabular}
 \caption{Division of Labour}
 \label{tab:division_of_labour}
