@@ -261,7 +261,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \begin{itemize}
 	\item Describe those general characteristics of the intended users of the product including educational level, experience, and technical expertise 
 	\item Since there will be many users, you may wish to divide into different user types or personas
-%	\item Do not state specific requirements, but rather provide the reasons why certain specific requirements are later specified
+%	\item Do not state specific requirements, but rather provide the reasons why certain specific requirements are later specified	
 \end{itemize}
 \end{comment}
 \begin{itemize}
@@ -386,27 +386,127 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\item VP5. Dealership
 \end{itemize}
 
-\noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
+\noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.
 \begin{itemize}
 	\item NA.
 \end{itemize}
 
-\begin{enumerate}[label={\bf BE\arabic*.}]
-	\item Create Account \#1
-		\begin{enumerate}[label=\textbf{VP\arabic*.}]
-			\item Users \#1 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Customer Support (RideRecon) \#2 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Marketing (RideRecon) \#3 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Accounting (RideRecon) \#4 \\
-				\textcolor{red}{Insert Scenario Here}
-			\item Dealership \#5 \\
-				\textcolor{red}{Insert Scenario Here}
+\begin{enumerate}[label={\bf BE\arabic*}]
+	\setlist[enumerate]{nosep}
+	\item Create an Account \#1\\
+	\textbf{Preconditions:} The user is not logged in, thus the log-in screen is displayed
+	\begin{enumerate}[label={\bf VP\arabic*}]		
+		\item User \#1\\
+		\textbf{Main Success Scenario}
+		\begin{enumerate}[label={\bf \arabic*.}]			
+			\color{red}
+			\item User opens the RideRecon app
+			\item The system responds by showing the user the log-in screen interface.
+			\item User selects create account
+			\item The system displays a screen to request information from the user relating to their account.
+			\item The user provides information to make the account and selects the option to confirm the account creation.
+			\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
+		\end{enumerate}
+		\textbf{Secondary Scenario}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{3i.}] User selects "sign in as guest"
+			\begin{enumerate}
+				\item[\textbf{3i.1}] User selects "sign in as guest"
+				\item[\textbf{3i.2}] System grants user access to RideRecon app in guest mode.
+			\end{enumerate}
+			\item[\textbf{5i.}] User cancels the operation
+			\begin{enumerate}
+				\item[\textbf{5i.1}] User cancels the operation
+				\item[\textbf{5i.2}] System returns them to the log-in menu
+			\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+			\begin{enumerate}
+				\item[\textbf{6i.1}] The system detects the user's information is invalid
+				\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
+				\item[\textbf{6i.3}] The user acknowledges the message.
+				\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}
+			\end{enumerate}
+			\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+			\begin{enumerate}
+				\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
+				\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred.
+				\item[\textbf{6ii.3}] The user acknowledges the error.
+				\item[\textbf{6ii.4}] The system returns the user to the information request screen in step \textbf{5.}
+			\end{enumerate}
+		\end{enumerate}
+		\item Customer Support \#2			
+			\begin{enumerate}
+				\color{red}
+%				\item[\textbf{5xi.}] User selects terms of service option to see terms of service.
+%				\begin{enumerate}
+%					\item[\textbf{5xi.1}] User selects "how to sign up" option to get more information on how to sign up
+%					\item[\textbf{5xi.2}] User is redirected to 
+%				\end{enumerate}
+				\item[\textbf{5i.}] User selects get support option to speak with customer support regarding signup
+				\begin{enumerate}
+					\item[\textbf{5i.1}] User selects get support option to speak with customer support regarding signup
+					\item[\textbf{5i.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+				\end{enumerate}
+				\item[\textbf{6i.}] An error occurs and the user's information cannot be validated.
+				\begin{enumerate}
+					\item[\textbf{6i.1}] An error occurs and the user's information cannot be validated.
+					\item[\textbf{6i.2}] The system sends a message to the user asking if they want to submit a crash report for analysis.
+					\item[\textbf{6i.3}] The user selects yes or no.
+					\item[\textbf{6i.4}] If yes is selected, the system sends a crash report of the error to the system maintainers. If no is selected, nothing happens.
+					\item[\textbf{6i.5}] The system returns the user to the information request screen in \textbf{step 5.}
+				\end{enumerate}
+			\end{enumerate}
+			\item Marketing \#3\\
+			N/A
+			\item Accounting \#4\\
+			N/A
+			\item Dealership \#5\\
+			N/A
 		\end{enumerate}
 		{\bf Global Scenario:}\\
-		\textcolor{red}{Insert Scenario Here}
+		\textbf{Main Success Scenario}
+		\begin{enumerate}[label={\bf \arabic*.}]
+			\color{red}
+			\item User opens the RideRecon app
+			\item The system responds by showing the user the log-in screen interface.
+			\item User selects create account
+			\item The system displays a screen to request information from the user relating to their account.
+			\item The user provides information to make the account and selects the option to confirm the account creation.
+			\item The system ensures the user's information is valid and grants them access to the main functionalities of the system.
+		\end{enumerate}
+		\textbf{Secondary Scenario}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{3i.}] User selects "sign in as guest"
+			\begin{enumerate}
+				\item[\textbf{3i.1}] User selects "sign in as guest"
+				\item[\textbf{3i.2}] User gains access to the system in guest mode.  
+			\end{enumerate}
+			\item[\textbf{5i.}] User cancels the operation
+			\begin{enumerate}
+				\item[\textbf{5i.1}] User cancels the operation
+				\item[\textbf{5i.2}] System returns them to the log-in menu
+			\end{enumerate}						
+			\item[\textbf{5ii.}] User selects get support option to speak with customer support regarding signup
+			\begin{enumerate}
+				\item[\textbf{5ii.1}] User selects get support option to speak with customer support regarding signup
+				\item[\textbf{5ii.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+			\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+			\begin{enumerate}
+				\item[\textbf{6i.1}] The system detects the user's information is invalid
+				\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
+				\item[\textbf{6i.3}] The user acknowledges the message.
+				\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}				 							\end{enumerate}
+			\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+			\begin{enumerate}
+				\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
+				\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred. Alongside the message, the system prompts the user to submit a crash report to the system maintainers for analysis.
+				\item[\textbf{6ii.4}] The user selects either yes or no to submitting a crash report.
+				\item[\textbf{6ii.5}] If the user selected yes, a crash report of the error is submitted to the system maintainers. If no is selected, nothing happens.
+				\item[\textbf{6ii.6}] The system returns the user to the information request screen in step \textbf{5.}
+			\end{enumerate}
+		\end{enumerate}
+	%\end{enumerate}
 	\item Authenticate User \#2
 	\begin{enumerate}[label={\bf VP\arabic*.}]
 		\item Users \#1 \\
@@ -419,9 +519,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 			\textcolor{red}{Insert Scenario Here}
 		\item Dealership \#5 \\
 			\textcolor{red}{Insert Scenario Here}
-	\end{enumerate}
+	\end{enumerate}	
 	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}
+	\textcolor{red}{Insert Scenario Here}	
 
 	\item Upload Text and/or Image as Input \#3 \\  
     \textbf{Pre-Condition:} The user must be authenticated in the system and must have an active internet connection. The user must either provide an image of the car or enter a textual description. If using an image, the device must have a functioning camera or access to stored images.
@@ -458,48 +558,101 @@ There will be 3 modules in the product. Each module focuses on different major f
 
         \item Dealership \#5 \\  
             \textcolor{red}{9i. The system determines that the dealership database lacks a match for the provided input.} \\  
-            \textcolor{red}{9ii. The dealership can request to update the system database to ensure their listings appear in future searches.} \\  
-    \end{enumerate}
+            \textcolor{red}{9ii. The dealership can request to update the system database to ensure their listings appear in future searches.} \\
+	\end{enumerate}
 
-    {\bf Global Scenario:} \\  
-        \textbf{Main Success Scenario} \\  
-        \textcolor{red}{1. User opens the RideRecon app on their device.} \\  
-        \textcolor{red}{2. System requires the user to log in and displays the login fields.} \\  
-        \textcolor{red}{3. User enters login credentials.} \\  
-        \textcolor{red}{4. System authenticates the user.} \\  
-        \textcolor{red}{5. System prompts the user to upload an image or enter a text description of the car they want to identify.} \\  
-        \textcolor{red}{6. User uploads an image or enters a text description.} \\  
-        \textcolor{red}{7. System verifies the uploaded image quality and processes it.} \\  
-        \textcolor{red}{8. System processes the text description using language processing and matches potential vehicles.} \\  
-        \textcolor{red}{9. System sends the input data to the Experts for processing.} \\  
+	{\bf Global Scenario:} \\  
+		\textbf{Main Success Scenario} \\  
+		\textcolor{red}{1. User opens the RideRecon app on their device.} \\  
+		\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\  
+		\textcolor{red}{3. User enters login credentials.} \\  
+		\textcolor{red}{4. System authenticates the user.} \\  
+		\textcolor{red}{5. System prompts the user to upload an image or enter a text description of the car they want to identify.} \\  
+		\textcolor{red}{6. User uploads an image or enters a text description.} \\  
+		\textcolor{red}{7. System verifies the uploaded image quality and processes it.} \\  
+		\textcolor{red}{8. System processes the text description using language processing and matches potential vehicles.} \\  
+		\textcolor{red}{9. System sends the input data to the Experts for processing.} \\  
 
-        \textbf{Secondary Scenario} \\  
-        \textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
-        \textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
-        \textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
-        \textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
-        \textcolor{red}{9i. The Experts detect that the provided image and text do not match the same car model.} \\  
-        \textcolor{red}{9ii. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
-
+		\textbf{Secondary Scenario} \\  
+		\textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
+		\textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
+		\textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
+		\textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
+		\textcolor{red}{9i. The Experts detect that the provided image and text do not match the same car model.} \\  
+		\textcolor{red}{9ii. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
 
 	\item Compare Expert Answers \#4
 	\begin{enumerate}[label={\bf VP\arabic*.}]
-		\item Users \#1 \\
-			\textcolor{red}{Insert Scenario Here}
-		\item Customer Support (RideRecon) \#2 \\
-			\textcolor{red}{Insert Scenario Here}
-		\item Marketing (RideRecon) \#3 \\
-			\textcolor{red}{Insert Scenario Here}
-		\item Accounting (RideRecon) \#4 \\
-			\textcolor{red}{Insert Scenario Here}
-		\item Dealership \#5 \\
-			\textcolor{red}{Insert Scenario Here}
+		\item User \#1\\
+		\textbf{Main Success Scenario}
+		\begin{enumerate}[label={\bf \arabic*.}]
+			\color{red}
+			\item User provides the information of a car for the system to process.
+			\item System feeds input to all of its experts
+			\item Experts provide the system with their answer on information about the car.
+			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
+			\item The finalizer processes the data from the experts for output.
+		\end{enumerate}
+		\textbf{Secondary Scenario}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
+				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input.
+				\item[\textbf{4i.5}] The user acknowledges the message.
+				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+			\end{enumerate}
+		\end{enumerate}
+		\item Customer Support \#2
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{4i.}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+				\item[\textbf{4i.2}] The user can select yes or no to this prompt.
+				\item[\textbf{4i.3}] If the user selects no, nothing happens and the system is returned to a state where the user can provide input for identifying a car again. If the user selects yes, the system will prompt them for their feedback and any other important information.
+				\item[\textbf{4i.4}] The user inputs their feedback.
+				\item[\textbf{4i.5}] The system thanks the user for their feedback and returns them to a state where they can provide input for identifying a car again.
+			\end{enumerate}
+		\end{enumerate}
+		\item Marketing\\
+		N/A
+		\item Accounting\\
+		N/A
+		\item Dealership\\
+		N/A
+		{\bf Global Scenario:}\\
+		\textbf{Main Success Scenario}
+		\begin{enumerate}[label={\bf \arabic*.}]
+			\color{red}
+			\item User provides the information of a car for the system to process.
+			\item System feeds input to all of its experts
+			\item Experts provide the system with their answer on information about the car.
+			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
+			\item The finalizer processes the data from the experts for output.
+		\end{enumerate}
+		\textbf{Secondary Scenario}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
+				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
+				\item[\textbf{4i.5}] The user acknowledges the message and chooses not to give feedback.
+				\item[\textbf{4i.5.i.1}] The user decides to give feedback.
+				\item[\textbf{4i.5.i.2}] The system will prompt the user for their feedback and any other important information.
+				\item[\textbf{4i.5.i.3}] The user inputs their feedback.
+				\item[\textbf{4i.5.i.4}] The system thanks them for their response.
+				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+			\end{enumerate} 
+		\end{enumerate}
 	\end{enumerate}
-	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}
-
-
-	\item Finalize and Present Output With Identification Information \#5 \\
+\item Finalize and Present Output With Identification Information \#5 \\
 		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
 			\item Users \#1 \\
@@ -576,7 +729,6 @@ There will be 3 modules in the product. Each module focuses on different major f
 		\textcolor{red}{NA}
 		\item Dealership \#5 \\
 		\textcolor{red}{NA}
-
 	\end{enumerate}
 	{\bf Global Scenario:}\\
 	\textbf{Main Success Scenario} \\
@@ -594,6 +746,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	2i. No past identified car. Return to homepage. \\
 	8i. User declines changes. No modification made to car collection and return to homepage. \\
 \end{enumerate}
+
 %	Below, we organize by Business Event.
 %	\begin{enumerate}[{BE}1.]
 %		\item Business Event name
@@ -728,7 +881,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:appearance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={LF-A\arabic*.}]
-    \item 
+	\item The application must use company colours that align with the ones used in their branding.\\
+	\textbf{Rationale:} The user should feel as if the application is closely tied to the company that contracted us and their mission statements.
+	\item The application should not use harsh and overly vibrant colours\\
+	\textbf{Rationale:} If the application is hard on the eyes to use, the user will have a worse experience overall and be adverse to using the application.
+	\item The application should be consistent in how it associates colours with certain buttons or actions.\\
+	\textbf{Rationale:} When a user goes to do actions across the application, the colour of buttons relating to certain prompts like "yes" or "no" should remain consistent across all of those prompts. For example, if a "yes" button uses the colour green, then any other time "yes" comes up it should also be green.
+	\item Users should be able to quickly distinguish what is and what is not a button.\\
+	\textbf{Rationale:} The user should be able to quickly understand the options available to them without needing a lot of effort or research. 
 \end{enumerate}
 % End SubSubSection
 
@@ -736,7 +896,15 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:style_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={LF-S\arabic*.}]
-    \item 
+	\item The system must scale its UI so that it can fit to the size of the screen device.\\
+	\textbf{Rationale:} Device screens come in all shapes and sizes, thus the application should be able accommodate all kinds of screen sizes.
+	\item Additional options or menus should be hidden under one to a small handful of dropdown menus.\\
+	\textbf{Rationale:} The user's screen should not be cluttered with an abundance of buttons that makes the application hard to navigate.
+	\item The system should adhere to general practices for making applications for android devices\\
+	\textbf{Rationale:} Since the system is made for android devices, we need to follow general practices for making android applications to 
+%	\item On system startup, if the user is logged in, the system should display the frame that allows the user to identify a car.\\
+%	\textbf{Rationale:} The system should display the frame that highlights its main functionality to communicate the intended purpose of the system.
+
 \end{enumerate}
 % End SubSubSection
 
@@ -750,7 +918,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:ease_of_use_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={UH-EOU\arabic*.}]
-    \item 
+	\item The system should only require a maximum of two inputs from the user to produce an output.\\
+	\textbf{Rationale:} The user should not need to go through an extensive process to identify a car. They should be able to take a picture, type in a model, etc. and receive the results they are looking for.
+	\item The system should be usable with only one hand.\\
+	\textbf{Rationale:} There are many times in a user's daily life where only one hand is available to them. Thus, making the app usable with only one hand means users would be able to use the app even in those moments.
 \end{enumerate}
 % End SubSubSection
 
@@ -758,15 +929,21 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:personalization_and_internationalization_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={UH-PI\arabic*.}]
-    \item 
+	\item The system should have a variety of language options to choose from.\\
+	\textbf{Rationale:} With a variety of users comes a variety of languages that are spoken. Thus, to improve the user's experience, we should give them a wide range of languages to choose from do they can use the app with the language they are most comfortable with.
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Learning Requirements}
 \label{ssub:learning_requirements}
 % Begin SubSubSection
+% Mention modern conventions
 \begin{enumerate}[label={UH-L\arabic*.}]
-    \item 
+	\item it is clear how to access the camera through the a	
+	%\item The system should require a user to know how to take a picture with their camera.\\
+	%\textbf{Rationale:} Camera would be a form of input for the user so familiarity with using it is essential.
+	%\item The system should require a user to know how to use their phone keyboard.\\
+	%\textbf{Rationale:} Another form of input for the user.
 \end{enumerate}
 % End SubSubSection
 
@@ -774,7 +951,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:understandability_and_politeness_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={UH-UP\arabic*.}]
-    \item 
+	\item Any icons used in the system without explanation should be universally understood by users or easy to learn.\\
+	\textbf{Rationale:} An icon that can be quickly understood or universally known will make it easier for users to understand what our system does.
+	\item The system should be usable on a lower device brightness.\\
+	\textbf{Rationale:} Users will not always have their device at full brightness, so if the device becomes harder to use at these low brightness settings the user will find the system more tedious to work with.
 \end{enumerate}
 % End SubSubSection
 
@@ -782,7 +962,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:accessibility_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={UH-A\arabic*.}]
-    \item 
+	\item The system should be able to accommodate users with colour blindness.\\
+	\textbf{Rationale:} All manners of users will be using this system, including those with colour blindness. Thus, it would be unethical if they were unable to use the app based on our design decisions.
+	\item The system should be easy to use by both right and left handed people.\\
+	\textbf{Rationale:} A user should have an easy time using the system with either their left or right hand since the user may have a hand that they prefer to use. This requirement also works in conjunction with requirement UH-EOU2, the system should be usable with only one hand since the one hand being used should account for either the left hand or the right hand.
+	\item The system should be compatible with accessibility screen readers.\\
+	\textbf{Rationale:} Users with vision or comprehension disabilities might use screen readers to better navigate the devices and applications that they are engaging with. Thus, to make the system accessible to those users it would be necessary to make the system friendly to common screen readers.
 \end{enumerate}
 % End SubSubSection
 
@@ -1032,7 +1217,8 @@ Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \
 Section 3 & BE2 in Section 4 & BE1 in Section 4 & BE6 in Section 4 & BE3 in Section 4 \\ 
 BE5 in Section 4 & & BE4 in Section 4 & & \\ \hline
 \includegraphics[height=1cm]{images/hashim_signature.png} & \includegraphics[height=1cm]{images/Jaden_signature.jpg} &
-\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & \includegraphics[height=0.6cm]{images/omar_signature.png}  \\ \hline
+\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & \includegraphics[height=0.6cm]{images/omar_signature.png}  \\
+\hline
 \end{tabular}
 \caption{Division of Labour} 
 \label{tab:division_of_labour}
