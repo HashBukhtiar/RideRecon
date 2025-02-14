@@ -103,16 +103,19 @@ One of the goals of the software is to increase users, as more users will lead t
 \subsection{References}
 \label{sub:references}
 % Begin SubSection
+\iffalse
 \begin{itemize}
     \item Provide a complete list of all documents referenced elsewhere in the SRS.
     \item Identify each document by title, report number (if applicable), date, and publishing organization.
     \item Specify the sources from which the references can be obtained.
     \item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
 \end{itemize}
-
+\fi
 \begin{itemize}
     \item \url{https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1}
     \item \url{https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA}
+    \item[3] \url{https://medium.com/design-bootcamp/left-handedness-and-mobile-user-experience-a3728c72f880}
+    \item[4] \url{https://venngage.com/blog/color-blind-design/}
 \end{itemize}
 
 % End SubSection
@@ -395,7 +398,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\setlist[enumerate]{nosep}
 	\item Create an Account \#1\\
 	\textbf{Preconditions:} The user is not logged in, thus the log-in screen is displayed
-	\begin{enumerate}[label={\bf VP\arabic*}]		
+	\begin{enumerate}[label={\bf VP\arabic*.}]		
 		\item User \#1\\
 		\textbf{Main Success Scenario}
 		\begin{enumerate}[label={\bf \arabic*.}]			
@@ -901,7 +904,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\item Additional options or menus should be hidden under one to a small handful of dropdown menus.\\
 	\textbf{Rationale:} The user's screen should not be cluttered with an abundance of buttons that makes the application hard to navigate.
 	\item The system should adhere to general practices for making applications for android devices\\
-	\textbf{Rationale:} Since the system is made for android devices, we need to follow general practices for making android applications to 
+	\textbf{Rationale:} Since the system is made for android devices, we need to follow general practices for making android applications to fit with the styles of other android applications.
+	\item When an expert is mentioned in the system, if it was called by an API call, the system should use the expert's branding appearance when displaying information from it.\\
+	\textbf{Rationale:} When a user interacts with the system in a way that displays information from the experts, if the branding from the given expert is used, it will be easily identifiable by the user and will help them gain trust in the information they are receiving.
 %	\item On system startup, if the user is logged in, the system should display the frame that allows the user to identify a car.\\
 %	\textbf{Rationale:} The system should display the frame that highlights its main functionality to communicate the intended purpose of the system.
 
@@ -931,7 +936,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \begin{enumerate}[label={UH-PI\arabic*.}]
 	\item The system should have a variety of language options to choose from.\\
 	\textbf{Rationale:} With a variety of users comes a variety of languages that are spoken. Thus, to improve the user's experience, we should give them a wide range of languages to choose from do they can use the app with the language they are most comfortable with.
+	\item The system should be easy to use by both right and left handed people.\\
+	\textbf{Rationale:} Users have a preference whether to use their phone with their left or right hand, thus the system should be comfortable to use regardless of which hand is used. Furthermore, there are occasions when users are not able to use one hand or the other, so making the application only feel comfortable to use with a specific hand could make the application feel unwieldy [3].
+	\item The system should be usable on a lower device brightness.\\
+	\textbf{Rationale:} Users will not always have their device at full brightness, so if the device becomes harder to use at these low brightness settings the user will find the system more tedious to work with.
 \end{enumerate}
+
 % End SubSubSection
 
 \subsubsection{Learning Requirements}
@@ -939,11 +949,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 % Mention modern conventions
 \begin{enumerate}[label={UH-L\arabic*.}]
-	\item it is clear how to access the camera through the a	
-	%\item The system should require a user to know how to take a picture with their camera.\\
-	%\textbf{Rationale:} Camera would be a form of input for the user so familiarity with using it is essential.
-	%\item The system should require a user to know how to use their phone keyboard.\\
-	%\textbf{Rationale:} Another form of input for the user.
+	\item Users should be able to start identifying a car within their first 5 minutes of logging into the application.\\
+	\textbf{Rationale:} The process of inputting the information required to identify a car should be minimal and should not be complex. Since coming across a car may be a quick experience, it should not take the user a long time to learn how to use the system effectively.
 \end{enumerate}
 % End SubSubSection
 
@@ -953,8 +960,6 @@ There will be 3 modules in the product. Each module focuses on different major f
 \begin{enumerate}[label={UH-UP\arabic*.}]
 	\item Any icons used in the system without explanation should be universally understood by users or easy to learn.\\
 	\textbf{Rationale:} An icon that can be quickly understood or universally known will make it easier for users to understand what our system does.
-	\item The system should be usable on a lower device brightness.\\
-	\textbf{Rationale:} Users will not always have their device at full brightness, so if the device becomes harder to use at these low brightness settings the user will find the system more tedious to work with.
 \end{enumerate}
 % End SubSubSection
 
@@ -963,9 +968,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={UH-A\arabic*.}]
 	\item The system should be able to accommodate users with colour blindness.\\
-	\textbf{Rationale:} All manners of users will be using this system, including those with colour blindness. Thus, it would be unethical if they were unable to use the app based on our design decisions.
-	\item The system should be easy to use by both right and left handed people.\\
-	\textbf{Rationale:} A user should have an easy time using the system with either their left or right hand since the user may have a hand that they prefer to use. This requirement also works in conjunction with requirement UH-EOU2, the system should be usable with only one hand since the one hand being used should account for either the left hand or the right hand.
+	\textbf{Rationale:} Approximately 360 Million people are colourblind [4]. Thus, as to not alienate a large demographic of users, the interface should be designed with these users in mind.
 	\item The system should be compatible with accessibility screen readers.\\
 	\textbf{Rationale:} Users with vision or comprehension disabilities might use screen readers to better navigate the devices and applications that they are engaging with. Thus, to make the system accessible to those users it would be necessary to make the system friendly to common screen readers.
 \end{enumerate}
