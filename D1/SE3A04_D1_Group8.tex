@@ -14,6 +14,10 @@
 %\usepackage{setspace}
 %\usepackage{xcolor}
 \usepackage{color}
+\usepackage{parskip}
+\usepackage{comment}
+\usepackage{enumitem}
+\usepackage{hyperref}
 %------------------------------------------------------------------------------
 
 % Header and Footer
@@ -25,7 +29,7 @@
 
 % Title Details
 %------------------------------------------------------------------------------
-\title{Deliverable \#1 Template : Software Requirement Specification (SRS)}
+\title{Deliverable \#1: Software Requirement Specification (SRS)}
 \author{SE 3A04: Software Design II -- Large System Design}
 \date{}
                             
@@ -33,15 +37,18 @@
 
 % Document
 %------------------------------------------------------------------------------
-\begin{document}
+\begin{document} 
 
 \maketitle	
 \noindent{\bf Tutorial Number:} T03\\
 {\bf Group Number:} G8 \\
 {\bf Group Members:} Hashim Bukhtiar, Jaden Moore, James Ariache, Olivia Reich, Omar Abdelhamid
 \begin{itemize}
-	\item Group Member Name (as listed in Avenue)
-	\item You do not need to use student \#s or macid (keep those private).
+        \item Hashim Bukhtiar
+        \item Jaden Moore
+        \item James Ariache
+        \item Olivia Reich
+        \item Omar Abdelhamid
 \end{itemize}
 
 \section*{IMPORTANT NOTES}
@@ -58,90 +65,115 @@
 \newpage
 \section{Introduction}
 \label{sec:introduction}
-% Begin Section
-
-\begin{itemize}
-	\item Provide an overview of the document/SRS.
-\end{itemize}
+The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RideRecon, a taxi rideshare application. 
+This document will discuss the purpose of RideRecon, the scope of the application, user characteristics, product requirements, and use case diagrams.
 
 
 \subsection{Purpose}
 \label{sub:purpose}
-% Begin SubSection
-\begin{itemize}
-	\item Specify the purpose of the SRS.
-	\item Specify the intended audience for the SRS.
-\end{itemize}
-% End SubSection
+The document focuses on software requirements, user characteristics, and use cases for RideRecon.
+The purpose of this SRS is to define the software’s objectives, scope, and functionalities. This document is intended for internal RideRecon stakeholders, including but not limited to, project managers, developers, domain experts, and RideRecon team members/investors. No prior readings are required.
 
 \subsection{Scope}
 \label{sub:scope}
-% Begin SubSection
-\begin{itemize}
-	\item Identify the software product(s) to be produced, and name each (e.g., Host DBMS, Report Generator, etc.)
-	\item Explain what the software product(s) will do (and, if necessary, also state what they will not do).
-	\item Describe the application of the software being specified, including relevant benefits, objectives, and goals.
-%	\item Be consistent with similar statements in higher-level specifications (e.g., the system requirements specification), if they exist
-\end{itemize}
-% End SubSection
+
+RideRecon, the car identification application, will allow users to upload an image and text about a vehicle that they want to identify, consulting up to four “Experts” who will use all or some of the user’s input to determine the make and model of the car that has been depicted.
+
+Users are required to register an account on RideRecon in order to access the car identification service. The service includes four experts: “RIS”, “G8M”, “4oE” and ”vAI”. The “RIS” expert performs a reverse image search with the user’s given image to identify the car. The “G8M” expert is a trained machine learning model by the developers that utilizes an optimized database of car images and their corresponding makes and models to identify the user’s car. The ”4oE” expert is the Large Language Model GPT-4o-mini, accessed through OpenAI’s API, which will utilize both the image and the text description to identify the car. Finally, the “vAI” expert is also an LLM, this one hosted on Google Cloud Platform using Vertex AI, specifically the Gemini 1.0 Flash Model, also accessed through its API.
+
+RideRecon’s objective is not only to identify users’ vehicles, but also to deliver other innovative and creative features. For example, once the car has been identified, 4oE will provide an interesting fact about the car, adding more depth and intrigue to it, as well as provide sources and listings for where to purchase the car, allowing the user to go one step further and save time if they are interested in making that vehicle their own.
+
+One of the goals of the software is to increase users, as more users will lead to more cars being identified and added to the optimized database of G8M, and thus better car identification overall, which is even better for future users. Another goal would be to to monetize its user base by offering premium features like better expert access, exclusive community forums, or partnerships with car-related businesses, thereby creating additional revenue streams beyond the core car identification service. This diversification will improve long-term sustainability and profitability.
+
 
 \subsection{Definitions, Acronyms, and Abbreviations}
 \label{sub:definitions_acronyms_and_abbreviations}
-% Begin SubSection
-\begin{itemize}
-	\item Provide the definitions of all terms, acronyms, and abbreviations required to properly interpret the SRS.
-	\item This should be in alphabetical order.
-\end{itemize}
-% End SubSection
+\textbf{LLM}: Large Language Model. A sophisticated artificial intelligence that can understand, generate, and translate human language, often used for tasks like text generation, question answering, and translation.
+
+\textbf{RIS}: Reverse Image Search. This is the idea of using an image as a search query in a browser to find results, rather than using text as traditional browser searches as performed.
+
+\textbf{G8M}: Group 8 Model. This is the model trained by the developers of RideRecon to identify cars. It will utilize an optimized dataset of car images and makes and models.
+
+\textbf{4oE}: GPT-4o-mini. This is an LLM that uses text and images to determine the make and model of the user's car.
+
+\textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
+
+\textbf{Finalizer}: The component of the system that consolidates and finalizes the output, including resolving conflicts between experts and outputting the fun fact about the car and where to purchase it.
 
 \subsection{References}
 \label{sub:references}
 % Begin SubSection
 \begin{itemize}
-	\item Provide a complete list of all documents referenced elsewhere in the SRS.
-	\item Identify each document by title, report number (if applicable), date, and publishing organization.
-	\item Specify the sources from which the references can be obtained.
-	\item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
+    \item Provide a complete list of all documents referenced elsewhere in the SRS.
+    \item Identify each document by title, report number (if applicable), date, and publishing organization.
+    \item Specify the sources from which the references can be obtained.
+    \item Order this list in some sensible manner (alphabetical by author, or something else that makes more sense).
 \end{itemize}
+
+\begin{itemize}
+    \item \url{https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1}
+    \item \url{https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA}
+\end{itemize}
+
 % End SubSection
 
 \subsection{Overview}
 \label{sub:overview}
-% Begin SubSection
-\begin{itemize}
-	\item Describe what the remainder of the document/SRS contains.\\
-	(e.g. "Section 2 discusses...Section 3...")
-%	\item Explain how the SRS is organized
-\end{itemize}
-% End SubSection
+
+\textbf{Section 2} discusses the overall product description talking about the product perspective, product functions, user characteristics, assumptions and dependencies, and apportioning of requirements. 
+
+\textbf{Section 3} contains the Use Case Diagram for the use case scenario of creating a carpool. 
+
+\textbf{Section 4} contains the highlights of functional requirements talking about main business events and viewpoints. 
+
+\textbf{Section 5} contains the Non-Functional Requirements talking about Look and Feel Requirements, Usability and Humanity Requirements, Performance Requirements, Operational and Environmental Requirements, Maintainability and Support Requirements, Security Requirements, Cultural and Political Requirements and Legal Requirements. 
+
+Lastly, \textbf{Section A} contains the Division of Labour.
+
 
 % End Section
-
+\newpage
 \section{Overall Product Description}
 \label{sec:overall_description}
 % Begin Section
-
+\begin{comment}
 \begin{itemize}
 	\item This section should describe the general factors that affect the product and its requirements. 
 	\item It does not state specific requirements.
 	\item It provides a \emph{background} for those requirements and makes them easier to understand.
 \end{itemize}
-
+\end{comment}
 
 \subsection{Product Perspective}
 \label{sub:product_perspective}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Put the product into perspective with other related products, i.e., context
 	\item If the product is independent and totally self-contained, it should be stated here
 	\item If the SRS defines a product that is a component of a larger system, then this subsection should relate the requirements of that larger system to the functionality of the software being developed. Identify interfaces between that larger system and the software to be developed.
 	\item A block diagram showing the major components of the larger system, interconnections, and external interfaces can be helpful
 \end{itemize}
+\end{comment}
+
+RideRecon is a mobile app for car identification that is developed to be compatible with the Android platform.Similar to products such as AvtoPix [insert reference] and CarsSnap [insert reference], it will allow car identification through images while also enhancing search capabilities by also allowing identification through textual descriptions. The product will allow users to create a profile and edit account information linked to that profile. This includes the creation of virtual car collections using car images submitted in the app.
+
+Once an image is selected by the user, the product will have an interface that allows it to interact with different reverse image search technologies. Specifically, it will be able to access a Vertex AI image model and the Reverse Image Search Tool via Google.
+
+If provided textual input by the user, the product will have an interface to interact with Google Search. This interface will also be used to search for relevant car facts that can be returned to the user upon identifying pivotal car identification information.
+
+\begin{center}
+	\includegraphics[width=0.9\textwidth]{images/system_diagram.png} \\
+	\textbf{Figure 1. } System Diagram
+\end{center}
+
 % End SubSection
 
+\newpage
 \subsection{Product Functions}
 \label{sub:product_functions}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Provide a \emph{summary} of the major functions that the software will perform.
 	\begin{itemize}
@@ -154,15 +186,88 @@
 		\item Such a diagram is not intended to show a design of a product, but simply shows the logical relationships among variables
 	\end{itemize} 
 \end{itemize}
+\end{comment}
+
+There will be 3 modules in the product. Each module focuses on different major functions within the product, which have been defined in the table below.
+
+\begin{tabular}{|p{3cm}|p{13cm}|}
+	\hline
+	Modules & Functions \\
+	\hline
+	Account Services &
+	\begin{itemize} [left=2pt]
+		\item Create an account
+		\item Login and logout of account
+		\item Update account information
+		\item Account recovery
+		\begin{itemize}
+			\item allow user to reset password if forgotten
+		\end{itemize}
+		\item Authenticate account
+		\begin{itemize}
+			\item verifies contact information only done during account creation or recovery
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+	Search Services &
+	\begin{itemize} [left=2pt]
+		\item Image search
+		\begin{itemize}
+			\item allow user to request car identification through an image
+		\end{itemize}
+		\item Text search
+		\begin{itemize}
+			\item allow user to request car identification through  text descriptors
+		\end{itemize}
+		\item Present car information
+		\begin{itemize}
+			\item displays all relevant identification information
+			\item displays ‘fun fact’ information
+		\end{itemize}
+		\item Confirm car identification
+		\begin{itemize}
+			\item allow user to confirm whether the identified information matches the car
+		\end{itemize}
+		\item Add car to collection
+		\begin{itemize}
+			\item allow user to add identified car to specified ‘Car Collection’
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+	Collection Manager &
+	\begin{itemize} [left=2pt]
+		\item Create new collection
+		\begin{itemize}
+			\item allow user to create new sub-class in their car collection
+		\end{itemize}
+		\item View collection
+		\begin{itemize}
+			\item allow user to select and view a car collection
+		\end{itemize}
+	\end{itemize} \\
+	\hline
+\end{tabular}
+
+\begin{center}
+	\includegraphics[width=0.5\textwidth]{images/state_diagram.png} \\
+	\textbf{Figure 2. } State Diagram
+\end{center}
 % End SubSection
 
 \subsection{User Characteristics}
 \label{sub:user_characteristics}
 % Begin SubSection
+\begin{comment}
 \begin{itemize}
 	\item Describe those general characteristics of the intended users of the product including educational level, experience, and technical expertise 
 	\item Since there will be many users, you may wish to divide into different user types or personas
 %	\item Do not state specific requirements, but rather provide the reasons why certain specific requirements are later specified	
+\end{itemize}
+\end{comment}
+\begin{itemize}
+	\item \textbf{Educational Level:} Users must have basic literacy skills which includes the fundamental ability to understand information through reading, writing, listening, and speaking.
+	\item \textbf{Technical Expertise:} Users should have a basic understanding of how to operate and navigate an Android smartphone, including downloading apps, as this application is designed specifically for the Android platform.
+	\item \textbf{Technical Experience:} Users do not require any prior experience or knowledge with cars in order to utilize the app. Aside from the basic technical expertise outlined above, no extra experience will be required to navigate and utilize the features of the app as it will prioritize an intuitive design.
 \end{itemize}
 % End SubSection
 
@@ -171,6 +276,14 @@
 % Begin SubSection
 \begin{itemize}
 	\item Provide a general description of any constraints that will limit the developer's options
+	
+	\item The system must have an active \textbf{internet connection} to perform car identification.
+    \item The app must be compatible with \textbf{Android 8.0 (Oreo) and above}.
+    \item The device must have at least \textbf{2GB of RAM} for smooth operation.
+    \item Captured images must have a \textbf{minimum resolution of 720p} to ensure accurate car identification.
+    \item The AI model may not recognize \textbf{damaged or heavily modified cars} accurately.
+    \item The system must comply with \textbf{privacy laws} regarding the storage and processing of user-uploaded images.
+
 \end{itemize}
 % End SubSection
 
@@ -185,6 +298,20 @@
 	\begin{itemize}
 		\item \textbf{Example}: An assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly.
 	\end{itemize}
+
+	\item \textbf{Assumptions:}
+    \begin{itemize}
+        \item Users will have stable internet access while using the app.
+        \item The AI model can identify most common car brands and models.
+        \item Dealerships will provide accurate and up-to-date pricing.
+    \end{itemize}
+    \item \textbf{Dependencies:}
+    \begin{itemize}
+        \item The AI model relies on an external \textbf{machine learning API} to process images.
+        \item The system depends on a third-party \textbf{reverse image search API} (e.g., Google Lens, TinEye) for validation.
+        \item Pricing and specifications are sourced from \textbf{external dealership databases}.
+    \end{itemize}
+
 \end{itemize}
 % End SubSection
 
@@ -193,6 +320,9 @@
 % Begin SubSection
 \begin{itemize}
 	\item Identify requirements that may be delayed until future versions of the system
+	\item \textbf{Offline Mode}: The app currently requires internet access; an offline model will be explored in future versions.
+    \item \textbf{Multiple Car Detection}: Initially, the app will support one car per image; future updates may allow multiple cars.
+    \item \textbf{Personalized Car Recommendations}: The first version won’t suggest similar cars, but this may be added later.
 \end{itemize}
 % End SubSection
 
@@ -206,6 +336,12 @@
 %	\item Provide \emph{one} use case diagram for the most important Business Event.
 %	\item The text of all use cases will be specified under "Highlights of Functional Requirements"
 \end{itemize}
+
+\begin{center}
+\includegraphics[height=13cm]{images/Use Case Diagram D1.png} \\
+\textbf{Figure 3. } Use Case Diagram
+\end{center}
+
 %In this section, select the most important Business Event that your system responds to and give its use case diagram.  Only one use case diagram is needed.  Give a brief textual description of the use case without repeating what is in the scenarios of the corresponding Business Event.
 
 %
@@ -232,10 +368,28 @@
 \end{itemize}
 
 \noindent {\bf Main Business Events:} List out all the main business events you are presenting. If you sub-divided into smaller ones, you don't need to include the smaller ones in this list.\\
+\begin{itemize}
+        \item BE1. Create Account
+        \item BE2. Authenticate User
+        \item BE3. Upload Text and/or Image as Input
+        \item BE4. Compare Expert Answers
+        \item BE5. Present Final Output With Identification Information
+        \item BE6. Add to or Remove From Car Collection
+\end{itemize}
 
 \noindent {\bf Viewpoints:} List out all the viewpoints you will be considering.\\
+\begin{itemize}
+	\item VP1. Users
+	\item VP2. Customer Support (RideRecon)
+	\item VP3. Marketing (RideRecon)
+	\item VP4. Accounting (RideRecon)
+	\item VP5. Dealership
+\end{itemize}
 
 \noindent {\bf Interpretation:} Specify any liberties you took in interpreting business events, if necessary.\\
+\begin{itemize}
+	\item NA.
+\end{itemize}
 
 \begin{enumerate}[{\bf BE1.}]
 	\item Create an Account \#1\\
@@ -351,22 +505,80 @@
 				\item[\textbf{6ii.6}] The system returns the user to the information request screen in step \textbf{5.}
 			\end{enumerate}
 		\end{enumerate}
-	\item Business Event Name \#2
-	\begin{enumerate}[{\bf VP1.}]
-		\item Viewpoint Name \#1 \\
-		\textcolor{red}{Insert Scenario Here}
-		\item Viewpoint Name \#2 \\
-		\textcolor{red}{Insert Scenario Here}
+	\item Authenticate User \#2
+	\begin{enumerate}[label={\bf VP\arabic*.}]
+		\item Users \#1 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Customer Support (RideRecon) \#2 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Marketing (RideRecon) \#3 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Accounting (RideRecon) \#4 \\
+			\textcolor{red}{Insert Scenario Here}
+		\item Dealership \#5 \\
+			\textcolor{red}{Insert Scenario Here}
 	\end{enumerate}	
 	{\bf Global Scenario:}\\
 	\textcolor{red}{Insert Scenario Here}	
-	\item Business Event Name \#3
-	\begin{enumerate}[\bf VP1.]
-		\item Viewpoint Name \#1
-		\item Viewpoint Name \#2
+
+	\item Upload Text and/or Image as Input \#3 \\  
+    \textbf{Pre-Condition:} The user must be authenticated in the system and must have an active internet connection. The user must either provide an image of the car or enter a textual description. If using an image, the device must have a functioning camera or access to stored images.
+  
+
+    \begin{enumerate}[label=\textbf{VP\arabic*.}]
+        \item Users \#1 \\  
+            \textbf{Main Success Scenario} \\  
+            \textcolor{red}{1. The user selects an image OR enters text describing a car.} \\  
+            \textcolor{red}{2. If an image is provided, the system checks its quality:
+			If acceptable, the system processes the image.
+			If blurry, the system prompts the user to retake the photo.} \\  
+            \textcolor{red}{3. If text is provided, the system extracts key information and performs a database search.} \\  
+            \textcolor{red}{4. The system provides instant feedback while processing.} \\  
+            \textcolor{red}{5. The user receives results, including car specifications and pricing (if available).} \\  
+            \textcolor{red}{6. The system sends the input data to the Experts for processing.} \\  
+            
+            \textbf{Secondary Scenario} \\  
+            \textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
+            \textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
+            \textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
+            \textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
+            \textcolor{red}{6v. The Experts detect that the provided image and text do not match the same car model.} \\  
+            \textcolor{red}{6vi. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
+
+        \item Customer Support (RideRecon) \#2 \\  
+            \textcolor{red}{NA}  
+
+        \item Marketing (RideRecon) \#3 \\  
+            \textcolor{red}{NA}  
+
+        \item Accounting (RideRecon) \#4 \\  
+            \textcolor{red}{NA}  
+
+        \item Dealership \#5 \\  
+            \textcolor{red}{9i. The system determines that the dealership database lacks a match for the provided input.} \\  
+            \textcolor{red}{9ii. The dealership can request to update the system database to ensure their listings appear in future searches.} \\
 	\end{enumerate}
-	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}
+
+	{\bf Global Scenario:} \\  
+		\textbf{Main Success Scenario} \\  
+		\textcolor{red}{1. User opens the RideRecon app on their device.} \\  
+		\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\  
+		\textcolor{red}{3. User enters login credentials.} \\  
+		\textcolor{red}{4. System authenticates the user.} \\  
+		\textcolor{red}{5. System prompts the user to upload an image or enter a text description of the car they want to identify.} \\  
+		\textcolor{red}{6. User uploads an image or enters a text description.} \\  
+		\textcolor{red}{7. System verifies the uploaded image quality and processes it.} \\  
+		\textcolor{red}{8. System processes the text description using language processing and matches potential vehicles.} \\  
+		\textcolor{red}{9. System sends the input data to the Experts for processing.} \\  
+
+		\textbf{Secondary Scenario} \\  
+		\textcolor{red}{6i. User provides an image, but it is blurry or unclear.} \\  
+		\textcolor{red}{6ii. System detects poor image quality and prompts the user to re-upload a clearer image.} \\  
+		\textcolor{red}{6iii. User does not have an image and enters text instead.} \\  
+		\textcolor{red}{6iv. System prompts the user to refine their text description if it is too vague.} \\  
+		\textcolor{red}{9i. The Experts detect that the provided image and text do not match the same car model.} \\  
+		\textcolor{red}{9ii. System prompts the user to confirm or edit the text description to match the uploaded image.} \\  
+
 	\item Compare Expert Answers \#4
 	\begin{enumerate}[\bf VP1.]
 		\item User \#1\\
@@ -410,36 +622,129 @@
 		N/A
 		\item Dealership\\
 		N/A
+		{\bf Global Scenario:}\\
+		\textbf{Main Success Scenario}
+		\begin{enumerate}[1.]
+			\color{red}
+			\item User provides the information of a car for the system to process.
+			\item System feeds input to all of its experts
+			\item Experts provide the system with their answer on information about the car.
+			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
+			\item The finalizer processes the data from the experts for output.
+		\end{enumerate}
+		\textbf{Secondary Scenario}
+		\begin{enumerate}
+			\color{red}
+			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\begin{enumerate}
+				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
+				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
+				\item[\textbf{4i.5}] The user acknowledges the message and chooses not to give feedback.
+				\begin{enumerate}
+					\item[\textbf{4i.5.i.1}] The user decides to give feedback.
+					\item[\textbf{4i.5.i.2}] The system will prompt the user for their feedback and any other important information.
+					\item[\textbf{4i.5.i.3}] The user inputs their feedback.
+					\item[\textbf{4i.5.i.4}] The system thanks them for their response.
+				\end{enumerate}
+				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+			\end{enumerate} 
+		\end{enumerate}
+	\end{enumerate}
+\item Finalize and Present Output With Identification Information \#5 \\
+		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
+		\begin{enumerate}[label=\textbf{VP\arabic*.}]
+			\item Users \#1 \\
+				\textbf{Main Success Scenario} \\
+				\textcolor{red}{1. User opens the RideRecon app on their device.} \\
+				\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\
+				\textcolor{red}{3. User enters login credentials.} \\
+				\textcolor{red}{4. System authenticates the user.} \\
+				\textcolor{red}{5. System prompts the user to upload an image and text description of the car they want to identify.} \\
+				\textcolor{red}{6. User uploads an image with some text description of their car.} \\
+				\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
+				\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
+				\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+				\textbf{Secondary Scenario} \\
+				\textcolor{red}{6i. User doesn't have both forms of input.} \\
+				\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
+				\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
+				\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
+				\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+				\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+			\item Customer Support (RideRecon) \#2 \\
+				\textcolor{red}{NA}
+			\item Marketing (RideRecon) \#3 \\
+				\textcolor{red}{NA}
+			\item Accounting (RideRecon) \#4 \\
+				\textcolor{red}{NA}
+			\item Dealership \#5 \\
+				\textcolor{red}{9i. The given dealership was not chosen as a source of purchase.} \\
+				\textcolor{red}{9ii. They can contact RideRecon to ensure that they are more likely to be chosen as the preferred purchase source.}
+
+		\end{enumerate}
+		{\bf Global Scenario:}\\
+			\textbf{Main Success Scenario} \\
+			\textcolor{red}{1. User opens the RideRecon app on their device.} \\
+			\textcolor{red}{2. System requires the user to log in and displays the login fields.} \\
+			\textcolor{red}{3. User enters login credentials.} \\
+			\textcolor{red}{4. System authenticates the user.} \\
+			\textcolor{red}{5. System prompts the user to upload an image and text description of the car they want to identify.} \\
+			\textcolor{red}{6. User uploads an image with some text description of their car.} \\
+			\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
+			\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
+			\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+			\textbf{Secondary Scenario} \\
+			\textcolor{red}{6i. User doesn't have both forms of input.} \\
+			\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
+			\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
+			\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
+			\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+			\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+			
+	\item Add to Car Collection \#6 \\
+	\textbf{Pre-Condition:} The user must be logged into their account.
+	\begin{enumerate}[label=\textbf{VP\arabic*.}]
+		\item Users \#1 \\
+		\textbf{Main Success Scenario} \\
+		1. User accesses their car collections through the icon on the homepage. \\
+		2. User chooses the add to car collection icon. \\
+		3. System prompts the user to choose a car from their past identification history. \\
+		4. User selected an identified car. \\
+		5. System prompts the user to choose a car collection. \\
+		6. User selects an existing car collection to add the identified car to. \\
+		7. The input data is sent to the Experts for processing. \\
+		8. System provides a review of changes to car collection and prompts the user for verification. \\
+		9. User verifies changes and returns to homepage. \\
+		\textbf{Secondary Scenario} \\
+		1i. User chooses to add a car to a collection immediately after identification. Skip VP1.2 \& VP1.3. \\
+		2i. No past identified car. Return to homepage. \\
+		8i. User declines changes. No modification made to car collection and return to homepage. \\
+		\item Customer Support (RideRecon) \#2 \\
+		\textcolor{red}{NA}
+		\item Marketing (RideRecon) \#3 \\
+		\textcolor{red}{NA}
+		\item Accounting (RideRecon) \#4 \\
+		\textcolor{red}{NA}
+		\item Dealership \#5 \\
+		\textcolor{red}{NA}
 	\end{enumerate}
 	{\bf Global Scenario:}\\
-	\textbf{Main Success Scenario}
-	\begin{enumerate}[1.]
-		\color{red}
-		\item User provides the information of a car for the system to process.
-		\item System feeds input to all of its experts
-		\item Experts provide the system with their answer on information about the car.
-		\item The finalizer recognizes the experts agree on what kind of car the user inputs.
-		\item The finalizer processes the data from the experts for output.
-	\end{enumerate}
-	\textbf{Secondary Scenario}
-	\begin{enumerate}
-		\color{red}
-		\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
-		\begin{enumerate}
-			\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
-			\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
-			\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
-			\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
-			\item[\textbf{4i.5}] The user acknowledges the message and chooses not to give feedback.
-			\begin{enumerate}
-				\item[\textbf{4i.5.i.1}] The user decides to give feedback.
-				\item[\textbf{4i.5.i.2}] The system will prompt the user for their feedback and any other important information.
-				\item[\textbf{4i.5.i.3}] The user inputs their feedback.
-				\item[\textbf{4i.5.i.4}] The system thanks them for their response.
-			\end{enumerate}
-			\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
-		\end{enumerate} 
-	\end{enumerate}
+	\textbf{Main Success Scenario} \\
+	1. User accesses their car collections through the icon on the homepage. \\
+	2. User chooses the add to car collection icon. \\
+	3. System prompts the user to choose a car from their past identification history. \\
+	4. User selected an identified car. \\
+	5. System prompts the user to choose a car collection. \\
+	6. User selects an existing car collection to add the identified car to. \\
+	7. The input data is sent to the Experts for processing. \\
+	8. System provides a review of changes to car collection and prompts the user for verification. \\
+	9. User verifies changes and returns to homepage. \\
+	\textbf{Secondary Scenario} \\
+	1i. User chooses to add a car to a collection immediately after identification. Skip VP1.2 \& VP1.3. \\
+	2i. No past identified car. Return to homepage. \\
+	8i. User declines changes. No modification made to car collection and return to homepage. \\
 \end{enumerate}
 
 %	Below, we organize by Business Event.
@@ -675,64 +980,64 @@
 \subsubsection{Speed and Latency Requirements}
 \label{ssub:speed_and_latency_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SL}1. ]
-	\item 
+\begin{enumerate}[label={PR-SL\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Safety-Critical Requirements}
 \label{ssub:safety_critical_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SC}1. ]
-	\item 
+\begin{enumerate}[label={PR-SC\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Precision or Accuracy Requirements}
 \label{ssub:precision_or_accuracy_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-PA}1. ]
-	\item 
+\begin{enumerate}[label={PR-PA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Reliability and Availability Requirements}
 \label{ssub:reliability_and_availability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-RA}1. ]
-	\item 
+\begin{enumerate}[label={PR-RA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Robustness or Fault-Tolerance Requirements}
 \label{ssub:robustness_or_fault_tolerance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-RFT}1. ]
-	\item 
+\begin{enumerate}[label={PR-RFT\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Capacity Requirements}
 \label{ssub:capacity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-C}1. ]
-	\item 
+\begin{enumerate}[label={PR-C\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Scalability or Extensibility Requirements}
 \label{ssub:scalability_or_extensibility_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-SE}1. ]
-	\item 
+\begin{enumerate}[label={PR-SE\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Longevity Requirements}
 \label{ssub:longevity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{PR-L}1. ]
-	\item 
+\begin{enumerate}[label={PR-L\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -745,32 +1050,32 @@
 \subsubsection{Expected Physical Environment}
 \label{ssub:expected_physical_environment}
 % Begin SubSubSection
-\begin{enumerate}[{OE-EPE}1. ]
-	\item 
+\begin{enumerate}[label={OE-EPE\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Requirements for Interfacing with Adjacent Systems}
 \label{ssub:requirements_for_interfacing_with_adjacent_systems}
 % Begin SubSubSection
-\begin{enumerate}[{OE-IA}1. ]
-	\item 
+\begin{enumerate}[label={OE-IA\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Productization Requirements}
 \label{ssub:productization_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{OE-P}1. ]
-	\item 
+\begin{enumerate}[label={OE-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Release Requirements}
 \label{ssub:release_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{OE-R}1. ]
-	\item 
+\begin{enumerate}[label={OE-R\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -783,24 +1088,24 @@
 \subsubsection{Maintenance Requirements}
 \label{ssub:maintenance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-M}1. ]
-	\item 
+\begin{enumerate}[label={MS-M\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Supportability Requirements}
 \label{ssub:supportability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-S}1. ]
-	\item 
+\begin{enumerate}[label={MS-S\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Adaptability Requirements}
 \label{ssub:adaptability_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{MS-A}1. ]
-	\item 
+\begin{enumerate}[label={MS-A\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -813,40 +1118,40 @@
 \subsubsection{Access Requirements}
 \label{ssub:access_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-AC}1. ]
-	\item 
+\begin{enumerate}[label={SR-AC\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Integrity Requirements}
 \label{ssub:integrity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-INT}1. ]
-	\item 
+\begin{enumerate}[label={SR-INT\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Privacy Requirements}
 \label{ssub:privacy_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-P}1. ]
-	\item 
+\begin{enumerate}[label={SR-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Audit Requirements}
 \label{ssub:audit_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-AU}1. ]
-	\item 
+\begin{enumerate}[label={SR-AU\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Immunity Requirements}
 \label{ssub:immunity_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{SR-IM}1. ]
-	\item 
+\begin{enumerate}[label={SR-IM\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -859,16 +1164,16 @@
 \subsubsection{Cultural Requirements}
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{CP-C}1. ]
-	\item 
+\begin{enumerate}[label={CP-C\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Political Requirements}
 \label{ssub:political_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{CP-P}1. ]
-	\item 
+\begin{enumerate}[label={CP-P\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
@@ -881,19 +1186,18 @@
 \subsubsection{Compliance Requirements}
 \label{ssub:compliance_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LR-COMP}1. ]
-	\item 
+\begin{enumerate}[label={LR-COMP\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
 
 \subsubsection{Standards Requirements}
 \label{ssub:standards_requirements}
 % Begin SubSubSection
-\begin{enumerate}[{LR-STD}1. ]
-	\item 
+\begin{enumerate}[label={LR-STD\arabic*.}]
+    \item 
 \end{enumerate}
 % End SubSubSection
-
 % End SubSection
 
 % End Section
@@ -910,12 +1214,12 @@ Include a Division of Labour sheet which indicates the contributions of each tea
 \hline
 Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \\ \hline
 1.1, 1.2, 1.3, 1.4, 1.5 & 5.3, 5.4, 5.5, 5.8 & 5.1, 5.2, 5.6, 5.7 & 2.1, 2.2, 2.3 & 2.4, 2.5, 2.6 \\ 
-Section 3 & BE2 in Section 4 & BE3 in Section 4 & BE4 in Section 4 & BE5 in Section 4 \\ 
-BE1 in Section 4 & & & & \\ \hline
-\includegraphics[height=1cm]{hashim_signature.png} & \includegraphics[height=1cm]{JadenSig.jpg} & 
-\includegraphics[scale=0.1]{james_signature.png}& \includegraphics[height=0.6cm]{olivia_signature.png} & SIGNATURE \\ \hline
+Section 3 & BE2 in Section 4 & BE1 in Section 4 & BE6 in Section 4 & BE3 in Section 4 \\ 
+BE5 in Section 4 & & BE4 in Section 4 & & \\ \hline
+\includegraphics[height=1cm]{images/hashim_signature.png} & \includegraphics[height=1cm]{images/Jaden_signature.jpg} &
+\includegraphics[scale=0.1]{images/james_signature.png}& \includegraphics[height=0.6cm]{images/olivia_signature.png} & \includegraphics[height=0.6cm]{images/omar_signature.png}  \\ \hline
 \end{tabular}
-\caption{Division of Labour}
+\caption{Division of Labour} 
 \label{tab:division_of_labour}
 \end{table}
 
@@ -935,4 +1239,3 @@ BE1 in Section 4 & & & & \\ \hline
 
 
 \end{document}
-%------------------------------------------------------------------------------

@@ -1,1 +1,4 @@
 *.log
+
+# Ignore Signatures
+*_signature.*

@@ -1,29 +1,41 @@
 @startuml
-actor User
-actor "Human Expert" as HumanExpert
-actor Dealership
-actor "Reverse Image Search" as ReverseImageSearch
+left to right direction
+actor User 
 actor "Vertex AI Image Model" as VertexAIImageModel
-actor Expert
+actor "Reverse Image Search" as ReverseImageSearch
+actor "4o-mini Text LLM" as TextLLM
+actor "Trained ML Model" as TrainedMLModel
 
-package System {
+package "RideRecon System" as System {
+    usecase "Provide Input" as ProvideInput
     usecase "Text Input" as TextInput
     usecase "Image Input" as ImageInput
     usecase "Identify Car" as IdentifyCar
-    usecase "Register Account" as RegisterAccount
-    usecase "Link Dealership" as LinkDealership
+    usecase "Resolve Conflicts" as ResolveConflicts
+    usecase "Provide Car Fact" as ProvideCarFact
+    usecase "Provide Purchase Sources" as ProvidePurchaseSources
+    usecase "Finalize Output" as FinalizeOutput
 }
 
-User --> TextInput
-User --> ImageInput
-TextInput --> IdentifyCar
-ImageInput --> IdentifyCar
-IdentifyCar <-- Expert
-Expert <|-- HumanExpert
-Expert <|-- ReverseImageSearch
-Expert <|-- VertexAIImageModel
+actor Expert as Expert
+actor Finalizer as Finalizer
 
-User --> RegisterAccount
-RegisterAccount --> LinkDealership
-LinkDealership --> Dealership
+TextLLM --> ProvideCarFact
+TextLLM --> ProvidePurchaseSources
+
+User --> ProvideInput
+ProvideInput ..> TextInput : <<include>>
+ProvideInput ..> ImageInput : <<include>>
+
+Finalizer --> FinalizeOutput
+FinalizeOutput ..> ResolveConflicts : <<include>>
+
+Expert --> IdentifyCar
+VertexAIImageModel -up-|> Expert
+ReverseImageSearch -up-|> Expert
+TextLLM -up-|> Expert
+TrainedMLModel -up-|> Expert
+
+System -[hidden]-> Expert
+System -[hidden]-> Finalizer
 @enduml
