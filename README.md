@@ -1,2 +1,2 @@
 # RideRecon
-The project and deliverables for SFWRENG 3A04
+The app that identifies any and all cars.
