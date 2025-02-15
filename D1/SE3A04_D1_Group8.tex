@@ -627,6 +627,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 		N/A
 		\item Dealership\\
 		N/A
+		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textbf{Main Success Scenario}
 		\begin{enumerate}[label={\bf \arabic*.}]
@@ -654,7 +655,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
 			\end{enumerate} 
 		\end{enumerate}
-	\end{enumerate}
+	%\end{enumerate}
 \item Finalize and Present Output With Identification Information \#5 \\
 		\textbf{Pre-Condition:} All experts have processed input and obtained their final answer for the make and model of the car.
 		\begin{enumerate}[label=\textbf{VP\arabic*.}]
@@ -1122,7 +1123,12 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:access_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-AC\arabic*.}]
-    \item 
+    \item Users should only be able to access an account if they have the correct login credentials.\\
+    \textbf{Rationale:} This is to ensure a user has legitimate access to an account. This also ensures that there is no "master account" or backdoor that could be exploited to get into a user's account.
+    \item The system must ask for access to the user's camera if they want to use the camera functionality.\\
+    \textbf{Rationale:} It is imperative to ask for the user's consent to use the camera in the application so they understand what features of their phone the system is gaining access to.
+    \item The system must ask for access to the user's photo library if they want to upload a photo of a car for identification.\\
+    \textbf{Rationale:} It is imperative to ask for the user's consent to use photos from their photo library in the application so they understand what features of their phone the system is gaining access to.
 \end{enumerate}
 % End SubSubSection
 
@@ -1130,7 +1136,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:integrity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-INT\arabic*.}]
-    \item 
+    \item An account's history or car collection can only be manipulated if a user is logged into the account.\\
+    \textbf{Rationale:} Outside actors that do not have access to a user's account should not be able to manipulate data specific to that account.
 \end{enumerate}
 % End SubSubSection
 
@@ -1138,7 +1145,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:privacy_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-P\arabic*.}]
-    \item 
+    \item The system should comply with Android's Privacy Checklist[5].\\
+    \textbf{Rationale:} Since this is an Android application, following their best practices for application development will ensure the system complies with Android's standards for privacy.
 \end{enumerate}
 % End SubSubSection
 
@@ -1168,7 +1176,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={CP-C\arabic*.}]
-    \item 
+    \item Determines between wheel on right side vs. wheel on the left side	
 \end{enumerate}
 % End SubSubSection
 
