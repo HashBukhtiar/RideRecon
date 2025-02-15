@@ -115,7 +115,8 @@ One of the goals of the software is to increase users, as more users will lead t
     \item[1] “AvtoPix: Car Id - apps on Google Play,” Google, \url{https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1} (accessed Feb. 14, 2025).
     \item[2] “CARSSNAP - car model identify - apps on Google Play,” Google, \url{https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA} (accessed Feb. 14, 2025).
     \item[3] M. Nadir, “Left handedness and mobile user experience,” Medium, \url{https://medium.com/design-bootcamp/left-handedness-and-mobile-user-experience-a3728c72f880} (accessed Feb. 14, 2025).
-    \item[4] Written By Jennifer Gaskin  Published: Jan 13, About Jennifer Gaskin      	A veteran of newsrooms and agencies, and A. J. Gaskin, “Color blind design guidelines: A comprehensive guide,” Venngage, \url{https://venngage.com/blog/color-blind-design/} (accessed Feb. 14, 2025).
+    \item[4] Written By Jennifer Gaskin  Published: Jan 13, About Jennifer Gaskin      	A veteran of newsrooms and agencies, and A. J. Gaskin, “Color blind design guidelines: A comprehensive guide,” Venngage, \url{https://venngage.com/blog/color-blind-design/} (accessed Feb. 14, 2025).
+    \item[5] https://developer.android.com/privacy-and-security/about 
 \end{itemize}
 
 % End SubSection
@@ -1251,7 +1252,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:audit_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-AU\arabic*.}]
-    \item 
+    \item N/A
 \end{enumerate}
 % End SubSubSection
 
@@ -1259,7 +1260,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:immunity_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-IM\arabic*.}]
-    \item 
+    \item When an external tool is used for development, ensure it is reliable and trustworthy.\\
+    \textbf{Rationale:} Some external tools could be compromised or contain malicious code. While this cannot be completely avoided, risk can be mitigated by using tools that are trusted and have a good reputation of safety and reliability.
+    \item The application should be resistant to malicious input from the user.\\
+    \textbf{Rationale:} The user may have tactics of penetrating security systems such as SQL injections. Thus, the system should be resistant to malicious input like this.
 \end{enumerate}
 % End SubSubSection
 
@@ -1273,7 +1277,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:cultural_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={CP-C\arabic*.}]
-    \item Determines between wheel on right side vs. wheel on the left side	
+    \item The system is able to identify a car, regardless of which side the drivers side is on.\\
+    \textbf{Rationale:} Countries around the world do not always drive on the same side of the road. In some countries, drivers drive on the left side of the road while others drive on the right. Depending on the country, the car has been designed with the drivers side on the left or the right side of the car. Thus, our system should be able to handle either kinds of these cars for users across the world.
 \end{enumerate}
 % End SubSubSection
 
@@ -1281,7 +1286,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:political_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={CP-P\arabic*.}]
-    \item 
+    \item N/A
 \end{enumerate}
 % End SubSubSection
 
