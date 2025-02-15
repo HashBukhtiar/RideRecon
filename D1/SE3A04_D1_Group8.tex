@@ -510,21 +510,61 @@ There will be 3 modules in the product. Each module focuses on different major f
 			\end{enumerate}
 		\end{enumerate}
 	%\end{enumerate}
-	\item Authenticate User \#2
+	\item Authenticate User \#2 \\
+	\textbf{Pre-Condition:} The user must have an existing RideRecon account and access to the internet. The system must be able to connect to the authentication server to verify login credentials.
 	\begin{enumerate}[label={\bf VP\arabic*.}]
-		\item Users \#1 \\
-			\textcolor{red}{Insert Scenario Here}
+		\item Users \#1 
+			\textbf{Main Success Scenario} \\  
+			\textcolor{red}{1. User opens the RideRecon app.} \\  
+			\textcolor{red}{2. System displays the log-in screen.} \\  
+			\textcolor{red}{3. User enters their email/username and password.} \\  
+			\textcolor{red}{4. System verifies credentials against the database.} \\  
+			\textcolor{red}{5. If credentials are valid, the system grants access to the user and loads the homepage.} \\
+
+			\textbf{Secondary Scenario} \\
+            \textcolor{red}{4i. User enters incorrect credentials.} \\  
+            \textcolor{red}{4ii. System detects invalid credentials and displays an error message.} \\  
+            \textcolor{red}{4iii. User is given the option to retry or reset their password.} \\  
+            \textcolor{red}{4iv. If the user retries, they are redirected back to the login screen.} \\  
+            \textcolor{red}{4v. If the user selects password reset, they are taken to the password recovery process.} \\  
+            \textcolor{red}{5i. System is unable to connect to the authentication server.} \\  
+            \textcolor{red}{5ii. System displays a message informing the user of a connection issue.} \\  
+            \textcolor{red}{5iii. User is given the option to retry logging in.} \\  
+            \textcolor{red}{6i. User selects "Remember Me" during login.} \\  
+            \textcolor{red}{6ii. System securely stores authentication tokens to allow automatic login on future app openings.} \\  
+            \textcolor{red}{7i. User selects "Sign in with Google/Apple ID".} \\  
+            \textcolor{red}{7ii. System redirects user to the respective authentication service.} \\  
+            \textcolor{red}{7iii. If authentication is successful, user is granted access to the app.} \\ 
 		\item Customer Support (RideRecon) \#2 \\
-			\textcolor{red}{Insert Scenario Here}
+			\textbf{Main Success Scenario} \\  
+			\textcolor{red}{1. User selects the "Need Help?" option on the login screen.} \\  
+			\textcolor{red}{2. System displays support options, including FAQs and a contact form.} \\  
+			\textcolor{red}{3. User submits an inquiry regarding login issues.} \\  
+			\textcolor{red}{4. System sends the inquiry to customer support.} \\  
+			
+			\textbf{Secondary Scenario}  
+			\textcolor{red}{4i. System provides automated troubleshooting suggestions before allowing the user to submit a ticket.} \\  
+			\textcolor{red}{4ii. If an error prevents login, system suggests clearing cache or checking for updates.} \\ 
 		\item Marketing (RideRecon) \#3 \\
-			\textcolor{red}{Insert Scenario Here}
+			\textcolor{red}{N/A}
 		\item Accounting (RideRecon) \#4 \\
-			\textcolor{red}{Insert Scenario Here}
+			\textcolor{red}{N/A}
 		\item Dealership \#5 \\
-			\textcolor{red}{Insert Scenario Here}
+			\textcolor{red}{N/A}
 	\end{enumerate}	
 	{\bf Global Scenario:}\\
-	\textcolor{red}{Insert Scenario Here}	
+	\textbf{Main Success Scenario} \\  
+	\textcolor{red}{1. User opens the RideRecon app.} \\  
+	\textcolor{red}{2. System displays the log-in screen.} \\  
+	\textcolor{red}{3. User enters login credentials.} \\  
+	\textcolor{red}{4. System verifies credentials.} \\  
+	\textcolor{red}{5. If valid, user is granted access to the app.} \\ 
+
+	\textbf{Secondary Scenario} \\  
+	\textcolor{red}{4i. User enters incorrect credentials and is prompted to retry or reset their password.} \\  
+	\textcolor{red}{4ii. System encounters a connectivity issue and informs the user.} \\  
+	\textcolor{red}{4iii. User opts to remember their credentials for future logins.} \\  
+	\textcolor{red}{4iv. User logs in using third-party authentication (Google/Apple ID).} \\
 
 	\item Upload Text and/or Image as Input \#3 \\  
     \textbf{Pre-Condition:} The user must be authenticated in the system and must have an active internet connection. The user must either provide an image of the car or enter a textual description. If using an image, the device must have a functioning camera or access to stored images.
