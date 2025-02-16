@@ -65,7 +65,7 @@
 \newpage
 \section{Introduction}
 \label{sec:introduction}
-The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RideRecon, a taxi rideshare application. 
+The SRS is a structured document that outlines the functional and non-functional requirements of the RideRecon software system. It serves as a blueprint for developers, testers, and stakeholders, ensuring a clear understanding of the system to be built. This SRS will provide visibility over software requirements for RideRecon, a car identification application. 
 This document will discuss the purpose of RideRecon, the scope of the application, user characteristics, product requirements, and use case diagrams.
 
 
@@ -79,11 +79,11 @@ The purpose of this SRS is to define the software’s objectives, scope, and fun
 
 RideRecon, the car identification application, will allow users to upload an image and text about a vehicle that they want to identify, consulting up to four “Experts” who will use all or some of the user’s input to determine the make and model of the car that has been depicted.
 
-Users are required to register an account on RideRecon in order to access the car identification service. The service includes four experts: “RIS”, “G8M”, “4oE” and ”vAI”. The “RIS” expert performs a reverse image search with the user’s given image to identify the car. The “G8M” expert is a trained machine learning model by the developers that utilizes an optimized database of car images and their corresponding makes and models to identify the user’s car. The ”4oE” expert is the Large Language Model GPT-4o-mini, accessed through OpenAI’s API, which will utilize both the image and the text description to identify the car. Finally, the “vAI” expert is also an LLM, this one hosted on Google Cloud Platform using Vertex AI, specifically the Gemini 1.0 Flash Model, also accessed through its API.
+Users are required to register an account on RideRecon in order to access the car identification service. The service includes four experts: “\underline{RIS}”, “\underline{G8M}”, “\underline{4oE}” and ”\underline{vAI}”. The “\underline{RIS}” expert performs a reverse image search with the user’s given image to identify the car. The “\underline{G8M}” expert is a trained machine learning model by the developers that utilizes an optimized database of car images and their corresponding makes and models to identify the user’s car. The ”\underline{4oE}” expert is the Large Language Model GPT-4o-mini, accessed through OpenAI’s API, which will utilize both the image and the text description to identify the car. Finally, the “\underline{vAI}” expert is also an \underline{LLM}, this one hosted on Google Cloud Platform using Vertex AI, specifically the Gemini 1.0 Flash Model, also accessed through its API.
 
-RideRecon’s objective is not only to identify users’ vehicles, but also to deliver other innovative and creative features. For example, once the car has been identified, 4oE will provide an interesting fact about the car, adding more depth and intrigue to it, as well as provide sources and listings for where to purchase the car, allowing the user to go one step further and save time if they are interested in making that vehicle their own.
+RideRecon’s objective is not only to identify users’ vehicles, but also to deliver other innovative and creative features. For example, once the car has been identified, \underline{4oE} will provide an interesting fact about the car, adding more depth and intrigue to it, as well as provide sources and listings for where to purchase the car, allowing the user to go one step further and save time if they are interested in making that vehicle their own.
 
-One of the goals of the software is to increase users, as more users will lead to more cars being identified and added to the optimized database of G8M, and thus better car identification overall, which is even better for future users. Another goal would be to to monetize its user base by offering premium features like better expert access, exclusive community forums, or partnerships with car-related businesses, thereby creating additional revenue streams beyond the core car identification service. This diversification will improve long-term sustainability and profitability.
+One of the goals of the software is to increase users, as more users will lead to more cars being identified and added to the optimized database of \underline{G8M}, and thus better car identification overall, which is even better for future users. Another goal would be to to monetize its user base by offering premium features like better expert access, exclusive community forums, or partnerships with car-related businesses, thereby creating additional revenue streams beyond the core car identification service. This diversification will improve long-term sustainability and profitability.
 
 
 \subsection{Definitions, Acronyms, and Abbreviations}
@@ -94,9 +94,9 @@ One of the goals of the software is to increase users, as more users will lead t
 
 \textbf{G8M}: Group 8 Model. This is the model trained by the developers of RideRecon to identify cars. It will utilize an optimized dataset of car images and makes and models.
 
-\textbf{4oE}: GPT-4o-mini. This is an LLM that uses text and images to determine the make and model of the user's car.
+\textbf{4oE}: GPT-4o-mini. This is an \underline{LLM} that uses text and images to determine the make and model of the user's car.
 
-\textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the LLM that uses images to determine the make and model of the user's car.
+\textbf{vAI}: Vertex AI, Gemini 1.0 Flash. This is the \underline{LLM} that uses images to determine the make and model of the user's car.
 
 \textbf{Finalizer}: The component of the system that consolidates and finalizes the output, including resolving conflicts between experts and outputting the fun fact about the car and where to purchase it.
 
@@ -114,31 +114,32 @@ One of the goals of the software is to increase users, as more users will lead t
 \begin{itemize}
     \item[1] “AvtoPix: Car Id - apps on Google Play,” Google, \url{https://play.google.com/store/apps/details?id=ru.egoroffsoft.avtopix&hl=en_CA&pli=1} (accessed Feb. 14, 2025).
     \item[2] “CARSSNAP - car model identify - apps on Google Play,” Google, \url{https://play.google.com/store/apps/details?id=com.mm999.car&hl=en_CA} (accessed Feb. 14, 2025).
-    \item[3] M. Nadir, “Left handedness and mobile user experience,” Medium, \url{https://medium.com/design-bootcamp/left-handedness-and-mobile-user-experience-a3728c72f880} (accessed Feb. 14, 2025).
-    \item[4] Written By Jennifer Gaskin  Published: Jan 13, About Jennifer Gaskin      	A veteran of newsrooms and agencies, and A. J. Gaskin, “Color blind design guidelines: A comprehensive guide,” Venngage, \url{https://venngage.com/blog/color-blind-design/} (accessed Feb. 14, 2025).
-	\item[5] L. Nikolov, “What’s the difference between API latency and API response time?,” Product Blog Sentry, \url{https://blog.sentry.io/whats-the-difference-between-api-latency-and-api-response-time/#:~:text=Just%20to%20have%20a%20number,to%20abandon%20the%20application%2Fwebsite} (accessed Feb. 15, 2025). 
-	\item[6] “Overview of app launch times,” New Relic Documentation, \url{https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile/get-started/introduction-app-launch-times/#:~:text=Mobile%20app%20launch%20time%20benchmarks,take%20less%20than%201.5%20seconds} (accessed Feb. 15, 2025).
-	\item[7] R. Gordon, “Image recognition accuracy: An unseen challenge confounding today’s AI,” MIT News | Massachusetts Institute of Technology, \url{https://news.mit.edu/2023/image-recognition-accuracy-minimum-viewing-time-metric-1215} (accessed Feb. 15, 2025).
-	\item[8] C. Staff, P. Sayer, M. K. Pratt, and M. Bayer, “What is an SLA? Best practices for service-level agreements,” CIO, \url{https://www.cio.com/article/274740/outsourcing-sla-definitions-and-solutions.html} (accessed Feb. 15, 2025).
-	\item[9] “How many users is realistic?,” Developer Nation Community, \url{https://www.developernation.net/blog/how-many-users-is-realistic/} (accessed Feb. 15, 2025).
-	\item[10] “Implement fallback with API gateway,” API7.ai, \url{https://api7.ai/blog/fallback-api-resilience-design-patterns} (accessed Feb. 15, 2025).
-	\item[11] “Amazon S3 pricing - cloud object storage - AWS,” \url{https://aws.amazon.com/s3/pricing/} (accessed Feb. 15, 2025).
-	\item[12] IBM, “What is cloud storage?,” IBM, \url{https://www.ibm.com/think/topics/cloud-storage} (accessed Feb. 15, 2025).
-	\item[13] IBM, “What is network optimization?,” IBM, \url{https://www.ibm.com/think/topics/network-optimization} (accessed Feb. 15, 2025).
-	\item[14] D. S. Sahin Ahmed, “Why does machine learning model performance degrade, and how can we detect and prevent it?,” Medium, \url{https://medium.com/@sahin.samia/why-does-machine-learning-model-performance-degrade-and-how-can-we-detect-and-prevent-it-70f546a54548} (accessed Feb. 15, 2025).
-	\item[15] “Adaptive preprocessing and segmentation for a ...,” NDT.net, \url{https://www.ndt.net/article/ctc2012/papers/307.pdf} (accessed Feb. 15, 2025).
-	\item[16] F. June, “Model quantization 1: Basic concepts,” Medium, \url{https://medium.com/@florian_algo/model-quantization-1-basic-concepts-860547ec6aa9} (accessed Feb. 15, 2025).
-	\item[17] A. Kareliya, “Firebase vs. AWS: Which one to select for your app project in 2025?,” Radixweb, \url{https://radixweb.com/blog/firebase-vs-aws} (accessed Feb. 15, 2025).
-	\item[18] “Android 9 PIE: Platform,” Android Developers, \url{https://developer.android.com/about/versions/pie} (accessed Feb. 15, 2025).
-	\item[19] “Developer policy center,” Developer Policy Center, \url{https://play.google/developer-content-policy/} (accessed Feb. 15, 2025).
-	\item[20] “Privacy checklist  :   android developers,” Android Developers, https://developer.android.com/privacy-and-security/about (accessed Feb. 15, 2025). 
-	\item[21] L. S. Branch, “Consolidated federal laws of Canada, Personal Information Protection and Electronic Documents Act,” Personal Information Protection and Electronic Documents Act, \url{https://laws-lois.justice.gc.ca/eng/acts/p-8.6/} (accessed Feb. 15, 2025).
-	\item[22] “Legal text,” General Data Protection Regulation (GDPR), \url{https://gdpr-info.eu/} (accessed Feb. 15, 2025).
-	\item[23] C. Masha Komnenic CIPP/E, “Mobile app terms and conditions template,” Termly, \url{https://termly.io/resources/templates/app-terms-and-conditions/} (accessed Feb. 15, 2025).
-	\item[24] “ISO/IEC 27001:2022,” ISO, \url{https://www.iso.org/standard/27001} (accessed Feb. 15, 2025).
-	\item[25] V. Kananda, “What is AES 256 encryption \& how does it work?,” Progress Blogs, \url{https://www.progress.com/blogs/use-aes-256-encryption-secure-data} (accessed Feb. 15, 2025).
-	\item[26] “What is OWASP? What is the OWASP Top 10?,” Cloudflare, \url{https://www.cloudflare.com/learning/security/threats/owasp-top-10/} (accessed Feb. 15, 2025).
-	\item[27] “Does Canada have a version of the DMCA takedown?,” DMCA Protection \& Takedown Services, \url{https://www.dmca.com/FAQ/Does-Canada-have-a-version-of-the-DMCA-Takedown} (accessed Feb. 15, 2025).
+    \item[3] Anthony, “Why you should avoid bright, saturated background colors,” UX Movement, \url{https://uxmovement.com/content/why-you-should-avoid-bright-saturated-background-colors/} (accessed Feb. 15, 2025). 
+    \item[4] M. Nadir, “Left handedness and mobile user experience,” Medium, \url{https://medium.com/design-bootcamp/left-handedness-and-mobile-user-experience-a3728c72f880} (accessed Feb. 14, 2025).
+    \item[5] Written By Jennifer Gaskin  Published: Jan 13, About Jennifer Gaskin      	A veteran of newsrooms and agencies, and A. J. Gaskin, “Color blind design guidelines: A comprehensive guide,” Venngage, \url{https://venngage.com/blog/color-blind-design/} (accessed Feb. 14, 2025).
+	\item[6] L. Nikolov, “What’s the difference between API latency and API response time?,” Product Blog Sentry, \url{https://blog.sentry.io/whats-the-difference-between-api-latency-and-api-response-time/#:~:text=Just%20to%20have%20a%20number,to%20abandon%20the%20application%2Fwebsite} (accessed Feb. 15, 2025). 
+	\item[7] “Overview of app launch times,” New Relic Documentation, \url{https://docs.newrelic.com/docs/mobile-monitoring/new-relic-mobile/get-started/introduction-app-launch-times/#:~:text=Mobile%20app%20launch%20time%20benchmarks,take%20less%20than%201.5%20seconds} (accessed Feb. 15, 2025).
+	\item[8] R. Gordon, “Image recognition accuracy: An unseen challenge confounding today’s AI,” MIT News | Massachusetts Institute of Technology, \url{https://news.mit.edu/2023/image-recognition-accuracy-minimum-viewing-time-metric-1215} (accessed Feb. 15, 2025).
+	\item[9] C. Staff, P. Sayer, M. K. Pratt, and M. Bayer, “What is an SLA? Best practices for service-level agreements,” CIO, \url{https://www.cio.com/article/274740/outsourcing-sla-definitions-and-solutions.html} (accessed Feb. 15, 2025).
+	\item[10] “How many users is realistic?,” Developer Nation Community, \url{https://www.developernation.net/blog/how-many-users-is-realistic/} (accessed Feb. 15, 2025).
+	\item[11] “Implement fallback with API gateway,” API7.ai, \url{https://api7.ai/blog/fallback-api-resilience-design-patterns} (accessed Feb. 15, 2025).
+	\item[12] “Amazon S3 pricing - cloud object storage - AWS,” \url{https://aws.amazon.com/s3/pricing/} (accessed Feb. 15, 2025).
+	\item[13] IBM, “What is cloud storage?,” IBM, \url{https://www.ibm.com/think/topics/cloud-storage} (accessed Feb. 15, 2025).
+	\item[14] IBM, “What is network optimization?,” IBM, \url{https://www.ibm.com/think/topics/network-optimization} (accessed Feb. 15, 2025).
+	\item[15] D. S. Sahin Ahmed, “Why does machine learning model performance degrade, and how can we detect and prevent it?,” Medium, \url{https://medium.com/@sahin.samia/why-does-machine-learning-model-performance-degrade-and-how-can-we-detect-and-prevent-it-70f546a54548} (accessed Feb. 15, 2025).
+	\item[16] “Adaptive preprocessing and segmentation for a ...,” NDT.net, \url{https://www.ndt.net/article/ctc2012/papers/307.pdf} (accessed Feb. 15, 2025).
+	\item[17] F. June, “Model quantization 1: Basic concepts,” Medium, \url{https://medium.com/@florian_algo/model-quantization-1-basic-concepts-860547ec6aa9} (accessed Feb. 15, 2025).
+	\item[18] A. Kareliya, “Firebase vs. AWS: Which one to select for your app project in 2025?,” Radixweb, \url{https://radixweb.com/blog/firebase-vs-aws} (accessed Feb. 15, 2025).
+	\item[19] “Android 9 PIE: Platform,” Android Developers, \url{https://developer.android.com/about/versions/pie} (accessed Feb. 15, 2025).
+	\item[20] “Developer policy center,” Developer Policy Center, \url{https://play.google/developer-content-policy/} (accessed Feb. 15, 2025).
+	\item[21] “Privacy checklist  :   android developers,” Android Developers, https://developer.android.com/privacy-and-security/about (accessed Feb. 15, 2025). 
+	\item[22] L. S. Branch, “Consolidated federal laws of Canada, Personal Information Protection and Electronic Documents Act,” Personal Information Protection and Electronic Documents Act, \url{https://laws-lois.justice.gc.ca/eng/acts/p-8.6/} (accessed Feb. 15, 2025).
+	\item[23] “Legal text,” General Data Protection Regulation (GDPR), \url{https://gdpr-info.eu/} (accessed Feb. 15, 2025).
+	\item[24] C. Masha Komnenic CIPP/E, “Mobile app terms and conditions template,” Termly, \url{https://termly.io/resources/templates/app-terms-and-conditions/} (accessed Feb. 15, 2025).
+	\item[25] “ISO/IEC 27001:2022,” ISO, \url{https://www.iso.org/standard/27001} (accessed Feb. 15, 2025).
+	\item[26] V. Kananda, “What is AES 256 encryption \& how does it work?,” Progress Blogs, \url{https://www.progress.com/blogs/use-aes-256-encryption-secure-data} (accessed Feb. 15, 2025).
+	\item[27] “What is OWASP? What is the OWASP Top 10?,” Cloudflare, \url{https://www.cloudflare.com/learning/security/threats/owasp-top-10/} (accessed Feb. 15, 2025).
+	\item[28] “Does Canada have a version of the DMCA takedown?,” DMCA Protection \& Takedown Services, \url{https://www.dmca.com/FAQ/Does-Canada-have-a-version-of-the-DMCA-Takedown} (accessed Feb. 15, 2025).
 
 \end{itemize}
 
@@ -318,6 +319,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{sub:assumptions_and_dependencies}
 % Begin SubSection
 \begin{itemize}
+\iffalse
 	\item List any assumptions you made in interpreting what the software being developed is aiming to achieve
 	\item List any other assumptions you made that, if it fails to hold, could require you to change the requirements
 	%\item List each of the factors that affect the requirements stated in the SRS
@@ -325,7 +327,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\begin{itemize}
 		\item \textbf{Example}: An assumption may be that a specific operating system will be available on the hardware designated for the software product. If, in fact, the operating system is not available, the SRS would then have to change accordingly.
 	\end{itemize}
-
+\fi
 	\item \textbf{Assumptions:}
     \begin{itemize}
         \item Users will have stable internet access while using the app.
@@ -345,8 +347,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 \subsection{Apportioning of Requirements}
 \label{sub:apportioning_of_requirements}
 % Begin SubSection
+\textbf{Requirements that may be delayed until future versions of the system:}
 \begin{itemize}
-	\item Identify requirements that may be delayed until future versions of the system
+	%\item Identify requirements that may be delayed until future versions of the system
 	\item \textbf{Offline Mode}: The app currently requires internet access; an offline model will be explored in future versions.
     \item \textbf{Multiple Car Detection}: Initially, the app will support one car per image; future updates may allow multiple cars.
     \item \textbf{Personalized Car Recommendations}: The first version won’t suggest similar cars, but this may be added later.
@@ -357,13 +360,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 \section{Use Case Diagram}
 \label{sec:use_case_diagram}
 % Begin Section
+\iffalse
 \begin{itemize}
 	\item Provide the use case diagram for the system being developed.
 	\item You do not need to provide the textual description of any of the use cases here (these will be specified under "Highlights of Functional Requirements").
 %	\item Provide \emph{one} use case diagram for the most important Business Event.
 %	\item The text of all use cases will be specified under "Highlights of Functional Requirements"
 \end{itemize}
-
+\fi
 \begin{center}
 \includegraphics[height=13cm]{images/Use Case Diagram D1.png} \\
 \textbf{Figure 3. } Use Case Diagram
@@ -383,6 +387,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \section{Highlights of Functional Requirements}
 \label{sec:functional_requirements}
 % Begin Section
+\iffalse
 \begin{itemize}
 	\item Specify all use cases (or other scenarios triggered by other events), organized by Business Event. 
 	\item For each Business Event, show the scenario from every Viewpoint. You should have the same set of Viewpoints across all Business Events. If a Viewpoint doesn't participate, write N/A so we know you considered it still. You can choose how to present this - keep in mind it should be easy to follow. 
@@ -393,8 +398,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\item You are \emph{not} specifying a complete and consistent set of functional requirements here. (i.e. you are providing them in the form of use cases/global scenarios, not a refined list). For the purpose of this project, you do not need to reduce them to a list; the global scenarios format is all you need.
 	\item Red text below is just to highlight where you need to insert a scenario - don't actually write it all in red.
 \end{itemize}
-
-\noindent {\bf Main Business Events:} List out all the main business events you are presenting. If you sub-divided into smaller ones, you don't need to include the smaller ones in this list.\\
+\fi
+\noindent {\bf Main Business Events:} 
+%List out all the main business events you are presenting. If you sub-divided into smaller ones, you don't need to include the smaller ones in this list.\\
 \begin{itemize}
         \item BE1. Create Account
         \item BE2. Authenticate User
@@ -404,7 +410,8 @@ There will be 3 modules in the product. Each module focuses on different major f
         \item BE6. Add to or Remove From Car Collection
 \end{itemize}
 
-\noindent {\bf Viewpoints:} List out all the viewpoints you will be considering.\\
+\noindent {\bf Viewpoints:} 
+%List out all the viewpoints you will be considering.\\
 \begin{itemize}
 	\item VP1. Users
 	\item VP2. Customer Support (RideRecon)
@@ -425,7 +432,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\begin{enumerate}[label={\bf VP\arabic*.}]		
 		\item User \#1\\
 		\textbf{Main Success Scenario}
-		\begin{enumerate}[label={\bf \arabic*.}]			
+		\begin{enumerate}[label={\arabic*.}]			
 			\color{red}
 			\item User opens the RideRecon app
 			\item The system responds by showing the user the log-in screen interface.
@@ -437,28 +444,28 @@ There will be 3 modules in the product. Each module focuses on different major f
 		\textbf{Secondary Scenario}
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{3i.}] User selects "sign in as guest"
+			\item[3i.] User selects "sign in as guest"
 			\begin{enumerate}
-				\item[\textbf{3i.1}] User selects "sign in as guest"
-				\item[\textbf{3i.2}] System grants user access to RideRecon app in guest mode.
+				\item[3i.1] User selects "sign in as guest"
+				\item[3i.2] System grants user access to RideRecon app in guest mode.
 			\end{enumerate}
-			\item[\textbf{5i.}] User cancels the operation
+			\item[5i.] User cancels the operation
 			\begin{enumerate}
-				\item[\textbf{5i.1}] User cancels the operation
-				\item[\textbf{5i.2}] System returns them to the log-in menu
-			\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+				\item[5i.1] User cancels the operation
+				\item[5i.2] System returns them to the log-in menu
+			\end{enumerate}													\item[6i.] The system detects the user's information is invalid
 			\begin{enumerate}
-				\item[\textbf{6i.1}] The system detects the user's information is invalid
-				\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
-				\item[\textbf{6i.3}] The user acknowledges the message.
-				\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}
+				\item[6i.1] The system detects the user's information is invalid
+				\item[6i.2] The system returns an message to the user stating the information is invalid.
+				\item[6i.3] The user acknowledges the message.
+				\item[6i.4] The system returns the user to the information request screen in step \textbf{5.}
 			\end{enumerate}
-			\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+			\item[6ii.] An error occurs and the system is unable to validate the user's information.
 			\begin{enumerate}
-				\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
-				\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred.
-				\item[\textbf{6ii.3}] The user acknowledges the error.
-				\item[\textbf{6ii.4}] The system returns the user to the information request screen in step \textbf{5.}
+				\item[6ii.1] An error occurs and the system is unable to validate the user's information.
+				\item[6ii.2] The system returns an message to the user stating an error has occurred.
+				\item[6ii.3] The user acknowledges the error.
+				\item[6ii.4] The system returns the user to the information request screen in step \textbf{5.}
 			\end{enumerate}
 		\end{enumerate}
 		\item Customer Support \#2			
@@ -469,18 +476,18 @@ There will be 3 modules in the product. Each module focuses on different major f
 %					\item[\textbf{5xi.1}] User selects "how to sign up" option to get more information on how to sign up
 %					\item[\textbf{5xi.2}] User is redirected to 
 %				\end{enumerate}
-				\item[\textbf{5i.}] User selects get support option to speak with customer support regarding signup
+				\item[5i.] User selects get support option to speak with customer support regarding signup
 				\begin{enumerate}
-					\item[\textbf{5i.1}] User selects get support option to speak with customer support regarding signup
-					\item[\textbf{5i.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+					\item[5i.1] User selects get support option to speak with customer support regarding signup
+					\item[5i.2] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
 				\end{enumerate}
-				\item[\textbf{6i.}] An error occurs and the user's information cannot be validated.
+				\item[6i.] An error occurs and the user's information cannot be validated.
 				\begin{enumerate}
-					\item[\textbf{6i.1}] An error occurs and the user's information cannot be validated.
-					\item[\textbf{6i.2}] The system sends a message to the user asking if they want to submit a crash report for analysis.
-					\item[\textbf{6i.3}] The user selects yes or no.
-					\item[\textbf{6i.4}] If yes is selected, the system sends a crash report of the error to the system maintainers. If no is selected, nothing happens.
-					\item[\textbf{6i.5}] The system returns the user to the information request screen in \textbf{step 5.}
+					\item[6i.1] An error occurs and the user's information cannot be validated.
+					\item[6i.2] The system sends a message to the user asking if they want to submit a crash report for analysis.
+					\item[6i.3] The user selects yes or no.
+					\item[6i.4] If yes is selected, the system sends a crash report of the error to the system maintainers. If no is selected, nothing happens.
+					\item[6i.5] The system returns the user to the information request screen in \textbf{step 5.}
 				\end{enumerate}
 			\end{enumerate}
 			\item Marketing \#3\\
@@ -492,7 +499,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textbf{Main Success Scenario}
-		\begin{enumerate}[label={\bf \arabic*.}]
+		\begin{enumerate}[label={\arabic*.}]
 			\color{red}
 			\item User opens the RideRecon app
 			\item The system responds by showing the user the log-in screen interface.
@@ -504,33 +511,33 @@ There will be 3 modules in the product. Each module focuses on different major f
 		\textbf{Secondary Scenario}
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{3i.}] User selects "sign in as guest"
+			\item[3i.] User selects "sign in as guest"
 			\begin{enumerate}
-				\item[\textbf{3i.1}] User selects "sign in as guest"
-				\item[\textbf{3i.2}] User gains access to the system in guest mode.  
+				\item[3i.1] User selects "sign in as guest"
+				\item[3i.2] User gains access to the system in guest mode.  
 			\end{enumerate}
-			\item[\textbf{5i.}] User cancels the operation
+			\item[5i.] User cancels the operation
 			\begin{enumerate}
-				\item[\textbf{5i.1}] User cancels the operation
-				\item[\textbf{5i.2}] System returns them to the log-in menu
+				\item[5i.1] User cancels the operation
+				\item[5i.2] System returns them to the log-in menu
 			\end{enumerate}						
-			\item[\textbf{5ii.}] User selects get support option to speak with customer support regarding signup
+			\item[5ii.] User selects get support option to speak with customer support regarding signup
 			\begin{enumerate}
-				\item[\textbf{5ii.1}] User selects get support option to speak with customer support regarding signup
-				\item[\textbf{5ii.2}] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
-			\end{enumerate}													\item[\textbf{6i.}] The system detects the user's information is invalid
+				\item[5ii.1] User selects get support option to speak with customer support regarding signup
+				\item[5ii.2] System redirects the user to a location outside of the app where the user can get in touch with our contractor's customer support line.
+			\end{enumerate}													\item[6i.] The system detects the user's information is invalid
 			\begin{enumerate}
-				\item[\textbf{6i.1}] The system detects the user's information is invalid
-				\item[\textbf{6i.2}] The system returns an message to the user stating the information is invalid.
-				\item[\textbf{6i.3}] The user acknowledges the message.
-				\item[\textbf{6i.4}] The system returns the user to the information request screen in step \textbf{5.}				 							\end{enumerate}
-			\item[\textbf{6ii.}] An error occurs and the system is unable to validate the user's information.
+				\item[6i.1] The system detects the user's information is invalid
+				\item[6i.2] The system returns an message to the user stating the information is invalid.
+				\item[6i.3] The user acknowledges the message.
+				\item[6i.4] The system returns the user to the information request screen in step \textbf{5.}				 							\end{enumerate}
+			\item[6ii.] An error occurs and the system is unable to validate the user's information.
 			\begin{enumerate}
-				\item[\textbf{6ii.1}] An error occurs and the system is unable to validate the user's information.
-				\item[\textbf{6ii.2}] The system returns an message to the user stating an error has occurred. Alongside the message, the system prompts the user to submit a crash report to the system maintainers for analysis.
-				\item[\textbf{6ii.4}] The user selects either yes or no to submitting a crash report.
-				\item[\textbf{6ii.5}] If the user selected yes, a crash report of the error is submitted to the system maintainers. If no is selected, nothing happens.
-				\item[\textbf{6ii.6}] The system returns the user to the information request screen in step \textbf{5.}
+				\item[6ii.1] An error occurs and the system is unable to validate the user's information.
+				\item[6ii.2] The system returns an message to the user stating an error has occurred. Alongside the message, the system prompts the user to submit a crash report to the system maintainers for analysis.
+				\item[6ii.4] The user selects either yes or no to submitting a crash report.
+				\item[6ii.5] If the user selected yes, a crash report of the error is submitted to the system maintainers. If no is selected, nothing happens.
+				\item[6ii.6] The system returns the user to the information request screen in step \textbf{5.}
 			\end{enumerate}
 		\end{enumerate}
 	%\end{enumerate}
@@ -652,37 +659,37 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\begin{enumerate}[label={\bf VP\arabic*.}]
 		\item User \#1\\
 		\textbf{Main Success Scenario}
-		\begin{enumerate}[label={\bf \arabic*.}]
+		\begin{enumerate}[label={\arabic*.}]
 			\color{red}
 			\item User provides the information of a car for the system to process.
 			\item System feeds input to all of its experts
 			\item Experts provide the system with their answer on information about the car.
-			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
-			\item The finalizer processes the data from the experts for output.
+			\item The \underline{Finalizer} recognizes the experts agree on what kind of car the user inputs.
+			\item The \underline{Finalizer} processes the data from the experts for output.
 		\end{enumerate}
 		\textbf{Secondary Scenario}
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\item[4i.] The \underline{Finalizer} recognizes that not all of the experts agree on what kind of car has been input into the system.
 			\begin{enumerate}
-				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
-				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
-				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
-				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input.
-				\item[\textbf{4i.5}] The user acknowledges the message.
-				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+				\item[4i.1] The \underline{Finalizer} recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[4i.2] Using conflict resolution methods, the \underline{Finalizer} will determine which experts to accept information from.
+				\item[4i.3] If a certain threshold of certainty is reached by the \underline{Finalizer}, the \underline{Finalizer} will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[4i.4] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input.
+				\item[4i.5] The user acknowledges the message.
+				\item[4i.6] The system returns itself to the state where the user can provide input for identifying a car.
 			\end{enumerate}
 		\end{enumerate}
 		\item Customer Support \#2
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{4i.}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+			\item[4i.] Should the experts and \underline{Finalizer} fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
 			\begin{enumerate}
-				\item[\textbf{4i.1}] Should the experts and finalizer fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
-				\item[\textbf{4i.2}] The user can select yes or no to this prompt.
-				\item[\textbf{4i.3}] If the user selects no, nothing happens and the system is returned to a state where the user can provide input for identifying a car again. If the user selects yes, the system will prompt them for their feedback and any other important information.
-				\item[\textbf{4i.4}] The user inputs their feedback.
-				\item[\textbf{4i.5}] The system thanks the user for their feedback and returns them to a state where they can provide input for identifying a car again.
+				\item[4i.1] Should the experts and \underline{Finalizer} fail to determine what car was input by the user, the system will prompt the user with the option to send feedback.
+				\item[4i.2] The user can select yes or no to this prompt.
+				\item[4i.3] If the user selects no, nothing happens and the system is returned to a state where the user can provide input for identifying a car again. If the user selects yes, the system will prompt them for their feedback and any other important information.
+				\item[4i.4] The user inputs their feedback.
+				\item[4i.5] The system thanks the user for their feedback and returns them to a state where they can provide input for identifying a car again.
 			\end{enumerate}
 		\end{enumerate}
 		\item Marketing\\
@@ -694,29 +701,29 @@ There will be 3 modules in the product. Each module focuses on different major f
 		\end{enumerate}
 		{\bf Global Scenario:}\\
 		\textbf{Main Success Scenario}
-		\begin{enumerate}[label={\bf \arabic*.}]
+		\begin{enumerate}[label={\arabic*.}]
 			\color{red}
 			\item User provides the information of a car for the system to process.
 			\item System feeds input to all of its experts
 			\item Experts provide the system with their answer on information about the car.
-			\item The finalizer recognizes the experts agree on what kind of car the user inputs.
-			\item The finalizer processes the data from the experts for output.
+			\item The \underline{Finalizer} recognizes the experts agree on what kind of car the user inputs.
+			\item The \underline{Finalizer} processes the data from the experts for output.
 		\end{enumerate}
 		\textbf{Secondary Scenario}
 		\begin{enumerate}
 			\color{red}
-			\item[\textbf{4i.}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
+			\item[4i.] The \underline{Finalizer} recognizes that not all of the experts agree on what kind of car has been input into the system.
 			\begin{enumerate}
-				\item[\textbf{4i.1}] The finalizer recognizes that not all of the experts agree on what kind of car has been input into the system.
-				\item[\textbf{4i.2}] Using conflict resolution methods, the finalizer will determine which experts to accept information from.
-				\item[\textbf{4i.3}] If a certain threshold of certainty is reached by the finalizer, the finalizer will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
-				\item[\textbf{4i.4}] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
-				\item[\textbf{4i.5}] The user acknowledges the message and chooses not to give feedback.
-				\item[\textbf{4i.5.i.1}] The user decides to give feedback.
-				\item[\textbf{4i.5.i.2}] The system will prompt the user for their feedback and any other important information.
-				\item[\textbf{4i.5.i.3}] The user inputs their feedback.
-				\item[\textbf{4i.5.i.4}] The system thanks them for their response.
-				\item[\textbf{4i.6}] The system returns itself to the state where the user can provide input for identifying a car.
+				\item[4i.1] The \underline{Finalizer} recognizes that not all of the experts agree on what kind of car has been input into the system.
+				\item[4i.2] Using conflict resolution methods, the \underline{Finalizer} will determine which experts to accept information from.
+				\item[4i.3] If a certain threshold of certainty is reached by the \underline{Finalizer}, the \underline{Finalizer} will use information from the selected experts in output processing. If not, the system will attempt to provide information to the experts that will refine their outputs and the system returns to step  \textbf{3.} in the process.
+				\item[4i.4] After a pre-defined maximum amount of attempts to refine the solution is reached, the system will notify the user that it was unable to find the car that was input. Alongside this message will be an option to send feedback to the system maintainers about the experience.
+				\item[4i.5] The user acknowledges the message and chooses not to give feedback.
+				\item[4i.5.i.1] The user decides to give feedback.
+				\item[4i.5.i.2] The system will prompt the user for their feedback and any other important information.
+				\item[4i.5.i.3] The user inputs their feedback.
+				\item[4i.5.i.4] The system thanks them for their response.
+				\item[4i.6] The system returns itself to the state where the user can provide input for identifying a car.
 			\end{enumerate} 
 		\end{enumerate}
 	%\end{enumerate}
@@ -733,14 +740,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 				\textcolor{red}{6. User uploads an image with some text description of their car.} \\
 				\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
 				\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
-				\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+				\textcolor{red}{9. The \underline{Finalizer} displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
 				\textbf{Secondary Scenario} \\
 				\textcolor{red}{6i. User doesn't have both forms of input.} \\
 				\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
 				\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
 				\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
-				\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
-				\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+				\textcolor{red}{9i. The \underline{Finalizer} displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+				\textcolor{red}{9ii. The \underline{Finalizer} also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
 			\item Customer Support (RideRecon) \#2 \\
 				\textcolor{red}{NA}
 			\item Marketing (RideRecon) \#3 \\
@@ -762,14 +769,14 @@ There will be 3 modules in the product. Each module focuses on different major f
 			\textcolor{red}{6. User uploads an image with some text description of their car.} \\
 			\textcolor{red}{7. The input data is sent to the Experts for processing.} \\
 			\textcolor{red}{8. All Experts come to the same conclusion about the make and model of the car.} \\
-			\textcolor{red}{9. The Finalizer displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
+			\textcolor{red}{9. The \underline{Finalizer} displays the make and model of the car, as well as the fun fact and where to purchase the car.} \\
 			\textbf{Secondary Scenario} \\
 			\textcolor{red}{6i. User doesn't have both forms of input.} \\
 			\textcolor{red}{6ii. System prompts the user to provide the missing form of input.} \\
 			\textcolor{red}{6iii. Available form of input is given to the Expderts which will do their best to determine the car.} \\
 			\textcolor{red}{8i. The Experts come to different conclusions about the make and model of the car.} \\
-			\textcolor{red}{9i. The Finalizer displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
-			\textcolor{red}{9ii. The Finalizer also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
+			\textcolor{red}{9i. The \underline{Finalizer} displays all Expert answers, with a recommendation on which is most likely based on how many Experts came to the same conclusion.} \\
+			\textcolor{red}{9ii. The \underline{Finalizer} also obtains fun facts and purchase information about ALL cars that the Experts concluded on.} \\
 			
 	\item Add to Car Collection \#6 \\
 	\textbf{Pre-Condition:} The user must be logged into their account.
@@ -928,7 +935,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 
 \section{Non-Functional Requirements}
 \label{sec:non-functional_requirements}
-
+\iffalse
 
 \begin{itemize}
 	\item For each non-functional requirement, provide a justification/rationale for it.\\
@@ -939,7 +946,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\item Each requirement should have a unique label/number for it.
 	\item In the list below, if a particular section doesn't apply, just write N/A so we know you considered it.
 \end{itemize}
-
+\fi
 % Begin Section
 \subsection{Look and Feel Requirements}
 \label{sub:look_and_feel_requirements}
@@ -949,10 +956,10 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:appearance_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={LF-A\arabic*.}]
-	\item The application must use company colours that align with the ones used in their branding.\\
-	\textbf{Rationale:} The user should feel as if the application is closely tied to the company that contracted us and their mission statements.
-	\item The application should not use harsh and overly vibrant colours\\
-	\textbf{Rationale:} If the application is hard on the eyes to use, the user will have a worse experience overall and be adverse to using the application.
+	\item The system's user interface must use the contractor's colours that align with the ones used in their branding.\\
+	\textbf{Rationale:} The user should feel as if the application is closely tied to our contractor and their mission statements.
+	\item The system's user interface should not use harsh and overly saturated colours.\\
+	\textbf{Rationale:} If the user interface is too bright or saturated, it can strain the user's eyes and users will not want to spend an extended period of time looking at the application[3]. 
 	\item The application should be consistent in how it associates colours with certain buttons or actions.\\
 	\textbf{Rationale:} When a user goes to do actions across the application, the colour of buttons relating to certain prompts like "yes" or "no" should remain consistent across all of those prompts. For example, if a "yes" button uses the colour green, then any other time "yes" comes up it should also be green.
 	\item Users should be able to quickly distinguish what is and what is not a button.\\
@@ -968,7 +975,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\textbf{Rationale:} Device screens come in all shapes and sizes, thus the application should be able accommodate all kinds of screen sizes.
 	\item Additional options or menus should be hidden under one to a small handful of dropdown menus.\\
 	\textbf{Rationale:} The user's screen should not be cluttered with an abundance of buttons that makes the application hard to navigate.
-	\item The system should adhere to general practices for making applications for android devices\\
+	\item The system should adhere to general practices for making applications for android devices.\\
 	\textbf{Rationale:} Since the system is made for android devices, we need to follow general practices for making android applications to fit with the styles of other android applications.
 	\item When an expert is mentioned in the system, if it was called by an API call, the system should use the expert's branding appearance when displaying information from it.\\
 	\textbf{Rationale:} When a user interacts with the system in a way that displays information from the experts, if the branding from the given expert is used, it will be easily identifiable by the user and will help them gain trust in the information they are receiving.
@@ -1002,7 +1009,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\item The system should have a variety of language options to choose from.\\
 	\textbf{Rationale:} With a variety of users comes a variety of languages that are spoken. Thus, to improve the user's experience, we should give them a wide range of languages to choose from do they can use the app with the language they are most comfortable with.
 	\item The system should be easy to use by both right and left handed people.\\
-	\textbf{Rationale:} Users have a preference whether to use their phone with their left or right hand, thus the system should be comfortable to use regardless of which hand is used. Furthermore, there are occasions when users are not able to use one hand or the other, so making the application only feel comfortable to use with a specific hand could make the application feel unwieldy [3].
+	\textbf{Rationale:} Users have a preference whether to use their phone with their left or right hand, thus the system should be comfortable to use regardless of which hand is used. Furthermore, there are occasions when users are not able to use one hand or the other, so making the application only feel comfortable to use with a specific hand could make the application feel unwieldy [4].
 	\item The system should be usable on a lower device brightness.\\
 	\textbf{Rationale:} Users will not always have their device at full brightness, so if the device becomes harder to use at these low brightness settings the user will find the system more tedious to work with.
 \end{enumerate}
@@ -1033,7 +1040,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={UH-A\arabic*.}]
 	\item The system should be able to accommodate users with colour blindness.\\
-	\textbf{Rationale:} Approximately 360 Million people are colourblind [4]. Thus, as to not alienate a large demographic of users, the interface should be designed with these users in mind.
+	\textbf{Rationale:} Approximately 360 Million people are colourblind [5]. Thus, as to not alienate a large demographic of users, the interface should be designed with these users in mind.
 	\item The system should be compatible with accessibility screen readers.\\
 	\textbf{Rationale:} Users with vision or comprehension disabilities might use screen readers to better navigate the devices and applications that they are engaging with. Thus, to make the system accessible to those users it would be necessary to make the system friendly to common screen readers.
 \end{enumerate}
@@ -1050,13 +1057,13 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={PR-SL\arabic*.}]
     \item The response time of all core APIs should be under 1 second for 90\% of requests and must not exceed 5 seconds.\\ 
-	\textbf{Rationale:} Research on mobile application UX shows that users expect instantaneous responses, with 1 second or less considered a high-performing API response time. At 2 seconds, delays become noticeable, and beyond 5 seconds, users are likely to abandon the interaction or log off the app[5].
+	\textbf{Rationale:} Research on mobile application UX shows that users expect instantaneous responses, with 1 second or less considered a high-performing API response time. At 2 seconds, delays become noticeable, and beyond 5 seconds, users are likely to abandon the interaction or log off the app[6].
 	\item A cold start (first launch or after app closure) must be under 5 seconds, while a hot start (reopening from background memory) must be under 1.5 seconds.\\
-	\textbf{Rationale:} Google’s Android App Performance Best Practices indicate that mobile apps should launch within 5 seconds for cold starts and under 1.5 seconds for hot starts to maintain user engagement. A slow start-up time increases drop-off rates, as users may assume the app is unresponsive or broken[5][6].
+	\textbf{Rationale:} Google’s Android App Performance Best Practices indicate that mobile apps should launch within 5 seconds for cold starts and under 1.5 seconds for hot starts to maintain user engagement. A slow start-up time increases drop-off rates, as users may assume the app is unresponsive or broken[6][7].
 	\item Uploading a photo should take less than 2 seconds under normal mobile network conditions.\\
 	\textbf{Rationale:} Google’s Mobile UX Research states that 90\% of mobile users abandon an interaction if an image takes longer than 5 seconds to load. Since RideRecon relies on image uploads for vehicle identification, ensuring fast upload speeds is critical to maintaining user engagement.
 	\item Identifying a car must take under 3 seconds for 80\% of requests.\\
-	\textbf{Rationale:} Users expect AI-driven systems to return results quickly, particularly for image recognition tasks, where they anticipate near-instant feedback. The 3-second goal aligns with industry benchmarks for real-time image classification models. If external APIs take longer than 5 seconds, users will get frustrated[6].
+	\textbf{Rationale:} Users expect AI-driven systems to return results quickly, particularly for image recognition tasks, where they anticipate near-instant feedback. The 3-second goal aligns with industry benchmarks for real-time image classification models. If external APIs take longer than 5 seconds, users will get frustrated[7].
 \end{enumerate}
 % End SubSubSection
 
@@ -1076,8 +1083,8 @@ There will be 3 modules in the product. Each module focuses on different major f
 	\textbf{Rationale:} High identification accuracy is crucial for user trust. Machine learning models trained on large, diverse datasets should reach this threshold, but real-world accuracy should be measured using benchmark tests on real user images. If accuracy is below this level, model retraining or additional expert validation is necessary.
 	\item The confidence score of each expert’s prediction must be included with the result.\\
 	\textbf{Rationale:} Since multiple experts provide input, some may be more confident than others. Showing confidence scores allows users to make informed decisions instead of blindly trusting the system.
-	\item The image search expert (RIS) should correctly match at least 95\% of input images when the car exists in the database.\\
-	\textbf{Rationale:} Reverse image search should work reliably for known cars. If the car is not found, the system should clearly indicate this rather than returning a false match[7].
+	\item The image search expert (\underline{RIS}) should correctly match at least 95\% of input images when the car exists in the database.\\
+	\textbf{Rationale:} Reverse image search should work reliably for known cars. If the car is not found, the system should clearly indicate this rather than returning a false match[8].
 \end{enumerate}
 % End SubSubSection
 
@@ -1086,11 +1093,11 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={PR-RA\arabic*.}]
     \item The system must maintain a minimum uptime of 99.5\% over any rolling 30-day period.\\
-    \textbf{Rationale:} Availability is critical for user retention. An uptime of 99.5\% aligns with industry best practices for consumer applications, meaning downtime does not exceed 3.6 hours per month. If the system becomes unreliable, users may abandon it in favour of alternatives[8].
+    \textbf{Rationale:} Availability is critical for user retention. An uptime of 99.5\% aligns with industry best practices for consumer applications, meaning downtime does not exceed 3.6 hours per month. If the system becomes unreliable, users may abandon it in favour of alternatives[9].
 	\item The system must be able to handle at least 2000 concurrent users without significant degradation in performance.\\
-	\textbf{Rationale:} Ensuring the system can handle high traffic loads prevents server crashes due to excessive load, increased response times negatively affecting user experience, and poor scalability as the user base grows[9].
+	\textbf{Rationale:} Ensuring the system can handle high traffic loads prevents server crashes due to excessive load, increased response times negatively affecting user experience, and poor scalability as the user base grows[10].
 	\item The system must detect external API failures automatically to prioritize internal processing and notify users of limited functionality.\\
-	\textbf{Rationale:} Dependence on third-party APIs introduces potential points of failure. A fallback mechanism ensures that core functionalities, such as image recognition and classification, remain operational while providing users with clear explanations instead of vague errors. This enhances system resilience, preventing a complete breakdown if an API becomes slow or unresponsive[10].
+	\textbf{Rationale:} Dependence on third-party APIs introduces potential points of failure. A fallback mechanism ensures that core functionalities, such as image recognition and classification, remain operational while providing users with clear explanations instead of vague errors. This enhances system resilience, preventing a complete breakdown if an API becomes slow or unresponsive[11].
 
 \end{enumerate}
 % End SubSubSection
@@ -1111,9 +1118,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={PR-C\arabic*.}]
     \item The system must support storage for at least 1 million images, with an average image size of 5MB.\\
-	\textbf{Rationale:} As user activity increases, a scalable storage solution is required to ensure historical searches remain accessible. Cloud storage solutions such as AWS S3 or Google Cloud Storage should be considered to provide cost-effective scalability without impacting performance[11][12]. 
+	\textbf{Rationale:} As user activity increases, a scalable storage solution is required to ensure historical searches remain accessible. Cloud storage solutions such as AWS S3 or Google Cloud Storage should be considered to provide cost-effective scalability without impacting performance[12][13]. 
 	\item The system must optimize bandwidth efficiency to ensure that total data usage does not exceed 3MB per processed request on average.\\
-	\textbf{Rationale:} Since many users will access RideRecon from mobile devices, excessive data usage can lead to long load times and increased costs for users with limited data plans. The system should implement techniques to minimize bandwidth consumption[13].
+	\textbf{Rationale:} Since many users will access RideRecon from mobile devices, excessive data usage can lead to long load times and increased costs for users with limited data plans. The system should implement techniques to minimize bandwidth consumption[14].
 \end{enumerate}
 % End SubSubSection
 
@@ -1135,7 +1142,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={PR-L\arabic*.}]
     \item The system must support periodic model retraining and dataset updates to maintain high identification accuracy.\\
-	\textbf{Rationale:} Machine learning models degrade over time as new car models enter the market, and retraining the models will ensure that identification remains accurate and up to date[14].
+	\textbf{Rationale:} Machine learning models degrade over time as new car models enter the market, and retraining the models will ensure that identification remains accurate and up to date[15].
 	\item The system should be designed to support future AI model improvements.\\
 	\textbf{Rationale:} As AI research advances, more efficient architectures may become industry standards. The system should be flexible enough to integrate these advancements without requiring major architectural changes.
 	\item The source code and documentation must be maintained with clear version control and developer guidelines for the duration of development.\\
@@ -1155,9 +1162,9 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={OE-EPE\arabic*.}]
     \item The system must function in a variety of lighting conditions for image capture, including low-light and high-glare environments.\\
-   \textbf{Rationale:} Users may take photos of vehicles in dimly lit parking lots, bright sunlight, or reflective surfaces, which can impact image quality. The system should use adaptive preprocessing techniques such as contrast adjustment to improve recognition accuracy across different lighting conditions[15].
+   \textbf{Rationale:} Users may take photos of vehicles in dimly lit parking lots, bright sunlight, or reflective surfaces, which can impact image quality. The system should use adaptive preprocessing techniques such as contrast adjustment to improve recognition accuracy across different lighting conditions[16].
    \item The system must be designed to function efficiently on mobile devices with limited hardware capabilities.\\
-   \textbf{Rationale:} Not all users will have high-end smartphones. The application should be optimized for devices with lower processing power, low RAM, and slow internet connections. Techniques such as model quantization should be used to ensure a smooth user experience[16].
+   \textbf{Rationale:} Not all users will have high-end smartphones. The application should be optimized for devices with lower processing power, low RAM, and slow internet connections. Techniques such as model quantization should be used to ensure a smooth user experience[17].
 \end{enumerate}
 % End SubSubSection
 
@@ -1168,7 +1175,7 @@ There will be 3 modules in the product. Each module focuses on different major f
     \item The system must support integration with third-party APIs, including Google Vision API, OpenAI, and other AI-based identification services.\\
 	\textbf{Rationale:} RideRecon depends on multiple AI models and image recognition APIs to provide accurate results. The architecture must allow seamless communication between these external services, ensuring modularity and flexibility for potential future integrations.
 	\item The system must allow interoperability with cloud storage services for secure image storage and retrieval.\\
-	\textbf{Rationale:} Users may want to save their past identifications or access reports. The system should integrate with cloud storage providers to securely manage image uploads and retrievals while ensuring data privacy[17].
+	\textbf{Rationale:} Users may want to save their past identifications or access reports. The system should integrate with cloud storage providers to securely manage image uploads and retrievals while ensuring data privacy[18].
 \end{enumerate}
 % End SubSubSection
 
@@ -1185,11 +1192,11 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={OE-R\arabic*.}]
     \item The application must be compatible with Android 9.0 and above.\\
-	\textbf{Rationale:} Ensuring compatibility with older but still widely used Android versions allows broader accessibility. Android 9.0 provides sufficient support for modern AI and image processing capabilities without compromising performance[18].
+	\textbf{Rationale:} Ensuring compatibility with older but still widely used Android versions allows broader accessibility. Android 9.0 provides sufficient support for modern AI and image processing capabilities without compromising performance[19].
 	\item The system must undergo beta testing with at least 10 users before public release.\\	
 	\textbf{Rationale:} A beta testing phase ensures that real-world feedback is collected before full deployment. This helps identify issues and unexpected performance bottlenecks, reducing the likelihood of post-launch failures.
 	\item The application must comply with Google Play Store policies, including data privacy and API usage guidelines.\\	
-	\textbf{Rationale:} To ensure the application is accepted and remains available in the Play Store, it must adhere to Google’s developer guidelines regarding privacy policies, data handling, and API rate limits. Violating these guidelines could lead to the app being delisted[19].
+	\textbf{Rationale:} To ensure the application is accepted and remains available in the Play Store, it must adhere to Google’s developer guidelines regarding privacy policies, data handling, and API rate limits. Violating these guidelines could lead to the app being delisted[20].
 \end{enumerate}
 % End SubSubSection
 
@@ -1266,7 +1273,7 @@ There will be 3 modules in the product. Each module focuses on different major f
 \label{ssub:privacy_requirements}
 % Begin SubSubSection
 \begin{enumerate}[label={SR-P\arabic*.}]
-    \item The system should comply with Android's Privacy Checklist[20].\\
+    \item The system should comply with Android's Privacy Checklist[21].\\
     \textbf{Rationale:} Since this is an Android application, following their best practices for application development will ensure the system complies with Android's standards for privacy.
 \end{enumerate}
 % End SubSubSection
@@ -1324,13 +1331,13 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={LR-COMP\arabic*.}]
     \item The system must comply with PIPEDA (Personal Information Protection and Electronic Documents Act) for handling user data in Canada.\\
-   \textbf{Rationale:} RideRecon collects and processes user-submitted images and metadata. Under PIPEDA, personal information must be collected with user consent, securely stored, and only used for stated purposes. The system must include a privacy policy detailing data collection, storage, and sharing practices[21].
+   \textbf{Rationale:} RideRecon collects and processes user-submitted images and metadata. Under PIPEDA, personal information must be collected with user consent, securely stored, and only used for stated purposes. The system must include a privacy policy detailing data collection, storage, and sharing practices[22].
    \item The system must comply with GDPR (General Data Protection Regulation) if accessible in the European Union.\\
-   \textbf{Rationale:} If RideRecon is available in the EU, it must adhere to GDPR principles, including user consent, data minimization, and the right to be forgotten. The system should allow users to request data deletion and should not store personally identifiable information beyond what is necessary[22].
+   \textbf{Rationale:} If RideRecon is available in the EU, it must adhere to GDPR principles, including user consent, data minimization, and the right to be forgotten. The system should allow users to request data deletion and should not store personally identifiable information beyond what is necessary[23].
    \item The application must comply with Google Play Developer Distribution Agreement.\\
-   \textbf{Rationale:} To be approved and remain listed on the Google Play Store, RideRecon must follow Google’s data usage policies, user consent requirements, and restricted API guidelines. Failure to comply could result in app suspension or removal[19].
+   \textbf{Rationale:} To be approved and remain listed on the Google Play Store, RideRecon must follow Google’s data usage policies, user consent requirements, and restricted API guidelines. Failure to comply could result in app suspension or removal[20].
    \item The system must include a legally adequate Terms of Service and Privacy Policy accessible from within the app.\\
-   \textbf{Rationale:} Users must be informed about their rights, data usage policies, and liability limitations before using the app. The Terms of Service should outline acceptable use, intellectual property rights, disclaimers, and dispute resolution mechanisms[23]. 
+   \textbf{Rationale:} Users must be informed about their rights, data usage policies, and liability limitations before using the app. The Terms of Service should outline acceptable use, intellectual property rights, disclaimers, and dispute resolution mechanisms[24]. 
 \end{enumerate}
 % End SubSubSection
 
@@ -1339,11 +1346,11 @@ There will be 3 modules in the product. Each module focuses on different major f
 % Begin SubSubSection
 \begin{enumerate}[label={LR-STD\arabic*.}]
 	\item The system must use industry-standard encryption protocols (e.g., AES-256) for data transmission and storage.\\
-   \textbf{Rationale:} To protect user-uploaded images and metadata, the system must encrypt sensitive data during transmission and at rest. This ensures compliance with security best practices and helps prevent data breaches[24][25].
+   \textbf{Rationale:} To protect user-uploaded images and metadata, the system must encrypt sensitive data during transmission and at rest. This ensures compliance with security best practices and helps prevent data breaches[25][26].
    \item The system must not log personally identifiable information in plaintext storage or logs.\\
-   \textbf{Rationale:} To comply with privacy laws and security best practices, logs should not store sensitive user data in plaintext. Any logging mechanism should mask or anonymize sensitive data before storage to reduce exposure in case of a breach adhering to OWASP best practices[26].
+   \textbf{Rationale:} To comply with privacy laws and security best practices, logs should not store sensitive user data in plaintext. Any logging mechanism should mask or anonymize sensitive data before storage to reduce exposure in case of a breach adhering to OWASP best practices[27].
    \item The system must adhere to fair use and copyright laws when handling third-party images.\\
-   \textbf{Rationale:} Users may upload images sourced from third-party websites or copyrighted materials. RideRecon should not process or store copyrighted content without permission, and it must include disclaimers clarifying user responsibility for uploaded images, to adhere to DMCA laws(The Notice and Notice regime in Canada)[27].
+   \textbf{Rationale:} Users may upload images sourced from third-party websites or copyrighted materials. RideRecon should not process or store copyrighted content without permission, and it must include disclaimers clarifying user responsibility for uploaded images, to adhere to DMCA laws(The Notice and Notice regime in Canada)[28].
 
 \end{enumerate}
 % End SubSubSection
