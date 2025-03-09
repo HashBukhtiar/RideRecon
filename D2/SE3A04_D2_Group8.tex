@@ -89,7 +89,13 @@ The RideRecon system is designed to identify vehicles based on both text and ima
 \subsection{Overview}
 \label{sub:overview}
 % Begin SubSection
-Describe what the rest of the document contains and explain how the document is organised (e.g. "In Section 2 we discuss...in Section 3...").
+This document provides a structured analysis and design of the \textbf{RideRecon} app. Section 2 presents the \textbf{Analysis Class Diagram}, which defines the relationships and interactions between key components of the app, including entities, controllers, and boundary classes. This diagram visually represents how data flows between different parts of the app, particularly focusing on \textbf{identification management, vehicle recognition, and user account handling}.  \\
+ 
+\noindent Section 3 discusses the \textbf{architectural design}, outlining the reasoning behind key design choices and how they align with the app's objectives. This section details the \textbf{app architecture}, including the \textbf{handling of image processing for identification, interaction with AI models like GPT-4.0, and vehicle collection management}.  \\
+ 
+\noindent Section 4 provides a \textbf{Class Responsibility Collaboration (CRC) Model}, breaking down the \textbf{responsibilities, collaborations, and roles} of each class. This section ensures that each component's function is clearly defined, particularly in \textbf{managing identification failures, handling user interactions, and integrating AI-powered recognition tools}.  \\
+ 
+\noindent Together, these sections establish a \textbf{comprehensive foundation} for understanding the structure and operation of the \textbf{RideRecon} app.
 
 % End SubSection
 
@@ -587,7 +593,7 @@ Include a Division of Labour sheet which indicates the contributions of each tea
 \begin{tabular}{|p{3cm}|p{3.5cm}|p{3cm}|p{3cm}|p{3.5cm}|}
 \hline
 Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \\ \hline
-1.1, 1.2, 3.2 & X Cards in Section 4 & Section 2 & Section 3.1 & Y Cards in Section 4 \\ 
+1.1, 1.2, 3.2 & 12 Cards in Section 4 & Section 2 & Section 3.1 & 12 Cards in Section 4 \\ 
 Compiled Final Doc &  &  &  & Section 1.3 \\
 \includegraphics[height=1cm]{../D1/images/hashim_signature.png} & \includegraphics[height=1cm]{../D1/images/Jaden_signature.jpg} &
 \includegraphics[scale=0.1]{../D1/images/james_signature.png}& \includegraphics[height=0.6cm]{../D1/images/olivia_signature.png} & \includegraphics[height=0.6cm]{../D1/images/omar_signature.png}  \\
