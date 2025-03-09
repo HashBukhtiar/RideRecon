@@ -128,10 +128,10 @@ The main architecture used in RideRecon is the Blackboard architecture. The Blac
 	\hline
 	Input Management & Identify a car through text or image and add to a collection afterwards (if desired). & Blackboard with each agent using Repository \\
 	\hline
-\end{tabular}
+\end{tabular}\\
 
-\\
-\noindent Subsystem relationships and further explanation of their architecture are defined in Section 3.2 of this document.\\
+
+\noindent Subsystem relationships and further explanation of their architecture are defined in Section 3.2 of this document.
 
 \noindent In addition, there are three databases, each utilized by the different subsystems. The G8M stores all relevant information for the internally trained ML agent. The account database and car collection database, respectively, store all account details and all relevant information required to create specific car collections.\\
 
@@ -187,8 +187,190 @@ This section should contain all of your CRC cards.
 	\end{table}
 	
 \end{itemize}
+
+% CRC Card 1: User Information
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: User Information (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows User Database & User Database \\
+        Knows User Information Manager & User Information Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+
+%CRC Card 2: User Database
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: User Database (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows User Information & User Information Manager \\
+        Knows User Information Manager & User History Information \\
+        Knows User History Information & Car Collection Database \\
+        Knows Car Collection Database & Car Collection Database \\
+        \hline
+    \end{tabular}
+\end{table}
+
+%CRC Card 3: User History Information
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: User History Information (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows User Database & User Database \\
+        Knows User Information Manager & User Information Manager \\
+        Knows Identification Manager & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%CRC Card 4: Car Collection Database
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Car Collection Database (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows User Database & User Database \\
+        Knows User Information Manager & User Information Manager \\
+        Knows Identification Manager & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+
+% CRC Card 5: G8m Data
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: G8m Data (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows Identification Manager & Identification Manager \\
+        Knows G8m & G8m \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 6: G8m
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: G8m (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows G8m Data & G8m Data \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 7: GPT 4.0
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: GPT 4.0 (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows Identification Manager & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 8: Vector Imaging
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Vector Imaging (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows Identification Manager & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 9: Reverse Image Search
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Reverse Image Search (Entity)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Knows Identification Manager & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 10: Account Error Prompt
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Account Error Prompt (Boundary)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Handles display of account-related error messages & Account Management Controller \\
+        Handles user options for retrying or fixing errors & Account Management Controller \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 11: Add to Car Collection Prompt
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Add to Car Collection Prompt (Boundary)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Handles user prompts for adding a vehicle to their collection & User Information Manager \\
+        Handles confirmation messages for successful additions & User Information Manager \\
+        \hline
+    \end{tabular}
+\end{table}
+ 
+%  CRC Card 12: Identification Failed Screen
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{5cm}|p{5cm}|}
+        \hline
+        \multicolumn{2}{|l|}{\textbf{Class Name: Identification Failed Screen (Boundary)}} \\
+        \hline
+        \textbf{Responsibility:} & \textbf{Collaborators:} \\
+        \hline
+        Handles display of failure messages when identification is unsuccessful & Identification Manager \\
+        Handles user options for retrying or using alternative input methods & Identification Manager \\
+        \hline
+    \end{tabular}
+\end{table}	
+
 % End Section
 
+\clearpage
 \appendix
 \section{Division of Labour}
 \label{sec:division_of_labour}
