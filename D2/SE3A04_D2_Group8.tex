@@ -113,13 +113,45 @@ This section should provide an overview of the overall architectural design of y
 \subsection{System Architecture}
 \label{sub:system_architecture}
 % Begin SubSection
-\begin{itemize}
-	\item Identify and explain the overall architecture of your system
-	\item Be sure to clearly state the name of the architecture you used (this is the name of the architectural pattern, not the name of your system)
-	\item Provide the reasoning and justification of the choice of architecture
-	\item Provide a structural architecture diagram showing the relationship among the subsystems (if appropriate)
-	\item List any design alternatives you considered, but eliminated (and explain why you eliminated them)
-\end{itemize}
+The main architecture used in RideRecon is the Blackboard architecture. The Blackboard architecture style has several subsystems that are involved, as it utilizes the knowledge of up to four different agents, including Vertex AI Image, Google Reverse Image Search (RIS), text-based large-language model (LLM) and an internally trained machine learning (ML) program. These resources are These resources are integrated into the architecture through a Repository style so that each subsystem agent creates a hybrid architecture with both the Blackboard and Repository style.\\
+
+\noindent The following subsystems that have been included in the architecture diagram have been defined below:\\
+
+\noindent
+\begin{tabular}{|p{4cm}|p{7cm}|p{3.5cm}|}
+	\hline
+	Subsystem & Purpose & Architectural Style \\
+	\hline
+	Account Management & Create, access, update, recover and authenticate account. & Repository \\
+	\hline
+	Collection Management & Create, view and edit a car collection. & Repository \\
+	\hline
+	Input Management & Identify a car through text or image and add to a collection afterwards (if desired). & Blackboard with each agent using Repository \\
+	\hline
+\end{tabular}
+
+\\
+\noindent Subsystem relationships and further explanation of their architecture are defined in Section 3.2 of this document.\\
+
+\noindent In addition, there are three databases, each utilized by the different subsystems. The G8M stores all relevant information for the internally trained ML agent, present as an agent in the diagram as G8M. The account database and car collection database, respectively, store all account details and all relevant information required to create specific car collections.\\
+
+\noindent As stated above, the architecture incorporates both Blackboard and Repository styles, with the overall architecture style being recognized as Blackboard. This is because the Blackboard architecture is recognized as the most significant for completing the main program functionality, which is car identification. The Blackboard style was chosen due to its ability to utilize many different domain-specific knowledge sources (i.e., the four different agents specified above) in order to collaborate together to solve a complex problem. In our case, the complex problem is being able to identify a car.\\
+
+\noindent The nature of the Blackboard architecture is to be able to provide solutions to nondeterministic solutions, which is helpful for our program as we recognize that identification will always be bound by the limitations of the data covered by the specified agents. The ability of the Blackboard architecture to have different agents working in parallel allows our system to support identification through both image and text simultaneously, which is important for comprehensive identification. Additionally, using a Blackboard architecture style allows easy scalability through updating existing knowledge sources and adding new knowledge sources. This is beneficial to our system as we expect the expected app maintenance will require modifications to the knowledge sources in the event that their knowledge limitations are no longer acceptable.\\
+
+\noindent The Repository architecture is also incorporated for  each knowledge sources in the Blackboard method as it allows multiple software component clients to access different aspects of large, complex information systems. In this case, the agents of the blackboard system are considered the clients that are requesting information needed to complete their partial solutions. This is beneficial for the system as it ensures that while agents work in parallel, they are able to access the relevant data stores that they need, even if another agent is currently accessing certain information from the data store. This also allows multiple users to operate the system at the same time, as the information system is able to be accessible to multiple instances of agents who are looking to identify different cars. Furthermore, if more agents are added to the Blackboard architecture, the Repository style ensures each new knowledge source will be able to easily access the necessary data store. The Repository style can also easily integrate additional protection measures, as it supports data integrity with an easy way to back up and restore information. Additionally, by also integrating the Repository style in Account and Collection Management subsystems, it ensures that the system is easily able to accommodate increases in new users in all aspects of app usage.\\
+
+\begin{center}
+\includegraphics[scale=0.5]{images/system_architecture.png}
+\textbf{Figure 2.} System Architecture.\\
+\end{center}
+
+\noindent \textbf{Why Batch Sequential architecture was not used:} Due to its rigid and sequential style of architecture, it lacks the real-time, iterative, and dynamic collaboration approach that is useful to solve complex problems such as identification. It also is unable to handle real-time updates due to its reliance on batched data sets, which is unsuitable as the system should be able to continuously adapt to new information in order to provide the best solution given all information provided.\\
+
+\noindent \textbf{Why Pipe and Filter architecture was not used:} Similarly, to Batch Sequential architecture, the rigid nature of having specific defined processing steps in which it handles data makes it unsuitable for the dynamic collaboration required during an identification process.\\
+
+\noindent \textbf{Why Process-Control architecture was not used:} This architecture is more rigid and better suited for a system with precise, well-defined target points in specific data that help determine fixed-logic decisions. Since identification involves uncertainty and dynamic reasoning, this makes it unideal for an architecture that relies on fixed rules and thresholds that shape the decision-making process.\\
+
 % End SubSection
 
 \subsection{Subsystems}
