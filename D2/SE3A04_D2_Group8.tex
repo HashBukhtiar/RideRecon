@@ -368,6 +368,229 @@ This section should contain all of your CRC cards.
     \end{tabular}
 \end{table}	
 
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: User Information Manager (Controller)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Manages user authentication, account creation, and profile updates. \newline
+    - Fetches and updates user data from the User Database. \newline
+    - Retrieves and stores user history information. \newline
+    - Communicates with the Car Collection Database to fetch saved user cars.
+    &
+    User Database \newline
+    User Information \newline
+    User History Information \newline
+    Car Collection Database \newline
+    Login Screen \newline
+    Account Creation Screen \newline
+    History Screen \newline
+    Edit Account Screen \newline
+    View Account Screen \newline
+    Account Error Prompt \newline
+    Car Collection Screen \newline
+    Customer Support/FAQ Screen \newline
+    Identification Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Identification Manager (Controller)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Receives vehicle input requests (text/image) from boundary classes. \newline
+    - Forwards input to expert modules for analysis. \newline
+    - Aggregates and resolves expert outputs to produce the final identification result. \newline
+    - Sends identification results to the appropriate boundary class. \newline
+    - Manages failed identification attempts and allows for additional user input.  
+    &
+    GPT 4.0 \newline
+    Vector Imaging \newline
+    G8M \newline
+    Reverse Image Search \newline
+    Text Input Screen \newline
+    Image Input Screen \newline
+    Identification Complete Screen \newline
+    Identification Failed Screen \newline
+    Add to Car Collection Prompt \newline
+    Customer Support/FAQ Screen \newline
+    User Information Manager \newline
+    Car Collection Database \newline
+    User History Information \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Login Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays login fields and collects user credentials. \newline
+    - Sends login request to User Information Manager.
+    &
+    User Information Manager\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Account Creation Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Presents user registration form. \newline
+    - Sends account details to User Information Manager for processing.
+    &
+    User Information Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: History Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays the history of user actions, including past identifications and car collections. \newline
+    - Retrieves data from the User Information Manager.
+    &
+    User Information Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Edit Account Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Presents account modification form to the user. \newline
+    - Sends changes to User Information Manager for validation.
+    &
+    User Information Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: View Account Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays user profile information. \newline
+    - Requests data from User Information Manager.
+    &
+    User Information Manager\\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Car Collection Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays user’s saved vehicle identifications. \newline
+    - Requests car collection data from User Information Manager.
+    &
+    User Information Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Customer Support/FAQ Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays support and FAQ options for users. \newline
+    - Provides contact information if an issue arises. \newline
+    - Sends support requests to User Information Manager/Identification Manager if applicable.
+    &
+    User Information Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Text Input Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Collects text descriptions of vehicles from users. \newline
+    - Sends the input to Identification Manager for processing.
+    &
+    Identification Manager (Controller) \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Image Input Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Allows users to upload an image for vehicle identification. \newline
+    - Sends the input to Identification Manager.
+    &
+    Identification Manager (Controller) \\
+    \hline
+    \end{tabular}
+\end{table}
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{7cm}|p{7cm}|}
+    \hline
+     \multicolumn{2}{|l|}{\textbf{Class Name: Identification Complete Screen (Boundary)}} \\
+    \hline
+    \textbf{Responsibility:} & \textbf{Collaborators:} \\
+    \hline
+    - Displays the final car identification results after processing. \newline
+    - Receives data from Identification Manager.
+    &
+    Identification Manager \\
+    \hline
+    \end{tabular}
+\end{table}
+
+
 % End Section
 
 \clearpage
