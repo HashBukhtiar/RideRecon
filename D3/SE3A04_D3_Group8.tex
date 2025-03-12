@@ -48,14 +48,12 @@
 \label{sec:introduction}
 % Begin Section
 
-This section should provide an brief overview of the entire document.
-
 \subsection{Purpose}
 \label{sub:purpose}
 % Begin SubSection
 
 This document provides further information about the RideRecon car identification system architecture, including state chart diagrams, sequence diagrams, and a detailed class diagram. This document is intended for internal RideRecon stakeholders, including but not limited to, project managers, developers, domain experts, and RideRecon team members/investors. \\
- 
+
 \noindent RideRecon Deliverable 1 and 2 should be read prior, and technical knowledge may be beneficial in better understanding the contents of the document.
 
 
@@ -64,9 +62,11 @@ This document provides further information about the RideRecon car identificatio
 \subsection{System Description}
 \label{sub:system_description}
 % Begin SubSection
-\begin{enumerate}[a)]
-	\item Give a brief description of the system. This could be a paragraph or two to give some context to this document.
-\end{enumerate}
+
+The RideRecon system is a vehicle identification platform that processes user-provided text and image inputs to accurately recognize and classify cars. The system leverages a hybrid blackboard-repository architecture, where multiple expert modules—including a trained ML model (G8M), a reverse image search engine, vector imaging techniques, and GPT-based text processing—collaborate to determine the most accurate identification. The blackboard component acts as a shared workspace where expert modules contribute insights, iteratively refining the identification, while the repository component ensures efficient data management, storing user inputs, past identifications, and expert processing outcomes for future reference.\\
+
+\noindent This document builds on the foundational system description provided in Deliverable 2, expanding the technical details through state charts, sequence diagrams, and a detailed class diagram. These artifacts provide a deeper understanding of the system’s data flow, processing logic, and user interactions. The diagrams illustrate how user inputs progress through various system components, from input validation to expert analysis and final result generation. Additionally, this document clarifies how user accounts, history tracking, and car collection management integrate into the broader system. Through these detailed design elements, we establish a clear roadmap for the system’s implementation and behavior.
+
 % End SubSection
 
 \subsection{Overview}
