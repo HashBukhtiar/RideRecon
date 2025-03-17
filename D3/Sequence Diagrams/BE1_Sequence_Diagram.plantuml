@@ -1,0 +1,19 @@
+@startuml
+actor User
+participant "Login Screen" as LS
+participant "Account Creation Screen" as ACS
+participant "User Information Manager" as UIM
+participant "User Database" as UD
+
+User -> LS: Open app
+LS -> User: Display login screen
+User -> LS: Select "Create Account"
+LS -> ACS: Navigate to account creation screen
+ACS -> User: Display account creation form
+User -> ACS: Enter account details and submit
+ACS -> UIM: Send account details for account creation
+UIM -> UD: Validate and store user info
+UD --> UIM: Confirmation
+UIM --> ACS: Account created successfully
+ACS -> User: Display success message and grant access
+@enduml

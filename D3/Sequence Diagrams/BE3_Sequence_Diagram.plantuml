@@ -1,0 +1,22 @@
+@startuml
+actor User
+participant "Input Screen" as IS
+participant "Identification Manager" as IM
+participant "Expert Modules" as EM
+
+User -> IS: Select image OR enter text description
+alt Image provided
+    IS -> IS: Check image quality
+    alt Quality acceptable
+        IS -> IM: Send image input
+    else Quality poor
+        IS -> User: Prompt to re-upload image
+    end
+else Text provided
+    IS -> IM: Send text input
+end
+IM -> EM: Forward input data for processing
+EM --> IM: Return identification results
+IM -> IS: Display processing feedback and results
+IS -> User: Show final output (car specs, pricing, etc.)
+@enduml

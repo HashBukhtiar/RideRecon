@@ -1,0 +1,15 @@
+@startuml
+actor User
+participant "Login Screen" as LS
+participant "User Information Manager" as UIM
+participant "User Database" as UD
+
+User -> LS: Open app
+LS -> User: Display login screen
+User -> LS: Enter credentials (email/username, password)
+LS -> UIM: Submit credentials for authentication
+UIM -> UD: Verify credentials
+UD --> UIM: Return authentication result
+UIM --> LS: Authentication successful
+LS -> User: Grant access and load homepage
+@enduml
