@@ -13,3 +13,6 @@ SE3A04_D3_Group8*
 
 # Misc
 .DS_Store/
+
+# .env
+**/.env
