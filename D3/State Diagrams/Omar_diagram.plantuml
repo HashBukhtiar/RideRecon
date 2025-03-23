@@ -1,0 +1,139 @@
+@startuml
+ 
+[*] --> Idle
+ 
+state Idle {
+  Idle : None
+}
+ 
+state ProcessingLogin {
+  ProcessingLogin : Username, Password
+  ProcessingLogin : ----
+  ProcessingLogin : Login Success or Failure
+}
+ 
+state LoginSuccessful {
+  LoginSuccessful : Valid Credentials
+  LoginSuccessful : ----
+  LoginSuccessful : User Dashboard
+}
+ 
+state LoginFailed {
+  LoginFailed : Invalid Credentials
+  LoginFailed : ----
+  LoginFailed : Error Message
+}
+ 
+state CreatingAccount {
+  CreatingAccount : Name, Email, Password
+  CreatingAccount : ----
+  CreatingAccount : Account Created or Error
+}
+ 
+state AccountCreationSuccessful {
+  AccountCreationSuccessful : Verified User Details
+  AccountCreationSuccessful : ----
+  AccountCreationSuccessful : Account Confirmation
+}
+ 
+state AccountCreationFailed {
+  AccountCreationFailed : Invalid or Duplicate Details
+  AccountCreationFailed : ----
+  AccountCreationFailed : Error Message
+}
+ 
+state DisplayingUserInfo {
+  DisplayingUserInfo : User Request
+  DisplayingUserInfo : ----
+  DisplayingUserInfo : User Profile Info
+}
+ 
+state EditingUserInfo {
+  EditingUserInfo : Modified User Details
+  EditingUserInfo : ----
+  EditingUserInfo : Updated Profile or Error
+}
+ 
+state SavingChanges {
+  SavingChanges : Submitted Changes
+  SavingChanges : ----
+  SavingChanges : Save Confirmation or Error
+}
+ 
+state UpdateSuccessful {
+  UpdateSuccessful : Validated Changes
+  UpdateSuccessful : ----
+  UpdateSuccessful : Updated Profile
+}
+ 
+state UpdateFailed {
+  UpdateFailed : Invalid Changes
+  UpdateFailed : ----
+  UpdateFailed : Error Message
+}
+ 
+state RetrievingUserHistory {
+  RetrievingUserHistory : User Request
+  RetrievingUserHistory : ----
+  RetrievingUserHistory : List of Activities
+}
+ 
+state DisplayingUserHistory {
+  DisplayingUserHistory : Retrieved History Data
+  DisplayingUserHistory : ----
+  DisplayingUserHistory : User History Logs
+}
+ 
+state FetchingCarCollection {
+  FetchingCarCollection : User Request
+  FetchingCarCollection : ----
+  FetchingCarCollection : Car List
+}
+ 
+state DisplayingCarCollection {
+  DisplayingCarCollection : Retrieved Car Data
+  DisplayingCarCollection : ----
+  DisplayingCarCollection : Car Display
+}
+ 
+state ErrorState {
+  ErrorState : System Error
+  ErrorState : ----
+  ErrorState : Error Report
+}
+ 
+state Logout {
+  Logout : User Logout Request
+  Logout : ----
+  Logout : Logout Confirmation
+}
+ 
+Idle --> ProcessingLogin : User enters login details
+ProcessingLogin --> LoginSuccessful : Login successful
+ProcessingLogin --> LoginFailed : Login failed
+ 
+Idle --> CreatingAccount : User registers new account
+CreatingAccount --> AccountCreationSuccessful : Account created successfully
+CreatingAccount --> AccountCreationFailed : Account creation failed
+ 
+LoginSuccessful --> DisplayingUserInfo : User requests account details
+DisplayingUserInfo --> EditingUserInfo : User edits profile
+EditingUserInfo --> SavingChanges : User submits updates
+SavingChanges --> UpdateSuccessful : Save successful
+SavingChanges --> UpdateFailed : Save failed
+ 
+LoginSuccessful --> RetrievingUserHistory : User requests history
+RetrievingUserHistory --> DisplayingUserHistory : History retrieved
+ 
+LoginSuccessful --> FetchingCarCollection : User opens car collection
+FetchingCarCollection --> DisplayingCarCollection : Car collection retrieved
+ 
+UpdateFailed --> ErrorState : System error
+ 
+LoginSuccessful --> Logout : User logs out
+DisplayingUserInfo --> Logout : User logs out
+ErrorState --> Idle : Restart system
+ 
+Logout --> [*]
+ 
+@enduml
