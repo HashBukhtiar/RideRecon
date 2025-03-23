@@ -1,0 +1,21 @@
+@startuml
+actor Actor as actor1
+participant “Screen” as display
+participant “Collection Manager” as CM
+participant “Account Database” as AD
+participant “Car Collection Dataset” as CCD
+actor1 -> display: select “add to car collection”
+display-> CM: request account history
+CM  -> AD:  access identification history
+AD --> CM: return past history
+CM --> display: return history details
+display --> actor1: prompts to choose car & collection
+actor1 -> display: select car & car collection
+display --> actor1: prompts verification of change
+actor1 -> display: verify change
+display -> CM: apply change to collection
+CM -> CCD: add car to collection
+CCD --> CM: car addition successful
+CM --> display: confirmation of car addition
+display -> actor1: return to homepage
+@enduml
