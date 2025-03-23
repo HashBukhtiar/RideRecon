@@ -1,0 +1,35 @@
+@startuml
+actor Actor as actor1
+participant “Screen” as display
+participant “Identification Manager” as IM
+participant “Google RIS” as expert1
+participant “Gemini” as expert2
+participant “GPT 4.0” as expert3
+participant “GM8” as expert4
+participant “Finalizer” as finalizer
+actor1 -> display: provide car input
+display -> IM: requests processing of input 
+loop conclusion_reached = true OR > max attempts
+    IM -> expert1: feed input for processing
+    expert1 -> finalizer: send identification results
+    IM -> expert2: feed input for processing
+    expert2 -> finalizer: send identification results
+    IM -> expert3:feed input for processing
+    expert3 -> finalizer: send identification results
+    IM -> expert4: feed input for processing
+    expert4 -> finalizer: send identification results
+    finalizer -> finalizer: compare results
+    alt conclusion_reached = false
+        finalizer --> IM: return result from each expert
+        IM --> IM: refine input
+    else conclusion_reached = true
+        finalizer --> IM: return identification conclusion
+    end
+end    
+alt conclusion_reached = false
+    IM --> display: return result from most trusted expert
+else conclusion_reached = true
+    IM --> display: return identification
+end
+display -> actor1: return final identification output & 
+@enduml
