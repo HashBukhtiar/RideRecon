@@ -1,0 +1,306 @@
+@startuml
+skinparam linetype ortho
+hide empty members
+left to right direction
+
+class "IdentificationResult" as IR {
+    + make : String
+    + model : String
+    + confidence : double
+    + extraDetails: String
+    + dateRecorded: Date
+}
+
+class "IdentificationRecord" as II {
+    + carID: String
+    + input: IdentificationInput
+    + result: IdentificationResult
+    + confirmedCorrect: boolean
+}
+
+class "UserHistory" as UH {
+    - userID: UUID
+    - identificationRecords: Map<String, IdentificationInformation>
+    + updateHistory (IdentificationInformation): boolean
+    + getIdentification(carID): IdentificationInformation
+}
+
+abstract "AccountManagement" as AM1 {
+    - userData: UserDatabase
+    - accountMessage: DisplayAccountMessages
+    - accountPage: DisplayAccountPages
+    + login(username, password): boolean
+    + createAccount(username, password, email, phoneNumber): boolean
+    + viewAccount(): void
+    + editAccount(username, password, email, phoneNumber): boolean
+}
+
+class "AccountManager" as AM2
+
+abstract "CollectionManagement" as CM1 {
+    - userRecords: UserDatabase
+    - collectionRecords: Map<String, CollectionDatabase>
+    - collectionMessage: DisplayCollectionMessages
+    - collectionPage: DisplayCollectionPages
+    + createNewCollection(collectionName): boolean
+    + viewCollection (collectionName): boolean
+    + updateCollection (collectionName, IdentificationInformation): boolean
+}
+
+class "CollectionManager" as CM2
+
+class "CollectionDatabase" as CD {
+    - userID: UUID
+    - collectionName: String
+    - collectionEntries: Map<String, IdentificationInformation>
+}
+
+class "UserInformation" as UI {
+    +userID: UUID
+    +username: username
+    +password: String
+    +email: String
+    +phoneNumber: int
+}
+
+class "UserDatabase " as UD {
+    - userID: UUID
+    - userInfo: UserInformation
+    - history: UserHistory
+    - collections: CollectionDatabase
+    + getUserInfo(): UserInformation
+    + updateUserInfo(): boolean
+}
+
+
+abstract "IdentificationManagement" as IM1 {
+    - expertName: String
+    + getExpertName(): String
+    + setExpertName(expertName) : void
+    # identifyCar(image, text) : IdentificationResult
+}
+
+class "IdentificationManager" as IM2 {
+    - experts: List<IdentificationManagement>
+    - userInput: Input
+    + finalAnswer(image, text) : IdentificationRecord
+    - gatherAnswers(image, text) : List<IdentificationResult>
+    - resolveConflicts(List<IdentificationResult>) : IdentificationResult
+    + storeAnswer(IdentificationRecord) : void
+}
+
+
+class "RIS" as RIS {
+    - apiKey : String
+    - callReverseImageAPI(image) : String
+    - parseSearchResults(String) : IdentificationResult
+}
+
+class "VertexAI" as VERTEX {
+    - projectId : String
+    - callVertexAIApi(image, text) : String
+    - parseApiResponse(String) : IdentificationResult
+}
+
+class "GPT4Mini" as GPT4 {
+    - openAiApiKey : String
+    - callGPT4MiniApi(image, text) : String
+    - parseResponse(String) : IdentificationResult
+}
+
+class "G8M" as G8M {
+    - modelPath : String
+    - g8mData : G8MData
+    - loadModel(String) : void
+    - runInference(String) : MLResult
+    + retrainModel() : void
+}
+
+class "G8MData" as G8MData {
+    - datasetPath : String
+    - lastUpdated : Date
+    - trainingSamples : List<TrainingSample>
+    + loadDataset() : void
+    + getTrainingSamples() : List<TrainingSample>
+    + updateDataset(String) : void
+    + getDatasetStats() : String
+}
+
+class "IdentificationInput" as IDI {
+    - image: String
+    - text: String
+}
+
+
+
+
+
+
+interface "DisplayCollectionMessages" as DCM {
+    + displayMessages(): void
+}
+
+class "SuccessMessage" as SMC {
+    - message: String
+    + displayMessages(): void
+}
+
+class "NotSignedInMessage" as NSMC {
+    - message: String
+    + displayMessages(): void
+}
+
+interface "DisplayCollectionScreen" as DCP {
+    + displayPage(): void
+}
+
+class "ShowCollectionsScreen" as SCP {
+    - message: String
+    + displayMessages(): void
+}
+
+class "CreateCollectionScreen" as CCP {
+    - message: String
+    + displayMessages(): void
+}
+
+class "DisplayEditCollectionScreen" as ECP {
+    - message: String
+    + displayMessages(): void
+}
+
+interface "DisplayAccountMessages" as DAM {
+    + displayMessages(): void
+}
+
+class "AccountSuccess" as AS {
+    - message: String
+    + displayMessages(): void
+}
+
+class "AccountError" as AE {
+    - message: String
+    + displayMessages(): void
+}
+
+interface "DisplayAccountScreen" as DAP {
+    + displayPage(): void
+}
+
+class "SignInScreen" as SIP {
+    - message: String
+    + displayMessages(): void
+}
+
+class "CreateAccountScreen" as CAP {
+    - message: String
+    + displayMessages(): void
+}
+
+class "EditAccountScreen" as EAP {
+    - message: String
+    + displayMessages(): void
+}
+
+class "AccountHistoryScreen" as AHP {
+    - message: String
+    + displayMessages(): void
+}
+
+interface "InputScreen" as INS {
+    + displayInput() : void
+    + getUserInput() : String
+}
+
+class "TextInputScreen" as TIS {
+    + displayInput() : void
+    + getUserInput() : String
+    + validateText() : boolean
+}
+
+class "ImageInputScreen" as IIS {
+    + displayInput() : void
+    + getUserInput() : Image
+    + openCamera() : void
+    + openFilePicker() : void
+}
+
+interface "IdentificationScreen" as IS {
+    + displayResults(result: IdentificationResult) : void
+    + promptNextAction() : void
+}
+
+class "IdentificationSuccess" as ISS {
+    + displayResults(result: IdentificationResult) : void
+    + promptNextAction() : void
+    + showFunFact() : void
+}
+
+class "IdentificationFailed" as IFS {
+    + displayResults(result: IdentificationResult) : void
+    + promptNextAction() : void
+    + retryIdentification() : void
+}
+
+class "CustomerFAQ" as FAQ {
+    + displayFAQ() : void
+    + searchFAQ(query: String) : void
+    + contactSupport() : void
+}
+
+
+II o-- UH: 1..*
+
+AM1 --> UD
+AM1 <|-- AM2
+
+
+CM1 --> UD
+CM1 <|-- CM2
+CM1 <|-- IM1
+
+UD *-- UH
+UD *-- CD
+UD *-- UI
+
+
+IR --> II
+IDI --> II
+IM2  o--> IM1: 1..*
+IR <- IM2
+
+IM1 --> IDI
+IM1 <|-- RIS
+IM1 <|-- VERTEX
+IM1 <|-- GPT4
+IM1 <|-- G8M
+
+G8M *-- G8MData
+
+CM1 --> DCM
+CM1 --> DCP
+DCM <|.. SMC
+DCM <|.. NSMC
+DCP <|.. SCP
+DCP <|.. CCP
+DCP <|.. ECP
+
+AM1 --> DAP
+AM1 --> DAM
+DAM <|..AS
+DAM <|..AE
+DAP <|..SIP
+DAP <|..CAP
+DAP <|..EAP
+DAP <|..AHP
+
+IM1 --> INS
+IM1 --> IS
+INS <|..TIS
+INS <|..IIS
+IS <|..ISS
+IS <|..IFS
+IS <|..FAQ
+
+
+@enduml
