@@ -3,118 +3,122 @@
 [*] --> Idle
  
 state Idle {
-  Idle : None
+  Idle :       None
 }
  
 state ProcessingLogin {
-  ProcessingLogin : Username, Password
-  ProcessingLogin : ----
-  ProcessingLogin : Login Success or Failure
+  ProcessingLogin :       user_input
+  ProcessingLogin :       ----
+  ProcessingLogin :       login_status
 }
  
 state LoginSuccessful {
-  LoginSuccessful : Valid Credentials
-  LoginSuccessful : ----
-  LoginSuccessful : User Dashboard
+  LoginSuccessful :       valid_credentials
+  LoginSuccessful :       ----
+  LoginSuccessful :       load_dashboard
 }
  
 state LoginFailed {
-  LoginFailed : Invalid Credentials
-  LoginFailed : ----
-  LoginFailed : Error Message
+  LoginFailed :       invalid_credentials
+  LoginFailed :       ----
+  LoginFailed :       display_error
 }
  
 state CreatingAccount {
-  CreatingAccount : Name, Email, Password
-  CreatingAccount : ----
-  CreatingAccount : Account Created or Error
+  CreatingAccount :       user_details
+  CreatingAccount :       ----
+  CreatingAccount :       account_status
 }
  
 state AccountCreationSuccessful {
-  AccountCreationSuccessful : Verified User Details
-  AccountCreationSuccessful : ----
-  AccountCreationSuccessful : Account Confirmation
+  AccountCreationSuccessful :       verified_user
+  AccountCreationSuccessful :       ----
+  AccountCreationSuccessful :       confirmation_message
 }
  
 state AccountCreationFailed {
-  AccountCreationFailed : Invalid or Duplicate Details
-  AccountCreationFailed : ----
-  AccountCreationFailed : Error Message
+  AccountCreationFailed :       invalid_or_duplicate
+  AccountCreationFailed :       ----
+  AccountCreationFailed :       error_message
 }
  
 state DisplayingUserInfo {
-  DisplayingUserInfo : User Request
-  DisplayingUserInfo : ----
-  DisplayingUserInfo : User Profile Info
+  DisplayingUserInfo :       user_request
+  DisplayingUserInfo :       ----
+  DisplayingUserInfo :       profile_data
 }
  
 state EditingUserInfo {
-  EditingUserInfo : Modified User Details
-  EditingUserInfo : ----
-  EditingUserInfo : Updated Profile or Error
+  EditingUserInfo :       modified_data
+  EditingUserInfo :       ----
+  EditingUserInfo :       update_status
 }
  
 state SavingChanges {
-  SavingChanges : Submitted Changes
-  SavingChanges : ----
-  SavingChanges : Save Confirmation or Error
+  SavingChanges :       submitted_changes
+  SavingChanges :       ----
+  SavingChanges :       save_confirmation
 }
  
 state UpdateSuccessful {
-  UpdateSuccessful : Validated Changes
-  UpdateSuccessful : ----
-  UpdateSuccessful : Updated Profile
+  UpdateSuccessful :       validated_changes
+  UpdateSuccessful :       ----
+  UpdateSuccessful :       updated_profile
 }
  
 state UpdateFailed {
-  UpdateFailed : Invalid Changes
-  UpdateFailed : ----
-  UpdateFailed : Error Message
+  UpdateFailed :       invalid_changes
+  UpdateFailed :       ----
+  UpdateFailed :       error_message
 }
  
 state RetrievingUserHistory {
-  RetrievingUserHistory : User Request
-  RetrievingUserHistory : ----
-  RetrievingUserHistory : List of Activities
+  RetrievingUserHistory :       user_request
+  RetrievingUserHistory :       ----
+  RetrievingUserHistory :       activity_list
 }
  
 state DisplayingUserHistory {
-  DisplayingUserHistory : Retrieved History Data
-  DisplayingUserHistory : ----
-  DisplayingUserHistory : User History Logs
+  DisplayingUserHistory :       retrieved_data
+  DisplayingUserHistory :       ----
+  DisplayingUserHistory :       history_logs
 }
  
 state FetchingCarCollection {
-  FetchingCarCollection : User Request
-  FetchingCarCollection : ----
-  FetchingCarCollection : Car List
+  FetchingCarCollection :       user_request
+  FetchingCarCollection :       ----
+  FetchingCarCollection :       car_list
 }
  
 state DisplayingCarCollection {
-  DisplayingCarCollection : Retrieved Car Data
-  DisplayingCarCollection : ----
-  DisplayingCarCollection : Car Display
+  DisplayingCarCollection :       retrieved_car_data
+  DisplayingCarCollection :       ----
+  DisplayingCarCollection :       car_display
 }
  
 state ErrorState {
-  ErrorState : System Error
-  ErrorState : ----
-  ErrorState : Error Report
+  ErrorState :       system_error
+  ErrorState :       ----
+  ErrorState :       error_report
 }
  
 state Logout {
-  Logout : User Logout Request
-  Logout : ----
-  Logout : Logout Confirmation
+  Logout :       logout_request
+  Logout :       ----
+  Logout :       logout_confirmation
 }
  
 Idle --> ProcessingLogin : User enters login details
 ProcessingLogin --> LoginSuccessful : Login successful
 ProcessingLogin --> LoginFailed : Login failed
  
+LoginFailed --> Idle : Retry login
+ 
 Idle --> CreatingAccount : User registers new account
 CreatingAccount --> AccountCreationSuccessful : Account created successfully
 CreatingAccount --> AccountCreationFailed : Account creation failed
+ 
+AccountCreationFailed --> Idle : Retry or Exit
  
 LoginSuccessful --> DisplayingUserInfo : User requests account details
 DisplayingUserInfo --> EditingUserInfo : User edits profile
@@ -122,18 +126,22 @@ EditingUserInfo --> SavingChanges : User submits updates
 SavingChanges --> UpdateSuccessful : Save successful
 SavingChanges --> UpdateFailed : Save failed
  
+UpdateFailed --> ErrorState : System error
+ 
 LoginSuccessful --> RetrievingUserHistory : User requests history
 RetrievingUserHistory --> DisplayingUserHistory : History retrieved
  
 LoginSuccessful --> FetchingCarCollection : User opens car collection
 FetchingCarCollection --> DisplayingCarCollection : Car collection retrieved
  
-UpdateFailed --> ErrorState : System error
- 
 LoginSuccessful --> Logout : User logs out
 DisplayingUserInfo --> Logout : User logs out
-ErrorState --> Idle : Restart system
  
+ErrorState --> Idle : Restart system
 Logout --> [*]
+UpdateSuccessful --> [*]
+DisplayingUserHistory --> [*]
+DisplayingCarCollection --> [*]
+AccountCreationSuccessful --> [*]
  
 @enduml
