@@ -20,7 +20,9 @@ def finalizer(gpt4o,gemini,ris,g8m):
         if expert["model"] == baseline_model:
             confidence += 50/6
     
-    return round(confidence,1)
+    out_info = {"make": baseline_make, "model": baseline_model, "confidence": round(confidence,1)}
+
+    return out_info
 
 
 
@@ -35,6 +37,21 @@ gemini = {
 }
 ris = {
     "make": "Porsche",
+    "model": "911 GT3 RS"
+}
+g8m = {
+    "make": "Porsche",
+    "model": "911 GT3 RS"
+}
+
+gpt4o = json.dumps(gpt4o)
+gemini = json.dumps(gemini)
+ris = json.dumps(ris)
+g8m = json.dumps(g8m)
+
+'''
+ris = {
+    "make": "Porsche",
     "model": "911 Turbo S"
 }
 g8m = {
@@ -42,6 +59,6 @@ g8m = {
     "model": "911 Turbo S"
 }
 
-
+'''
 if __name__ == "__main__":
     print(finalizer(gpt4o, gemini, ris, g8m))
