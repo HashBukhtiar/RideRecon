@@ -2,6 +2,11 @@ import json
 
 
 def finalizer(gpt4o,gemini,ris,g8m):
+    gpt4o = json.loads(gpt4o)
+    gemini = json.loads(gemini)
+    ris = json.loads(ris)
+    g8m = json.loads(g8m)
+    
     baseline_make = gpt4o["make"]
     baseline_model = gpt4o["model"]
 
