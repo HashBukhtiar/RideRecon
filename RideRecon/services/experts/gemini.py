@@ -1,33 +1,9 @@
 import vertexai
 from vertexai.generative_models import GenerativeModel, SafetySetting, Part
-from base64_funcs import *
+from processing import *
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from json import loads
-from PIL import Image
-import io
-
-def resize_image(image_path, max_size=(1024, 1024), quality=85):
-    """Resize an image to reduce its size"""
-    try:
-        img = Image.open(image_path)
-        img.thumbnail(max_size, Image.Resampling.LANCZOS)
-        
-        # Convert to RGB if needed (in case of PNG with transparency)
-        if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
-            img = img.convert('RGB')
-            
-        # Save to bytes
-        buffer = io.BytesIO()
-        img.save(buffer, format="JPEG", quality=quality)
-        buffer.seek(0)
-        
-        return buffer.read()
-    except Exception as e:
-        print(f"Error resizing image: {e}")
-        with open(image_path, "rb") as f:
-            return f.read()  # Return original as fallback
 
 def load_environment():
     script_dir = Path(os.path.dirname(os.path.abspath(__file__)))
@@ -92,7 +68,7 @@ def gemini_gcp_identification(image_path):
     print("\nGemini's Response:")
     print(response.text)
 
-    car_info = loads(response.text) # Return python dictionary
+    car_info = jsonify(response.text) # Return python dictionary
     return car_info
 
 if __name__ == "__main__":
