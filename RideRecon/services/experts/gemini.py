@@ -103,7 +103,14 @@ def gemini_gcp_identification(image_path):
     # Create a proper Part object from the image
     image_part = Part.from_data(mime_type="image/jpeg", data=image_data)
     
-    user_prompt = Part.from_text('Give me the make and model of the car in the image in the following format: {"make": "", "model": ""}. Do not include the ```json ``` in your answer, just the curly braces with the make and model')
+    raw_prompt = """
+    Please identify the car in this image. Provide the make and model, format your response as JSON with the following structure:
+    {
+        "make": "Car manufacturer",
+        "model": "Car model"
+    }
+    """
+    user_prompt = Part.from_text(raw_prompt)
     
     print("Analyzing image...")
     
@@ -131,4 +138,4 @@ if __name__ == "__main__":
 
     print("Car Identification with Gemini 1.0 Pro Vision")
     print("--------------------------------------------")
-    print(gemini_gcp_identification(camry_path))
+    print(gemini_gcp_identification(camry_path)) # This is a Python dictionary at this point
