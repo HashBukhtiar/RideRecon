@@ -67,19 +67,22 @@ if __name__ == "__main__":
     f150_path = str(project_root / "assets" / "images" / "f150.png")
     camry_path = str(project_root / "assets" / "images" / "camry.png")
     wagon_path = str(project_root / "assets" / "images" / "wagon.jpg")
+    svj_path = str(project_root / "assets" / "images" / "svj.png")
     
     # Verify images exist
     print(f"GT3RS exists: {os.path.exists(gt3rs_path)}")
     print(f"F150 exists: {os.path.exists(f150_path)}")
     print(f"Camry exists: {os.path.exists(camry_path)}")
     print(f"Wagon exists: {os.path.exists(wagon_path)}")
+    print(f"SVJ exists: {os.path.exists(svj_path)}")
     
     # Choose image
     #finalize(gt3rs_path)
     #finalize(f150_path)
-    finalize(camry_path)
+    #finalize(camry_path)
     #finalize(wagon_path)
-    
+    finalize(svj_path)
+
     '''image_to_use = None
     for img_path in [gt3rs_path, f150_path, camry_path]:
         if os.path.exists(img_path):
