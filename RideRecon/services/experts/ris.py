@@ -8,7 +8,7 @@ import re
 
 load_dotenv()
 
-def identify_car_with_vision(image_path):
+def reverse_image_search_identification(image_path):
     """
     Identify car using Google Vision API with brand-agnostic analysis
     
@@ -227,7 +227,7 @@ if __name__ == "__main__":
     chosen_path = camry_path
 
     print(f"Analyzing car image at: {chosen_path}")
-    result = identify_car_with_vision(chosen_path)
+    result = reverse_image_search_identification(chosen_path)
 
     print("\n=== REVERSE IMAGE SEARCH IDENTIFICATION RESULTS ===")
     print(result)

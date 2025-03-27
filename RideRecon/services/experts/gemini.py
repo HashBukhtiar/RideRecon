@@ -1,6 +1,6 @@
 import vertexai
 from vertexai.generative_models import GenerativeModel, SafetySetting, Part
-from processing import *
+from .processing import *
 import os
 from pathlib import Path
 from dotenv import load_dotenv
@@ -65,8 +65,8 @@ def gemini_gcp_identification(image_path):
         ],
     )
     
-    print("\nGemini's Response:")
-    print(response.text)
+    #print("\nGemini's Response:")
+    #print(response.text)
 
     car_info = jsonify(response.text) # Return python dictionary
     return car_info

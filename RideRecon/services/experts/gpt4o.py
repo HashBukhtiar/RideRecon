@@ -1,7 +1,7 @@
 from dotenv import load_dotenv
 from openai import OpenAI
 import os
-from processing import *
+from .processing import *
 from pathlib import Path
 
 load_dotenv()
@@ -44,7 +44,7 @@ def gpt4o_identification(image_path):
     )   
 
     response = chat_completion.choices[0].message.content
-    print("4o reponse:", response)
+    #print("4o reponse:", response)
 
     return jsonify(response)
 
