@@ -3,6 +3,13 @@ from experts.gpt4o import *
 from experts.ris import *
 from pathlib import Path
 import os
+from difflib import SequenceMatcher
+
+def similarity(s1, s2):
+    s1 = str(s1).lower()
+    s2 = str(s2).lower()
+    
+    return SequenceMatcher(None, s1, s2).ratio()
 
 def finalize(image_path):
     print(f"Processing image at path: {image_path}")
@@ -18,24 +25,17 @@ def finalize(image_path):
     print("\nRIS identified:", ris_response_json, '\n')
 
     # Simple voting mechanism for final result
-    make_votes = {}
-    model_votes = {}
-    
-    for response in [gpt4o_response_json, gemini_response_json, ris_response_json]:
-        if 'make' in response:
-            make = response['make'].lower()
-            make_votes[make] = make_votes.get(make, 0) + 1
-        if 'model' in response:
-            model = response['model'].lower()
-            model_votes[model] = model_votes.get(model, 0) + 1
-    
-    final_make = max(make_votes.items(), key=lambda x: x[1])[0] if make_votes else "Unknown"
-    final_model = max(model_votes.items(), key=lambda x: x[1])[0] if model_votes else "Unknown"
+    confidence = 33
+    final_make = gpt4o_response_json['make']
+    final_model = gpt4o_response_json['model']
+
+    for response in [gemini_response_json, ris_response_json]:
+        confidence += 16.75*similarity(response['make'], gpt4o_response_json['make']) + 16.75*similarity(response['model'], gpt4o_response_json['model'])
     
     final_result = {
         "make": final_make.title(),
         "model": final_model.title(),
-        "confidence": f"{round(max(make_votes.values()) / 3,1) * 100 if make_votes else 0}%"
+        "confidence": f"{round(confidence,2)}%"
     }
     
     print("\nFinal identification:", final_result)
@@ -75,9 +75,9 @@ if __name__ == "__main__":
     print(f"Wagon exists: {os.path.exists(wagon_path)}")
     
     # Choose image
-    finalize(gt3rs_path)
+    #finalize(gt3rs_path)
     #finalize(f150_path)
-    #finalize(camry_path)
+    finalize(camry_path)
     #finalize(wagon_path)
     
     '''image_to_use = None
