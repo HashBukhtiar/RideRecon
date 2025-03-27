@@ -195,7 +195,7 @@ def identify_car_with_vision(image_path):
             
     # Add more brand-specific logic here as needed
                 
-    return {
+    result = {
         "make": most_likely_make,
         "model": most_likely_model,
         "confidence": confidence,
@@ -204,27 +204,30 @@ def identify_car_with_vision(image_path):
         "raw_labels": labels,
         "raw_entities": web_entities
     }
+    #print(result)
 
-# Get the script directory and resolve the image path
-script_dir = Path(__file__).parent.resolve()
-project_dir = script_dir.parent
-image_path = project_dir / "assets" / "images" / "camry.png"
+    model_no_make = remove_make(result['make'], result['model'])
 
-print(f"Analyzing car image at: {image_path}")
+    return {
+        'make': result['make'],
+        'model': model_no_make
+    }
 
-# Identify the car
-result = identify_car_with_vision(str(image_path))
+def remove_make(make, full_model):
+    if make in full_model:
+        pattern = re.compile(re.escape(make), re.IGNORECASE)
+        return pattern.sub('', full_model).strip()
 
-print("\n=== REVERSE IMAGE SEARCH IDENTIFICATION RESULTS ===")
-print(f"Make: {result['make']}")
-print(f"Full Model: {result['model']}")
-print(f"Confidence: {result['confidence']:.2f}")
+if __name__ == "__main__":
+    project_root = Path(__file__).parent.parent.parent
+    gt3rs_path = str(project_root / "assets" / "images" / "GT3RS.jpg")
+    f150_path = str(project_root / "assets" / "images" / "f150.png")
+    camry_path = str(project_root / "assets" / "images" / "camry.png")
 
-if result['details']:
-    print("\nModel Details:")
-    for key, value in result['details'].items():
-        print(f"- {key}: {value}")
+    chosen_path = camry_path
 
-print("\nTop 3 Candidates:")
-for car in sorted(result['all_candidates'], key=lambda x: x['score'], reverse=True)[:3]:
-    print(f"- {car['text']} (confidence: {car['score']:.2f})")
+    print(f"Analyzing car image at: {chosen_path}")
+    result = identify_car_with_vision(chosen_path)
+
+    print("\n=== REVERSE IMAGE SEARCH IDENTIFICATION RESULTS ===")
+    print(result)
