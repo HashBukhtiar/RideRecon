@@ -3,11 +3,10 @@ import React, { useEffect } from 'react';
 import { colors } from '@/constants/theme';
 import { useRouter } from "expo-router";
 
-
 const index = () => {
     const router = useRouter();
     useEffect(()=>{
-        router.push("../(auth)/loggedout")
+        router.push("/(coll)/sets")
     },[])
     return (
         <View style={styles.container}>

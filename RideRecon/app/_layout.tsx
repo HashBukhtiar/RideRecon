@@ -1,38 +1,25 @@
+
+import { Stack } from 'expo-router'
 import React from 'react'
-import { View, Text } from 'react-native'
-import { Tabs } from 'expo-router'
-import TabBar from '../components/TabBar'
+import { StyleSheet, Text, View } from 'react-native'
 
 const _layout = () => {
     return (
-        <Tabs
-            tabBar={props=> <TabBar{...props} />}
-        >
-            <Tabs.Screen
-                name="(auth)"
+        <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen
+                name="(modals)/accountModal"
                 options={{
-                    title: "Account",
-                    headerShown: false,
+                    presentation: "modal"
                 }}
             />
-            <Tabs.Screen
-                name="index"
-                options={{
-                    title: "Home",
-                    headerShown: false,
-                }}
-            />
-            <Tabs.Screen
-                name="collection"
-                options={{
-                    title: "Collection",
-                    headerShown: false,
-                }}
-            />
-
-        </Tabs>
+        </Stack>
+    )  
         
-    )
 }
 
 export default _layout
+
+const styles = StyleSheet.create({})
+
+
+

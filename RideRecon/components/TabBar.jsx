@@ -6,9 +6,11 @@ const TabBar = ({state, descriptors, navigation}) => {
 
     const icons = {
         index: (props)=> <AntDesign name="home" size={26} color={greyColor}{...props} />,
-        collection: (props)=> <AntDesign name="bars" size={26} color={greyColor}{...props} />,
-        "(auth)": (props)=> <AntDesign name="user" size={26} color={greyColor}{...props} />,
+        collections: (props)=> <AntDesign name="bars" size={26} color={greyColor}{...props} />,
+        account: (props)=> <AntDesign name="user" size={26} color={greyColor}{...props} />,
+
     }
+
     const primaryColor = '#a3e535';
     const greyColor = '#FFFFFF';
     return (

@@ -31,7 +31,6 @@ export type ModalWrapperProps = {
 export type accountOptionType = {
     title: string;
     icon: React.ReactNode;
-    bgColor: string;
     routeName?: any;
 };
 
@@ -64,7 +63,6 @@ export type HeaderProps = {
     title?: string;
     style?: ViewStyle;
     leftIcon?: ReactNode;
-    rightIcon?: ReactNode;
 };
 
 export type BackButtonProps = {

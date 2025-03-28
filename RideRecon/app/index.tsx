@@ -1,12 +1,38 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import { colors } from '@/constants/theme'
+import React, { useEffect } from 'react'
+import { Image, StyleSheet, View, Text } from 'react-native'
+import { useRouter } from 'expo-router';
 
-const Home = () => {
+const index = () => {
+    const router = useRouter();
+    useEffect(()=>{
+        setTimeout(() => {
+            router.push("../(tabs)/account")
+        }, 100);
+
+    },[])
     return (
-        <View>
-            <Text>Home</Text>
+        <View style={styles.container}>
+            <Image
+            style={styles.logo}
+            resizeMode="contain"
+            source={require("../assets/images/design/logo.png")}
+            />
         </View>
     )
 }
 
-export default Home
+export default index
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: colors.neutral900,
+    },
+    logo: {
+        height: 250,
+        aspectRatio: 1,
+    }
+})
