@@ -2,12 +2,11 @@ import React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import{ AntDesign } from '@expo/vector-icons';
 
-const TabBar = ({state, descriptors, navigation}) => {
+const TabBarGuest = ({state, descriptors, navigation}) => {
 
     const icons = {
         index: (props)=> <AntDesign name="home" size={26} color={greyColor}{...props} />,
-        collections: (props)=> <AntDesign name="bars" size={26} color={greyColor}{...props} />,
-        account: (props)=> <AntDesign name="user" size={26} color={greyColor}{...props} />,
+        loggedout: (props)=> <AntDesign name="user" size={26} color={greyColor}{...props} />,
     }
 
     const primaryColor = '#a3e535';
@@ -99,4 +98,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default TabBar
+export default TabBarGuest

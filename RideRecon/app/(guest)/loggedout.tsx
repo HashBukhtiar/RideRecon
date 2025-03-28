@@ -52,7 +52,6 @@ const Loggedout = () => {
                 </View>
             </View>
             
-            
         </ScreenWrapper>
     );
 };
