@@ -7,7 +7,7 @@ const index = () => {
     const router = useRouter();
     useEffect(()=>{
         setTimeout(() => {
-            router.push("../(tabs)/account")
+            router.push("../(auth)/welcome")
         }, 100);
 
     },[])

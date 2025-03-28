@@ -162,3 +162,12 @@ export type ResponseType = {
     msg?: string;
 };
 
+export type CollectionType = {
+    id?: string;
+    name: string;
+    total?: number;
+    image: any;
+    uid?: string;
+    created?: Date;
+    
+}

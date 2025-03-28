@@ -12,7 +12,15 @@ const _layout = () => {
                     presentation: "modal"
                 }}
             />
+            <Stack.Screen
+                name="(modals)/collectionModal"
+                options={{
+                    presentation: "modal"
+                }}
+            />
         </Stack>
+        
+        
     )  
         
 }

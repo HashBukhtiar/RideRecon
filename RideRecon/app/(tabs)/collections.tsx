@@ -18,8 +18,8 @@ const Collections = () => {
 
                 {/* collection sets */}
                 <View style={styles.sets}>
-                    <View style={styles.flexRow}>
-                        <Typo size ={22} fontWeight={"500"}>
+                    <View style={styles.flexRow} >
+                        <Typo size ={22} fontWeight={"500"} >
                             Personal Collections
                         </Typo>
                         <TouchableOpacity onPress={()=> router.push("/(modals)/collectionModal")}>
@@ -30,10 +30,11 @@ const Collections = () => {
                             />
                         </TouchableOpacity>
                     </View>
+                    
+                    {/* mess with background color in sets to get it to work with the collections list */}
+
                 </View>
-
-                {/* mess with background color in sets to get it to work with the collections list */}
-
+            
             </View>
         </ScreenWrapper>
     )
@@ -44,7 +45,7 @@ export default Collections
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "space-between",
+        paddingTop: spacingX._20,
     },
     flexRow: {
         flexDirection: "row",

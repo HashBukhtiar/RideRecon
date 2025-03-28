@@ -25,7 +25,7 @@ const Welcome = () => {
                     source={require("../../assets/images/design/logo.png")}
                     />
 
-                    <Button onPress={()=> router.push('../(tabs)')}>
+                    <Button onPress={()=> router.push('../(guest)')}>
                         <Typo size={22} color={colors.neutral900} fontWeight={"600"}>
                             Guest Access
                         </Typo>

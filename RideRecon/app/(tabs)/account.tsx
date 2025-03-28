@@ -58,7 +58,7 @@ const Account = () => {
     }
 
     return (
-        <ModalWrapper >
+    <ModalWrapper >
         <View style={styles.container}>
             <Header title='Account Details' style={{marginVertical: spacingY._30}}/>
 
