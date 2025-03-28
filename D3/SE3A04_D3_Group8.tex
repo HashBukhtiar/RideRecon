@@ -72,10 +72,13 @@ The RideRecon system is a vehicle identification platform that processes user-pr
 \subsection{Overview}
 \label{sub:overview}
 % Begin SubSection
-\begin{enumerate}[a)]
-	\item Describe what the rest of the document contains 
-	\item Explain how the document is organised
-\end{enumerate}
+This document provides a structured analysis and design of the \textbf{RideRecon} system, focusing on the \textbf{State Chart Diagrams}, \textbf{Sequence Diagrams}, and a detailed \textbf{Class Diagram}. It expands upon the foundational concepts introduced in \textbf{Deliverables 1 and 2}, ensuring a comprehensive understanding of the system's behavior and interactions.\\
+ 
+\noindent\textbf{Section 2} presents \textbf{State Chart Diagrams}, which define the behavior of core controller classes, particularly focusing on user management and vehicle identification. These diagrams illustrate the different states a system entity can transition between and the conditions that trigger these transitions. \textbf{Section 3} provides \textbf{Sequence Diagrams}, visually representing the flow of interactions between system components during specific use cases. These diagrams capture step-by-step interactions between users, expert modules, and the system’s processing units. \textbf{Section 4} contains the \textbf{Class Diagram}, outlining the structure of the system’s classes, their attributes, relationships, and methods. This diagram ensures clarity in class responsibilities, making it easier to understand how data is managed within the system.\\
+ 
+\noindent Together, these sections form a comprehensive guide to understanding the \textbf{RideRecon system’s state management, process flow, and class relationships}, providing essential details for implementation and further development.
+
+ 
 
 % End SubSection
 
@@ -84,40 +87,56 @@ The RideRecon system is a vehicle identification platform that processes user-pr
 \section{State Charts for Controller Classes}
 \label{sec:state_charts_for_controller_classes}
 % Begin Section
-This section should provide a state chart for each controller class for your application.
+
+\begin{center}
+	\includegraphics[scale=0.43]{State Diagrams/omar_diagram.png}\\
+	\textbf{Figure 1.} State Chart Diagram for User Manager.\\
+
+	\includegraphics[scale=0.38]{State Diagrams/IdentStateDiagramUML.png}\\ 
+	\textbf{Figure 2.} State Chart Diagram for Identification Manager.\\
+\end{center}
+
 % End Section
 
 \section{Sequence Diagrams}
 \label{sec:sequence_diagrams}
 % Begin Section
-This section should provide a sequence diagram for each use case of your application.
 
 
 \begin{center}
 	\includegraphics[scale=0.5]{Sequence Diagrams/BE1_Sequence_Diagram.png}\\
-	\textbf{Figure X.} Sequence Diagram for BE1: Create Account.\\
+	\textbf{Figure 3.} Sequence Diagram for BE1: Create Account.\\
 
 	\includegraphics[scale=0.6]{Sequence Diagrams/BE2_Sequence_Diagram.png}\\
-	\textbf{Figure X+1.} Sequence Diagram for BE2: Authenticate User.\\
+	\textbf{Figure 4.} Sequence Diagram for BE2: Authenticate User.\\
 
 	\includegraphics[scale=0.55]{Sequence Diagrams/BE3_Sequence_Diagram.png}\\
-	\textbf{Figure X+2.} Sequence Diagram for BE3: Upload Text and/or Image as Input.\\
+	\textbf{Figure 5.} Sequence Diagram for BE3: Upload Text and/or Image as Input.\\
 
-	% \includegraphics[scale=0.55]{Sequence Diagrams/BE3_Sequence_Diagram.png}\\
-	\textbf{Figure X+3.} Sequence Diagram for BE4: Compare Expert Answers.\\
+	\includegraphics[scale=0.4]{Sequence Diagrams/BE4_Sequence_Diagram.png}\\
+	\textbf{Figure 6.} Sequence Diagram for BE4: Compare Expert Answers.\\
 
-	% \includegraphics[scale=0.55]{Sequence Diagrams/BE3_Sequence_Diagram.png}\\
-	\textbf{Figure X+4.} Sequence Diagram for BE5: Present Final Output With Identification Information.\\
+	\includegraphics[scale=0.55]{Sequence Diagrams/BE5_Sequence_Diagram.png}\\
+	\textbf{Figure 7.} Sequence Diagram for BE5: Present Final Output With Identification Information.\\
 
-	% \includegraphics[scale=0.55]{Sequence Diagrams/BE3_Sequence_Diagram.png}\\
-	\textbf{Figure X+5.} Sequence Diagram for BE6: Add to or Remove From Car Collection.\\
+	\includegraphics[scale=0.55]{Sequence Diagrams/BE6_Sequence_Diagram.png}\\
+	\textbf{Figure 8.} Sequence Diagram for BE6: Add to or Remove From Car Collection.\\
 \end{center}
 % End Section
 
 \section{Detailed Class Diagram}
 \label{sec:detailed_class_diagram}
 % Begin Section
-This section should provide a detailed class diagram for your application.
+\begin{center}
+	\includegraphics[scale=0.335]{Class Diagram/class_diagram1.png}\\
+	\textbf{Figure 9.} First half of detailed Class Diagram of RideRecon system. If blurry, zooming in will clear up the text.\\
+
+	\includegraphics[scale=0.4]{Class Diagram/class_diagram2.png}\\
+	\textbf{Figure 10.} Second half of detailed Class Diagram of RideRecon system. If blurry, zooming in will clear up the text.\\
+
+	\includegraphics[scale=0.4]{Class Diagram/class_diagram_legend.png}\\
+	\textbf{Figure 10.} Legend for detailed Class Diagram of RideRecon system.\\
+\end{center}
 % End Section
 
 \appendix
@@ -131,8 +150,8 @@ Include a Division of Labour sheet which indicates the contributions of each tea
 \begin{tabular}{|p{3.5cm}|p{3.5cm}|p{3cm}|p{3.5cm}|p{3cm}|}
 \hline
 Hashim Bukhtiar & Jaden Moore & James Ariache & Olivia Reich & Omar Abdelhamid \\ \hline
-Section 1.1, 1.2 & 12 Cards in Section 4 & X State Charts in Section 2 & 3 Sequence Diagrams in Section 3 & Section 1.3 \\ 
-3 Sequence Diagrams in Section 3 & X Class Diagrams in Section 4 & Y Class Diagrams in Section 4 & Z Class Diagrams in Section 4 & Y State Charts in Section 2 \\
+Section 1.1, 1.2 & Class Diagram in Section 4 & Second State Chart in Section 2 & 3 Sequence Diagrams in Section 3 & Section 1.3 \\ 
+3 Sequence Diagrams in Section 3 &  & Helped with Class Diagram in Section 4 & Class Diagram in Section 4 & First State Chart in Section 2 \\
 Compiled Final Doc &  &  &  & \\
 
 \includegraphics[height=1cm]{../D1/images/hashim_signature.png} & \includegraphics[height=1cm]{../D1/images/Jaden_signature.jpg} &

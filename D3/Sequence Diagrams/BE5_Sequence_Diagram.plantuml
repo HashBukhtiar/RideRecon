@@ -1,0 +1,21 @@
+@startuml
+actor Actor as actor1
+participant “Screen” as display
+participant “Identification Manager” as IM
+participant “Experts” as experts
+participant “Finalizer” as finalizer
+actor1 -> display: provide car input
+display -> IM: send input for processing
+IM -> experts: feed input for processing
+experts -> finalizer: send identification results
+finalizer -> finalizer: determine most accurate identification
+finalizer --> IM: return identification conclusion
+IM -> finalizer: request information about identified car
+finalizer -> experts: request fun facts
+experts --> finalizer: return fun facts
+finalizer -> experts: request purchase information
+experts --> finalizer: return purchase information
+finalizer --> IM: return related car information
+IM --> display: send information
+display -> actor1: display final output
+@enduml
