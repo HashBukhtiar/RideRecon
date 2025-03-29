@@ -11,6 +11,24 @@ def similarity(s1, s2):
     
     return SequenceMatcher(None, s1, s2).ratio()
 
+def get_common_marketplaces(make, model):
+    make_model = f"{make} {model}".replace(" ", "+")
+    
+    return [
+        {
+            "name": "AutoTrader",
+            "url": f"https://www.autotrader.com/cars-for-sale/{make_model}"
+        },
+        {
+            "name": "Cars.com",
+            "url": f"https://www.cars.com/shopping/results/?stock_type=all&makes%5B%5D={make}&models%5B%5D={model}"
+        },
+        {
+            "name": "CarGurus",
+            "url": f"https://www.cargurus.com/Cars/l-Used-{make}-{model}-d138"
+        }
+    ]
+
 def finalize(image_path):
     print(f"Processing image at path: {image_path}")
     print(f"File exists: {os.path.exists(image_path)}")
@@ -43,7 +61,12 @@ def finalize(image_path):
     fun_fact = gpt4o_fact(final_result['make'], final_result['model'])
     print(fun_fact)
 
-    return final_result, fun_fact
+    purchase_sources = get_common_marketplaces(final_result['make'], final_result['model'])
+    purchase_urls = [purchase_sources[0]['url'], purchase_sources[1]['url'], purchase_sources[2]['url']]
+
+    print(purchase_urls)
+
+    return final_result, fun_fact, purchase_urls
 
 
 if __name__ == "__main__":
