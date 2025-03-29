@@ -9,6 +9,7 @@ import { Pressable, Alert, StyleSheet, Text, View } from 'react-native'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
+import InputSmaller from '@/components/InputSmaller'
 
 const Register = () => {
 
@@ -47,7 +48,7 @@ const Register = () => {
                     <Typo size={16} color={colors.textLighter}>
                         Please fill all fields below to create an account
                     </Typo>
-                    <Input 
+                    <InputSmaller
                         placeholder="Enter your name" 
                         onChangeText={value=> nameRef.current = value}
                         icon={
@@ -57,7 +58,7 @@ const Register = () => {
                             weight="fill"
                         />}
                     />
-                    <Input 
+                    <InputSmaller 
                         placeholder="Enter your email" 
                         onChangeText={value=> emailRef.current = value}
                         icon={
@@ -67,7 +68,7 @@ const Register = () => {
                             weight="fill"
                         />}
                     />
-                    <Input 
+                    <InputSmaller 
                         placeholder="Enter your username" 
                         onChangeText={value=> usernameRef.current = value}
                         icon={
@@ -77,7 +78,7 @@ const Register = () => {
                             weight="fill"
                         />}
                     />
-                    <Input 
+                    <InputSmaller 
                         placeholder="Enter your password" 
                         secureTextEntry
                         onChangeText={value=> passwordRef.current = value}

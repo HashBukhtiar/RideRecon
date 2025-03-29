@@ -2,17 +2,13 @@ import BackButton from '@/components/BackButton'
 import ModalWrapper from '@/components/ModalWrapper'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { scale, verticalScale } from '@/utils/styling'
-import { Image } from 'expo-image'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { ScrollView, Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { getAccountImage } from '@/services/imageServices'
-import * as Icons from 'phosphor-react-native'
 import Typo from '@/components/Typo'
-import Input from '@/components/Input'
+import InputSmaller from '@/components/InputSmaller'
 import Button from '@/components/Button'
 import Header from '@/components/Header'
 import { CollectionType } from '@/types';
-import { useRouter } from 'expo-router'
 import * as ImagePicker from 'expo-image-picker';
 import ImageUpload from '@/components/ImageUpload'
 
@@ -56,7 +52,7 @@ const CollectionModal = () => {
                 <ScrollView contentContainerStyle={styles.form}>
                     <View style={styles.inputContainer}>
                         <Typo color={colors.neutral200}>Name</Typo>
-                        <Input
+                        <InputSmaller
                             placeholder='Name'
                             value={collection.name}
                             onChangeText={(value) => setCollection({...collection, name: value})} 
