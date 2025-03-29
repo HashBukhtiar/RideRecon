@@ -6,6 +6,32 @@ from pathlib import Path
 
 load_dotenv()
 
+def gpt4o_fact(make, model):
+    client = OpenAI(
+    api_key=os.getenv("OPENAI_API_KEY")
+    )
+    fact_prompt_4o = f"Give me a fun fact about the {make} {model}."
+
+    chat_completion = client.chat.completions.create(
+        model="gpt-4o",
+        max_tokens=300,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "text",
+                        "text": fact_prompt_4o
+                    },
+                ]
+            }
+        ]
+    )   
+
+    fact = chat_completion.choices[0].message.content
+
+    return fact
+
 def gpt4o_identification(image_path):
     client = OpenAI(
     api_key=os.getenv("OPENAI_API_KEY")

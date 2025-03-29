@@ -39,7 +39,11 @@ def finalize(image_path):
     }
     
     print("\nFinal identification:", final_result)
-    return final_result
+
+    fun_fact = gpt4o_fact(final_result['make'], final_result['model'])
+    print(fun_fact)
+
+    return final_result, fun_fact
 
 
 if __name__ == "__main__":
@@ -77,20 +81,8 @@ if __name__ == "__main__":
     print(f"SVJ exists: {os.path.exists(svj_path)}")
     
     # Choose image
-    #finalize(gt3rs_path)
+    finalize(gt3rs_path)
     #finalize(f150_path)
     #finalize(camry_path)
     #finalize(wagon_path)
-    finalize(svj_path)
-
-    '''image_to_use = None
-    for img_path in [gt3rs_path, f150_path, camry_path]:
-        if os.path.exists(img_path):
-            image_to_use = img_path
-            break
-    
-    if image_to_use:
-        print(f"Using image: {image_to_use}")
-        finalize(image_to_use)
-    else:
-        print("No valid images found!")'''
+    #finalize(svj_path) 
