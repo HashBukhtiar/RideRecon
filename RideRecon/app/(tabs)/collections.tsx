@@ -1,4 +1,3 @@
-import Button from '@/components/Button'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
@@ -30,11 +29,10 @@ const Collections = () => {
                             />
                         </TouchableOpacity>
                     </View>
-                    
+
                     {/* mess with background color in sets to get it to work with the collections list */}
 
                 </View>
-            
             </View>
         </ScreenWrapper>
     )

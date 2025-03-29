@@ -8,10 +8,11 @@ import { ScrollView, Alert, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import { getAccountImage } from '@/services/imageServices'
 import * as Icons from 'phosphor-react-native'
 import Typo from '@/components/Typo'
-import Input from '@/components/Input'
+import InputSmaller from '@/components/InputSmaller'
 import { UserDataType } from '@/types'
 import Button from '@/components/Button'
 import Header from '@/components/Header'
+
 
 
 const AccountModal = () => {
@@ -64,7 +65,7 @@ const AccountModal = () => {
 
                     <View style={styles.inputContainer}>
                         <Typo color={colors.neutral200}>Name</Typo>
-                        <Input
+                        <InputSmaller
                             placeholder='Name'
                             value={userData.name}
                             onChangeText={(value) => setUserData({...userData, name: value})} 
@@ -72,7 +73,7 @@ const AccountModal = () => {
                     </View>
                     <View style={styles.inputContainer}>
                         <Typo color={colors.neutral200}>Username</Typo>
-                        <Input
+                        <InputSmaller
                             placeholder='Username'
                             value={userData.name}
                             onChangeText={(value) => setUserData({...userData, name: value})} 
@@ -80,7 +81,7 @@ const AccountModal = () => {
                     </View>
                     <View style={styles.inputContainer}>
                         <Typo color={colors.neutral200}>Email</Typo>
-                        <Input
+                        <InputSmaller
                             placeholder='Email'
                             value={userData.name}
                             onChangeText={(value) => setUserData({...userData, name: value})} 

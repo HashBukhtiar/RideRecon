@@ -9,6 +9,7 @@ import { Pressable, Alert, StyleSheet, Text, View } from 'react-native'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
+import InputSmaller from '@/components/InputSmaller'
 
 const Login = () => {
 
@@ -43,7 +44,7 @@ const Login = () => {
                     <Typo size={16} color={colors.textLighter}>
                         Login now to track identifications and create collections
                     </Typo>
-                    <Input 
+                    <InputSmaller 
                         placeholder="Enter your email" 
                         onChangeText={value=> emailRef.current = value}
                         icon={
@@ -53,7 +54,7 @@ const Login = () => {
                             weight="fill"
                         />}
                     />
-                    <Input 
+                    <InputSmaller 
                         placeholder="Enter your password" 
                         secureTextEntry
                         onChangeText={value=> passwordRef.current = value}

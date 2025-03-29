@@ -169,5 +169,10 @@ export type CollectionType = {
     image: any;
     uid?: string;
     created?: Date;
-    
+}
+
+export type IdentificationType = {
+    id?: string;
+    name: string;
+    image: any;
 }
