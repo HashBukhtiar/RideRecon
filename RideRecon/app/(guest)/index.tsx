@@ -72,7 +72,7 @@ const Home = () => {
             <View style = {styles.footer}> 
                 
                 <View style={styles.buttonContainer}>
-                    <Button onPress={()=> router.push('/(auth)/register')}>
+                    <Button onPress={()=> router.push('/(experts)/identify')} loading={loading}>
                         <Typo size={20} color={colors.neutral900} fontWeight={"600"}>
                             Identify
                         </Typo>
