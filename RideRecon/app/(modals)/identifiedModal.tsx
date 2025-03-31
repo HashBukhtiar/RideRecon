@@ -1,16 +1,12 @@
 import BackButton from '@/components/BackButton'
-import ModalWrapper from '@/components/ModalWrapper'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
-import React, { useState } from 'react'
-import { Image, ScrollView, Alert, StyleSheet, Text, TouchableOpacity, View, Dimensions } from 'react-native'
+import React from 'react'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import Typo from '@/components/Typo'
-import InputSmaller from '@/components/InputSmaller'
-import Button from '@/components/Button'
 import Header from '@/components/Header'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Animated, {interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset} from 'react-native-reanimated';
 import { verticalScale } from '@/utils/styling'
-import * as Icons from 'phosphor-react-native';
 
 const { width, height } = Dimensions.get("window");
 const IMG_HEIGHT = 300;
