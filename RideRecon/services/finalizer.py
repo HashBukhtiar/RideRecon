@@ -50,14 +50,6 @@ def finalize(image_path):
     for response in [gemini_response_json, ris_response_json]:
         confidence += 16.75*similarity(response['make'], gpt4o_response_json['make']) + 16.75*similarity(response['model'], gpt4o_response_json['model'])
     
-    final_result = {
-        "make": final_make.title(),
-        "model": final_model.title(),
-        "confidence": f"{round(confidence,2)}%"
-    }
-    
-    print("\nFinal identification:", final_result)
-
     fun_fact = gpt4o_fact(final_result['make'], final_result['model'])
     print(fun_fact)
 
@@ -65,6 +57,16 @@ def finalize(image_path):
     purchase_urls = [purchase_sources[0]['url'], purchase_sources[1]['url'], purchase_sources[2]['url']]
 
     print(purchase_urls)
+
+    final_result = {
+        "make": final_make.title(),
+        "model": final_model.title(),
+        "confidence": f"{round(confidence,2)}%",
+        "fact": fun_fact,
+        "source": purchase_urls
+    }
+    
+    print("\nFinal identification:", final_result)    
 
     return final_result, fun_fact, purchase_urls
 
