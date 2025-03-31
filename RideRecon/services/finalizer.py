@@ -73,12 +73,9 @@ def finalize(image_path):
 
 
 if __name__ == "__main__":
-    # Calculate the correct path to the current file
     current_file = Path(__file__)
-    # Find the project root - the directory containing the assets folder
     project_root = None
     
-    # Start from the current directory and go up until we find assets/images
     check_dir = current_file.parent
     for _ in range(5):  # Try up to 5 levels up
         if (check_dir / "assets" / "images").exists():
@@ -87,7 +84,6 @@ if __name__ == "__main__":
         check_dir = check_dir.parent
     
     if not project_root:
-        # Fallback to the expected structure
         project_root = Path(__file__).parent.parent
     
     print(f"Project root: {project_root}")
