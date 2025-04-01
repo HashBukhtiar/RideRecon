@@ -7,6 +7,7 @@ import Button from '@/components/Button';
 import BackButton from '@/components/BackButton';
 import { colors, radius, spacingX, spacingY } from '@/constants/theme';
 import { verticalScale } from '@/utils/styling';
+import { identifyCar } from '@/services/api';
 
 const Identify = () => {
   const params = useLocalSearchParams();
@@ -14,46 +15,32 @@ const Identify = () => {
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
 
-  // Mock identification for demo purposes
-  // In production, this would call your Python backend
   useEffect(() => {
-    const identifyCar = async () => {
+    const processImage = async () => {
       try {
-        // In a real implementation, you would:
-        // 1. Send the image to your backend
-        // 2. The backend would run finalizer.py
-        // 3. Return the identification results
-        
-        // Simulating API call delay
         setLoading(true);
-        await new Promise(resolve => setTimeout(resolve, 3000));
         
-        // Mock result (in production, this would come from your API)
-        const mockResult = {
-          identification: {
-            make: "Porsche",
-            model: "911 GT3 RS",
-            confidence: "87.5%"
-          },
-          funFact: "The Porsche 911 GT3 RS is named after the GT3 category of racing, and the 'RS' stands for 'Rennsport', which is German for 'racing sport'. It features a naturally aspirated engine that can rev up to 9,000 RPM!",
-          purchaseLinks: [
-            "https://www.autotrader.com/cars-for-sale/Porsche+911+GT3+RS",
-            "https://www.cars.com/shopping/results/?stock_type=all&makes%5B%5D=Porsche&models%5B%5D=911+GT3+RS",
-            "https://www.cargurus.com/Cars/l-Used-Porsche-911+GT3+RS-d138"
-          ]
-        };
+        // Get image URI from navigation params
+        const imageUri = params.imageUri as string;
         
-        setResults(mockResult);
+        if (!imageUri) {
+          throw new Error('No image provided');
+        }
+        
+        // Call the API service
+        const identificationResults = await identifyCar(imageUri);
+        
+        setResults(identificationResults);
       } catch (err) {
-        setError("Failed to identify vehicle. Please try again.");
         console.error(err);
+        setError("Failed to identify vehicle. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
-    identifyCar();
-  }, []);
+    processImage();
+  }, [params.imageUri]);
 
   const openUrl = (url) => {
     Linking.openURL(url).catch((err) => {

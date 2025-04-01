@@ -44,7 +44,11 @@ const Home = () => {
         setLoading(true);
         
         try {
-            router.push('/(experts)/identify');
+            // Pass the image URI when navigating
+            router.push({
+                pathname: '/(experts)/identify',
+                params: { imageUri: image.uri }
+            });
         } catch (error) {
             console.error("Navigation error:", error);
             Alert.alert("Error", "Could not navigate to results screen");
