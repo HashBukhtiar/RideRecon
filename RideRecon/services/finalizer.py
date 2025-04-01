@@ -57,8 +57,8 @@ def finalize(image_path):
         "gemini-model": gemini_response_json['model'],
         "ris-make": ris_response_json['make'],
         "ris-model": ris_response_json['model'],
-        "make": final_make.title(),
-        "model": final_model.title(),
+        "make": final_make,
+        "model": final_model,
         "confidence": f"{round(confidence,2)}%",
     }
 
