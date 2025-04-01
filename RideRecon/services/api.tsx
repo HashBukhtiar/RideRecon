@@ -1,4 +1,3 @@
-import { Platform } from 'react-native';
 import * as FileSystem from 'expo-file-system';
 import { REACT_APP_API_URL } from '@env';
 

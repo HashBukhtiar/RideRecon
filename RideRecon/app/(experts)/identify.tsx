@@ -51,11 +51,12 @@ const Identify = () => {
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <BackButton iconSize={28} onPress={() => router.back()} />
-        
-        <Typo size={30} fontWeight="800" style={styles.title}>
-          Vehicle Identification
-        </Typo>
+        <View style={styles.headerContainer}>
+          <BackButton iconSize={28} onPress={() => router.back()} />
+          <Typo size={24} fontWeight="700" style={styles.headerTitle}>
+            Vehicle Identification
+          </Typo>
+        </View>
         
         {loading ? (
           <View style={styles.loadingContainer}>
@@ -125,6 +126,14 @@ const Identify = () => {
 export default Identify;
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacingY._10,
+  },
+  headerTitle: {
+    marginLeft: spacingX._12,
+  },
   container: {
     flex: 1,
     paddingHorizontal: spacingX._20,

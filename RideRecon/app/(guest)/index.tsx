@@ -61,9 +61,12 @@ const Home = () => {
         <ScreenWrapper>
             <View style={styles.container}>
                 <View style={styles.topSection}>
-                    <Typo size={22} fontWeight="600" style={{ marginLeft: spacingX._15 }}>
-                        Car Identification
-                    </Typo>
+                    <View style={styles.titleContainer}>
+                        <BackButton onPress={() => router.back()} />
+                        <Typo size={22} fontWeight="600" style={{ marginLeft: spacingX._10 }}>
+                            Car Identification
+                        </Typo>
+                    </View>
                     
                     <Button 
                         onPress={onSubmit} 
@@ -112,6 +115,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         paddingBottom: spacingY._20,
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
     },
     identifyButton: {
         paddingHorizontal: spacingX._15,
