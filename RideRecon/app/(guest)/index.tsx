@@ -24,35 +24,70 @@ const Home = () => {
 
     const onPickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             aspect: [4, 3],
             quality: 0.5,
-        })
+        });
+
+        if (!result.canceled) {
+            setIdentification({...identification, image: result.assets[0]});
+        }
     }
 
     const onSubmit = async() => {
-        let{name, image} = identification;
-        if(!name.trim() && !image){
-            Alert.alert('User', 'Please fill all the fields')
+        let {name, image} = identification;
+        if(!image) {
+            Alert.alert('Vehicle Identification', 'Please upload an image of the vehicle')
             return
+        }
+        
+        setLoading(true);
+        
+        try {
+            // Pass the image URI when navigating
+            router.push({
+                pathname: '/(experts)/identify',
+                params: { imageUri: image.uri }
+            });
+        } catch (error) {
+            console.error("Navigation error:", error);
+            Alert.alert("Error", "Could not navigate to results screen");
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
         <ScreenWrapper>
             <View style={styles.container}>
-                <Header 
-                    title='Fill out information below to proceed with identification' 
-                    style={{marginVertical: spacingY._30, paddingHorizontal: spacingY._30}}
-                />
-
-                <ScrollView contentContainerStyle={styles.form}>
+                <View style={styles.topSection}>
+                    <View style={styles.titleContainer}>
+                        <BackButton onPress={() => router.back()} />
+                        <Typo size={22} fontWeight="600" style={{ marginLeft: spacingX._10 }}>
+                            Car Identification
+                        </Typo>
+                    </View>
+                    
+                    <Button 
+                        onPress={onSubmit} 
+                        loading={loading}
+                        style={styles.identifyButton}
+                    >
+                        <Typo size={16} color={colors.neutral900} fontWeight={"600"}>
+                            Identify
+                        </Typo>
+                    </Button>
+                </View>
+                <ScrollView 
+                    contentContainerStyle={styles.form}
+                    showsVerticalScrollIndicator={false}
+                >
                     <View style={styles.inputContainer}>
-                        <Typo color={colors.neutral200}>Collection Icon</Typo>
+                        <Typo color={colors.neutral200} style={{marginLeft:spacingX._15}}>Collection Icon</Typo>
                         <ImageUpload 
                             file={identification.image} 
                             onClear={()=> setIdentification({...identification, image: null})}
-                            onSelect={file=> setIdentification({...identification, image: file})} 
+                            onSelect={onPickImage} 
                             placeholder='Upload Image'
                         />
                     </View>
@@ -67,18 +102,6 @@ const Home = () => {
                     </View>
                 </ScrollView>
             </View>
-
-            {/* footer */}
-            <View style = {styles.footer}> 
-                
-                <View style={styles.buttonContainer}>
-                    <Button onPress={()=> router.push('/(auth)/register')}>
-                        <Typo size={20} color={colors.neutral900} fontWeight={"600"}>
-                            Identify
-                        </Typo>
-                    </Button>
-                </View>
-            </View>
         </ScreenWrapper>
     )
 }
@@ -86,6 +109,22 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
+    topSection: {
+        width: '100%',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingBottom: spacingY._20,
+    },
+    titleContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    identifyButton: {
+        paddingHorizontal: spacingX._15,
+        height: 45,
+        marginRight: spacingX._12
+    },
     container: {
         flex: 1,
         alignItems: "center",
@@ -104,9 +143,4 @@ const styles = StyleSheet.create({
         marginBottom: verticalScale(110),
         gap: spacingY._20,
     },
-    buttonContainer: {
-        width: "100%",
-        paddingHorizontal: spacingX._25,
-    }
-    
 })
