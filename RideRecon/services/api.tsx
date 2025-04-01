@@ -31,6 +31,21 @@ export const identifyCar = async (imageUri: string) => {
         model: data.model || "Unknown",
         confidence: data.confidence || "0%"
       },
+      // Add expert data
+      expertData: {
+        gpt4o: {
+          make: data["4o-make"] || "Unknown",
+          model: data["4o-model"] || "Unknown"
+        },
+        gemini: {
+          make: data["gemini-make"] || "Unknown",
+          model: data["gemini-model"] || "Unknown"
+        },
+        vision: {
+          make: data["ris-make"] || "Unknown",
+          model: data["ris-model"] || "Unknown"
+        }
+      },
       funFact: data.fact || "No information available",
       purchaseLinks: data.source || [
         "https://www.autotrader.com",

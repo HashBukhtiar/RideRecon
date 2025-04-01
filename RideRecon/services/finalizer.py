@@ -51,6 +51,12 @@ def finalize(image_path):
         confidence += 16.75*similarity(response['make'], gpt4o_response_json['make']) + 16.75*similarity(response['model'], gpt4o_response_json['model'])
     
     final_result = {
+        "4o-make": gpt4o_response_json['make'],
+        "4o-model": gpt4o_response_json['model'],
+        "gemini-make": gemini_response_json['make'],
+        "gemini-model": gemini_response_json['model'],
+        "ris-make": ris_response_json['make'],
+        "ris-model": ris_response_json['model'],
         "make": final_make.title(),
         "model": final_model.title(),
         "confidence": f"{round(confidence,2)}%",
