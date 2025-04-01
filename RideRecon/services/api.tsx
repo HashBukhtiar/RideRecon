@@ -1,5 +1,7 @@
 import * as FileSystem from 'expo-file-system';
-import { REACT_APP_API_URL } from '@env';
+import Constants from 'expo-constants';
+
+const API_URL = Constants.expoConfig?.extra?.apiUrl
 
 export const identifyCar = async (imageUri: string) => {
   try {
@@ -9,7 +11,7 @@ export const identifyCar = async (imageUri: string) => {
     });
 
     // Call the API
-    const response = await fetch(`${REACT_APP_API_URL}/api/identify`, {
+    const response = await fetch(`${API_URL}/api/identify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
