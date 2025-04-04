@@ -5,7 +5,7 @@ import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import React, { useRef, useState } from 'react'
-import { Pressable, Alert, StyleSheet, Text, View } from 'react-native'
+import { Pressable, Alert, StyleSheet, Text, View, Keyboard, TouchableWithoutFeedback } from 'react-native'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
@@ -34,78 +34,80 @@ const Register = () => {
 
     return (
         <ScreenWrapper>
-            <View style={styles.container}>
-                <BackButton iconSize={28} />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <BackButton iconSize={28} />
 
-                <View style={{gap: 5, marginTop: spacingY._20}}>
-                    <Typo size = {30} fontWeight={"800"}>
-                        Let's Get Started
-                    </Typo>
-                </View>
-
-                {/* form */}
-                <View style={styles.form}>
-                    <Typo size={16} color={colors.textLighter}>
-                        Please fill all fields below to create an account
-                    </Typo>
-                    <InputSmaller
-                        placeholder="Enter your name" 
-                        onChangeText={value=> nameRef.current = value}
-                        icon={
-                        <Icons.User
-                            size={verticalScale(26)} 
-                            color={colors.neutral300} 
-                            weight="fill"
-                        />}
-                    />
-                    <InputSmaller 
-                        placeholder="Enter your email" 
-                        onChangeText={value=> emailRef.current = value}
-                        icon={
-                        <Icons.User 
-                            size={verticalScale(26)} 
-                            color={colors.neutral300} 
-                            weight="fill"
-                        />}
-                    />
-                    <InputSmaller 
-                        placeholder="Enter your username" 
-                        onChangeText={value=> usernameRef.current = value}
-                        icon={
-                        <Icons.At 
-                            size={verticalScale(26)} 
-                            color={colors.neutral300} 
-                            weight="fill"
-                        />}
-                    />
-                    <InputSmaller 
-                        placeholder="Enter your password" 
-                        secureTextEntry
-                        onChangeText={value=> passwordRef.current = value}
-                        icon={
-                            <Icons.Lock 
-                              size={verticalScale(26)} 
-                              color={colors.neutral300} 
-                              weight="fill"
-                            />
-                        }
-                    />
-
-                    <Button loading={isLoading} onPress={handleSubmit}>
-                        <Typo fontWeight={"700"} color={colors.black} size={21}>
-                            Sign up
+                    <View style={{gap: 5, marginTop: spacingY._20}}>
+                        <Typo size = {30} fontWeight={"800"}>
+                            Let's Get Started
                         </Typo>
-                    </Button>
-                </View>
+                    </View>
 
-                {/* footer */}
-                <View style = {styles.footer}>
-                    <Typo size={15}>Already have an account?</Typo>
-                    <Pressable onPress={()=> router.push("/(auth)/login")}> 
-                        <Typo size={15} fontWeight={"700"} color={colors.primary}>Login</Typo>
-                    </Pressable>
+                    {/* form */}
+                    <View style={styles.form}>
+                        <Typo size={16} color={colors.textLighter}>
+                            Please fill all fields below to create an account
+                        </Typo>
+                        <InputSmaller
+                            placeholder="Enter your name" 
+                            onChangeText={value=> nameRef.current = value}
+                            icon={
+                            <Icons.User
+                                size={verticalScale(26)} 
+                                color={colors.neutral300} 
+                                weight="fill"
+                            />}
+                        />
+                        <InputSmaller 
+                            placeholder="Enter your email" 
+                            onChangeText={value=> emailRef.current = value}
+                            icon={
+                            <Icons.User 
+                                size={verticalScale(26)} 
+                                color={colors.neutral300} 
+                                weight="fill"
+                            />}
+                        />
+                        <InputSmaller 
+                            placeholder="Enter your username" 
+                            onChangeText={value=> usernameRef.current = value}
+                            icon={
+                            <Icons.At 
+                                size={verticalScale(26)} 
+                                color={colors.neutral300} 
+                                weight="fill"
+                            />}
+                        />
+                        <InputSmaller 
+                            placeholder="Enter your password" 
+                            secureTextEntry
+                            onChangeText={value=> passwordRef.current = value}
+                            icon={
+                                <Icons.Lock 
+                                  size={verticalScale(26)} 
+                                  color={colors.neutral300} 
+                                  weight="fill"
+                                />
+                            }
+                        />
+
+                        <Button loading={isLoading} onPress={handleSubmit}>
+                            <Typo fontWeight={"700"} color={colors.black} size={21}>
+                                Sign up
+                            </Typo>
+                        </Button>
+                    </View>
+
+                    {/* footer */}
+                    <View style = {styles.footer}>
+                        <Typo size={15}>Already have an account?</Typo>
+                        <Pressable onPress={()=> router.push("/(auth)/login")}> 
+                            <Typo size={15} fontWeight={"700"} color={colors.primary}>Login</Typo>
+                        </Pressable>
+                    </View>
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         </ScreenWrapper>
     )
 }

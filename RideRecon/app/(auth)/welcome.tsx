@@ -13,9 +13,9 @@ const Welcome = () => {
             <View style={styles.container}>
                 
                 <View style={styles.buttonContainer}>
-                    <Button onPress={()=> router.push('../(tabs)')}>
+                    <Button onPress={()=> router.push('/login')}>
                         <Typo size={22} color={colors.neutral900} fontWeight={"600"}>
-                            Account Access
+                            Login/Register
                         </Typo>
                     </Button>
 
