@@ -3,7 +3,7 @@ import ModalWrapper from '@/components/ModalWrapper'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { scale, verticalScale } from '@/utils/styling'
 import React, { useState } from 'react'
-import { ScrollView, Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Alert, StyleSheet, View } from 'react-native'
 import Typo from '@/components/Typo'
 import InputSmaller from '@/components/InputSmaller'
 import Button from '@/components/Button'
@@ -11,36 +11,53 @@ import Header from '@/components/Header'
 import { CollectionType } from '@/types';
 import * as ImagePicker from 'expo-image-picker';
 import ImageUpload from '@/components/ImageUpload'
+import { router } from 'expo-router'
+import { useCollectionContext } from '@/context/CollectionContext'
 
 const CollectionModal = () => {
-
-    {/* UPDATE ONCE FIREBASE IS DONE (everything after 34:11 on video 6*/}
-
+    const { addCollection } = useCollectionContext();
     const [collection, setCollection] = useState<CollectionType>({
         name: "",
-        image: null
+        imageUri: null
     })
 
     const[loading, setLoading] = useState(false)
 
     const onPickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             aspect: [4, 3],
             quality: 0.5,
-        })
+        });
+
+        if (!result.canceled) {
+            setCollection({...collection, imageUri: result.assets[0]});
+        }
     }
 
+    
     const onSubmit = async() => {
-        let{name, image} = collection;
-        if(!name.trim() || !image){
-            Alert.alert('User', 'Please fill all the fields')
+        let {name, imageUri} = collection;
+        if(!imageUri || !name) {
+            Alert.alert('Collection Creation', 'Please upload an image and name for the collection')
             return
+        }
+
+        setLoading(true);
+        
+        try {
+            addCollection({ name, imageUri: imageUri.uri});
+            router.back();
+        } catch (error) {
+            console.error("Navigation error:", error);
+            Alert.alert("Error", "Could not navigate to results screen");
+        } finally {
+            setLoading(false);
         }
     }
 
     return (
-        <ModalWrapper>
+        <ModalWrapper style={{ backgroundColor: colors.neutral900}}>
             <View style={styles.container}>
                 <Header
                     title='New Collection' 
@@ -61,9 +78,9 @@ const CollectionModal = () => {
                     <View style={styles.inputContainer}>
                         <Typo color={colors.neutral200}>Collection Icon</Typo>
                         <ImageUpload 
-                            file={collection.image} 
-                            onClear={()=> setCollection({...collection, image: null})}
-                            onSelect={file=> setCollection({...collection, image: file})} 
+                            file={collection.imageUri} 
+                            onClear={()=> setCollection({...collection, imageUri: null})}
+                            onSelect={onPickImage} 
                             placeholder='Upload Image'
                         />
                     </View>
@@ -86,7 +103,6 @@ export default CollectionModal
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'space-between',
         paddingHorizontal: spacingY._10,
     },
     footer: {

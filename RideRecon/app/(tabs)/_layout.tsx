@@ -1,7 +1,7 @@
 import TabBar from '@/components/TabBar'
-import { router, Tabs, useRouter } from 'expo-router'
-import React, { useEffect } from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Tabs } from 'expo-router'
+import React from 'react'
+import { StyleSheet } from 'react-native'
 
 
 const _layout = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ActivityIndicator, Alert, Linking, ScrollView, StyleSheet, TouchableOpacity, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import ScreenWrapper from '@/components/ScreenWrapper';
@@ -6,8 +6,12 @@ import Typo from '@/components/Typo';
 import Button from '@/components/Button';
 import BackButton from '@/components/BackButton';
 import { colors, radius, spacingX, spacingY } from '@/constants/theme';
-import { verticalScale } from '@/utils/styling';
 import { identifyCar } from '@/services/api';
+import Animated, { interpolate, useAnimatedScrollHandler, useAnimatedStyle, useSharedValue} from 'react-native-reanimated';
+import Header from '@/components/Header'
+import { useCarContext } from '@/context/CarContext';
+
+const IMG_HEIGHT = 300;
 
 const Identify = () => {
   const params = useLocalSearchParams();
@@ -15,6 +19,7 @@ const Identify = () => {
   const [results, setResults] = useState(null);
   const [error, setError] = useState(null);
   const [detailsExpanded, setDetailsExpanded] = useState(false);
+  const { addCar } = useCarContext();
 
   useEffect(() => {
     const processImage = async () => {
@@ -30,8 +35,16 @@ const Identify = () => {
         
         // Call the API service
         const identificationResults = await identifyCar(imageUri);
-        
         setResults(identificationResults);
+
+        addCar({
+          imageUri,
+          make: identificationResults.identification.make,
+          model: identificationResults.identification.model,
+          confidence: identificationResults.identification.confidence,
+          funFact: identificationResults.funFact,
+          purchaseLinks: identificationResults.purchaseLinks,
+        });
       } catch (err) {
         console.error(err);
         setError("Failed to identify vehicle. Please try again.");
@@ -49,15 +62,38 @@ const Identify = () => {
     });
   };
 
+  const scrollRef = useRef<ScrollView>(null);
+  const scrollY = useSharedValue(0);
+  const onScroll = useAnimatedScrollHandler((event) => {
+    scrollY.value = event.contentOffset.y;
+  });
+  
+  const imageAnimatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        {translateY: interpolate(scrollY.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.5])},
+        {scale: interpolate(scrollY.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [2, 1, 1])}
+      ]
+    }
+  })
+
+  const textAnimatedStyle = useAnimatedStyle(() => {
+      return {
+          transform: [
+              {translateY: interpolate(scrollY.value, [-IMG_HEIGHT, 0, IMG_HEIGHT], [-IMG_HEIGHT / 2, 0, IMG_HEIGHT * 0.5]) }
+          ]
+      };
+  })
+
   return (
     <ScreenWrapper>
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <BackButton iconSize={28} onPress={() => router.back()} />
-          <Typo size={24} fontWeight="700" style={styles.headerTitle}>
-            Vehicle Identification
-          </Typo>
-        </View>
+
+        <Header
+            title='Identification Results' 
+            leftIcon={<BackButton />}
+            style={{ marginBottom: spacingY._10 }}
+        />
         
         {loading ? (
           <View style={styles.loadingContainer}>
@@ -76,105 +112,118 @@ const Identify = () => {
             </Button>
           </View>
         ) : (
-          <ScrollView style={styles.resultsContainer}>
-            <View style={styles.card}>
-              <Typo size={22} fontWeight="700">
-                Identification Results
-              </Typo>
-              <View style={styles.resultItem}>
-                <Typo size={16} color={colors.textLighter}>Make:</Typo>
-                <Typo size={18} fontWeight="600">{results.identification.make}</Typo>
-              </View>
-              <View style={styles.resultItem}>
-                <Typo size={16} color={colors.textLighter}>Model:</Typo>
-                <Typo size={18} fontWeight="600">{results.identification.model}</Typo>
-              </View>
-              <View style={styles.resultItem}>
-                <Typo size={16} color={colors.textLighter}>Confidence:</Typo>
-                <Typo size={18} fontWeight="600">{results.identification.confidence}</Typo>
-              </View>
+          <View style={styles.resultsContainer}>
+              <Animated.ScrollView ref={scrollRef} scrollEventThrottle={16}>
+                <Animated.View style={styles.imageContainer}>
+                  <Animated.Image
+                      source={require("../../assets/images/design/login.png")}
+                      //source={{ uri: params.imageUri || '../../assets/images/design/login.png'}}
+                      style={[styles.image, imageAnimatedStyle]}
+                      resizeMode="contain"
+                  />
+                </Animated.View>
+                <Animated.View style={[textAnimatedStyle, { marginTop: spacingY._20 }]}>
+                  <View style={styles.card}>
+                    <View style={styles.resultItem}>
+                      <Typo size={16} color={colors.textLighter}>Make:</Typo>
+                      <Typo size={18} fontWeight="600">{results.identification.make}</Typo>
+                    </View>
+                    <View style={styles.resultItem}>
+                      <Typo size={16} color={colors.textLighter}>Model:</Typo>
+                      <Typo size={18} fontWeight="600">{results.identification.model}</Typo>
+                    </View>
+                    <View style={styles.resultItem}>
+                      <Typo size={16} color={colors.textLighter}>Confidence:</Typo>
+                      <Typo size={18} fontWeight="600">{results.identification.confidence}</Typo>
+                    </View>
 
-              <TouchableOpacity 
-                onPress={() => setDetailsExpanded(!detailsExpanded)}
-                style={[styles.detailsToggle, { alignItems: 'center' }]}
-              >
-                <View style={styles.toggleContainer}>
-                  <Typo size={14} color={colors.primary}>
-                    {detailsExpanded ? "▲ Hide identification details" : "▼ See identification details"}
-                  </Typo>
-                </View>
-              </TouchableOpacity>
-              
-              {/* Expandable details section */}
-              {detailsExpanded && (
-                <View style={styles.detailsContainer}>
-                  <View style={styles.detailsSection}>
-                    <Typo size={14} color={colors.textLighter} fontWeight="600">GPT-4o</Typo>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Make:</Typo>
-                      <Typo size={14}>{results.expertData.gpt4o.make}</Typo>
-                    </View>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Model:</Typo>
-                      <Typo size={14}>{results.expertData.gpt4o.model}</Typo>
-                    </View>
+                    <TouchableOpacity 
+                      onPress={() => setDetailsExpanded(!detailsExpanded)}
+                      style={[styles.detailsToggle, { alignItems: 'center' }]}
+                    >
+                      <View style={styles.toggleContainer}>
+                        <Typo size={14} color={colors.primary}>
+                          {detailsExpanded ? "▲ Hide identification details" : "▼ See identification details"}
+                        </Typo>
+                      </View>
+                    </TouchableOpacity>
+                    
+                    {/* Expandable details section */}
+                    {detailsExpanded && (
+                      <View style={styles.detailsContainer}>
+                        <View style={styles.detailsSection}>
+                          <Typo size={14} color={colors.textLighter} fontWeight="600">GPT-4o</Typo>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Make:</Typo>
+                            <Typo size={14}>{results.expertData.gpt4o.make}</Typo>
+                          </View>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Model:</Typo>
+                            <Typo size={14}>{results.expertData.gpt4o.model}</Typo>
+                          </View>
+                        </View>
+                        
+                        <View style={styles.detailsSection}>
+                          <Typo size={14} color={colors.textLighter} fontWeight="600">Gemini</Typo>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Make:</Typo>
+                            <Typo size={14}>{results.expertData.gemini.make}</Typo>
+                          </View>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Model:</Typo>
+                            <Typo size={14}>{results.expertData.gemini.model}</Typo>
+                          </View>
+                        </View>
+                        
+                        <View style={styles.detailsSection}>
+                          <Typo size={14} color={colors.textLighter} fontWeight="600">Google Vision RIS</Typo>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Make:</Typo>
+                            <Typo size={14}>{results.expertData.vision.make}</Typo>
+                          </View>
+                          <View style={styles.detailItem}>
+                            <Typo size={14} color={colors.textLighter}>Model:</Typo>
+                            <Typo size={14}>{results.expertData.vision.model}</Typo>
+                          </View>
+                        </View>
+                      </View>
+                    )}
                   </View>
                   
-                  <View style={styles.detailsSection}>
-                    <Typo size={14} color={colors.textLighter} fontWeight="600">Gemini</Typo>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Make:</Typo>
-                      <Typo size={14}>{results.expertData.gemini.make}</Typo>
-                    </View>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Model:</Typo>
-                      <Typo size={14}>{results.expertData.gemini.model}</Typo>
-                    </View>
+                  <View style={styles.card}>
+                    <Typo size={22} fontWeight="700">Fun Fact</Typo>
+                    <Typo size={16} style={{marginTop: spacingY._10}}>
+                      {results.funFact}
+                    </Typo>
                   </View>
                   
-                  <View style={styles.detailsSection}>
-                    <Typo size={14} color={colors.textLighter} fontWeight="600">Google Vision RIS</Typo>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Make:</Typo>
-                      <Typo size={14}>{results.expertData.vision.make}</Typo>
-                    </View>
-                    <View style={styles.detailItem}>
-                      <Typo size={14} color={colors.textLighter}>Model:</Typo>
-                      <Typo size={14}>{results.expertData.vision.model}</Typo>
-                    </View>
+                  <View style={styles.card}>
+                    <Typo size={22} fontWeight="700">Where to Buy</Typo>
+                    {results.purchaseLinks.map((link, index) => (
+                      <TouchableOpacity 
+                        key={index}
+                        onPress={() => openUrl(link)}
+                        style={{
+                          marginTop: spacingY._10,
+                          backgroundColor: colors.neutral700,
+                          padding: spacingY._12,
+                          borderRadius: radius._10,
+                          alignItems: 'center'
+                        }}
+                      >
+                        <Typo size={16} color={colors.primary}>
+                          {index === 0 ? "AutoTrader" : index === 1 ? "Cars.com" : "CarGurus"}
+                        </Typo>
+                      </TouchableOpacity>
+                    ))}
                   </View>
-                </View>
-              )}
-            </View>
-            
-            <View style={styles.card}>
-              <Typo size={22} fontWeight="700">Fun Fact</Typo>
-              <Typo size={16} style={{marginTop: spacingY._10}}>
-                {results.funFact}
-              </Typo>
-            </View>
-            
-            <View style={styles.card}>
-              <Typo size={22} fontWeight="700">Where to Buy</Typo>
-              {results.purchaseLinks.map((link, index) => (
-                <TouchableOpacity 
-                  key={index}
-                  onPress={() => openUrl(link)}
-                  style={{
-                    marginTop: spacingY._10,
-                    backgroundColor: colors.neutral700,
-                    padding: spacingY._12,
-                    borderRadius: radius._10,
-                    alignItems: 'center'
-                  }}
-                >
-                  <Typo size={16} color={colors.primary}>
-                    {index === 0 ? "AutoTrader" : index === 1 ? "Cars.com" : "CarGurus"}
-                  </Typo>
-                </TouchableOpacity>
-              ))}
-            </View>
-          </ScrollView>
+                  
+                </Animated.View>
+
+
+              </Animated.ScrollView>
+
+          </View>
         )}
       </View>
     </ScreenWrapper>
@@ -250,10 +299,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: spacingY._15,
   },
+  imageContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center', 
+    width: '100%',      
+    height: IMG_HEIGHT,   
+  },
   image: {
-    width: '100%',
-    height: verticalScale(200),
-    borderRadius: radius._10,
-    marginBottom: spacingY._20,
+    width: '100%', 
+
   },
 });

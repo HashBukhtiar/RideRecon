@@ -1,9 +1,8 @@
-import BackButton from '@/components/BackButton'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { colors, radius, spacingX, spacingY } from '@/constants/theme'
+import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import React, { useState } from 'react'
-import { Alert, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Typo from '@/components/Typo'
 import Header from '@/components/Header'
 import Input from '@/components/Input'
@@ -12,8 +11,13 @@ import * as ImagePicker from 'expo-image-picker';
 import { IdentificationType } from '@/types'
 import Button from '@/components/Button'
 import { router } from 'expo-router'
+import Constants from 'expo-constants';
+
+const API_URL = Constants.expoConfig?.extra?.apiUrl
 
 const Home = () => {
+    console.log("API URL:", API_URL);
+
 
     const [identification, setIdentification] = useState<IdentificationType>({
         name: "",
@@ -60,30 +64,14 @@ const Home = () => {
     return (
         <ScreenWrapper>
             <View style={styles.container}>
-                <View style={styles.topSection}>
-                    <View style={styles.titleContainer}>
-                        <BackButton onPress={() => router.back()} />
-                        <Typo size={22} fontWeight="600" style={{ marginLeft: spacingX._10 }}>
-                            Car Identification
-                        </Typo>
-                    </View>
-                    
-                    <Button 
-                        onPress={onSubmit} 
-                        loading={loading}
-                        style={styles.identifyButton}
-                    >
-                        <Typo size={16} color={colors.neutral900} fontWeight={"600"}>
-                            Identify
-                        </Typo>
-                    </Button>
-                </View>
-                <ScrollView 
-                    contentContainerStyle={styles.form}
-                    showsVerticalScrollIndicator={false}
-                >
+                <Header 
+                    title='Fill out information below to proceed with identification' 
+                    style={{marginVertical: spacingY._30, paddingHorizontal: spacingY._30}}
+                />
+
+                <ScrollView contentContainerStyle={styles.form}>
                     <View style={styles.inputContainer}>
-                        <Typo color={colors.neutral200} style={{marginLeft:spacingX._15}}>Collection Icon</Typo>
+                        <Typo color={colors.neutral200}>Collection Icon</Typo>
                         <ImageUpload 
                             file={identification.image} 
                             onClear={()=> setIdentification({...identification, image: null})}
@@ -102,6 +90,19 @@ const Home = () => {
                     </View>
                 </ScrollView>
             </View>
+
+
+            {/* footer */}
+            <View style = {styles.footer}> 
+                
+                <View style={styles.buttonContainer}>
+                    <Button onPress={onSubmit} loading={loading} >
+                        <Typo size={20} color={colors.neutral900} fontWeight={"600"}>
+                            Identify
+                        </Typo>
+                    </Button>
+                </View>
+            </View>
         </ScreenWrapper>
     )
 }
@@ -109,22 +110,6 @@ const Home = () => {
 export default Home
 
 const styles = StyleSheet.create({
-    topSection: {
-        width: '100%',
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingBottom: spacingY._20,
-    },
-    titleContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    identifyButton: {
-        paddingHorizontal: spacingX._15,
-        height: 45,
-        marginRight: spacingX._12
-    },
     container: {
         flex: 1,
         alignItems: "center",
@@ -143,4 +128,8 @@ const styles = StyleSheet.create({
         marginBottom: verticalScale(110),
         gap: spacingY._20,
     },
+    buttonContainer: {
+        width: "100%",
+        paddingHorizontal: spacingX._25,
+    }
 })

@@ -15,5 +15,7 @@ SE3A04_D3_Group8*
 .DS_Store/
 
 # .env
+.env
+*.env
 **/.env
 node_modules

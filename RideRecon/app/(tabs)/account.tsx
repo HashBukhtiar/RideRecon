@@ -1,16 +1,15 @@
 import Header from '@/components/Header'
-import ModalWrapper from '@/components/ModalWrapper'
-import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image'
 import { getAccountImage } from '@/services/imageServices'
 import { accountOptionType } from '@/types'
 import * as Icons from 'phosphor-react-native'
 import { verticalScale } from '@/utils/styling';
-import { router, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
+import ScreenWrapper from '@/components/ScreenWrapper'
 
 
 const Account = () => {
@@ -30,6 +29,7 @@ const Account = () => {
             title: 'Identification History',
             icon: <Icons.ClockCounterClockwise size={26} color={colors.white}/>,
             routeName: '(modals)/historyModal',
+            params: { mode: 'view' },
         }
     ]
 
@@ -54,11 +54,16 @@ const Account = () => {
             showLogoutAlert();
         }
 
-        if(item.routeName) router.push(item.routeName);
+        if(item.routeName) {
+            router.push({
+                pathname: item.routeName,
+                params: item.params || {}, 
+            });
+        };
     }
 
     return (
-    <ModalWrapper >
+    <ScreenWrapper>
         <View style={styles.container}>
             <Header title='Account Details' style={{marginVertical: spacingY._30}}/>
 
@@ -118,7 +123,7 @@ const Account = () => {
                 }
             </View>
         </View>
-    </ModalWrapper>
+    </ScreenWrapper>
     )
 }
 
