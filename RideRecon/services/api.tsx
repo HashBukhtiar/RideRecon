@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 const API_URL = Constants.expoConfig?.extra?.apiUrl
 
 export const identifyCar = async (imageUri: string) => {
+
   try {
     // Read the image as base64
     const base64Image = await FileSystem.readAsStringAsync(imageUri, {
@@ -55,6 +56,7 @@ export const identifyCar = async (imageUri: string) => {
         "https://www.cargurus.com"
       ]
     };
+
   } catch (error) {
     console.error('Error identifying car:', error);
     throw error;

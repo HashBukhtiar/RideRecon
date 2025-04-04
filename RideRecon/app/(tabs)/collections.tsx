@@ -1,38 +1,71 @@
-import ScreenWrapper from '@/components/ScreenWrapper'
-import Typo from '@/components/Typo'
-import { colors, radius, spacingX, spacingY } from '@/constants/theme'
-import { verticalScale } from '@/utils/styling'
-import { router, useRouter } from 'expo-router'
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import * as Icons from "phosphor-react-native"
+import React from 'react';
+import { View, Text, Image, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { useCollectionContext } from '@/context/CollectionContext';
+import ScreenWrapper from '@/components/ScreenWrapper';
+import { colors, spacingX, spacingY } from '@/constants/theme';
+import Header from '../../components/Header';
+import * as Icons from 'phosphor-react-native'
+import { verticalScale } from '@/utils/styling';
+import { useRouter } from 'expo-router';
+import { CollectionType } from '@/types';
+
+const { width } = Dimensions.get('window');
 
 const Collections = () => {
 
-    const router = useRouter()
+    const { collects } = useCollectionContext();
+    const router = useRouter();
+    
+    const handlePress = async (item: CollectionType) => {
+        router.push({
+            pathname: '../(details)/collectionDetails',
+            params: {
+                imageUri: item.imageUri || '', 
+                name: item.name || 'Unknown', 
+            },
+        });
+    }
+    
+    const renderCollection = ({ item }: { item: CollectionType }) => (
+    
+        <TouchableOpacity style={styles.card} onPress={() => handlePress(item)}>
+            <Image 
+                source={{ uri: item.imageUri }} 
+                style={styles.collectionImage} 
+            />
+            <View style={styles.collectionInfo}>
+                <Text style={styles.collectionName}>{item.name}</Text>
+            
+            </View>
+            <Icons.CaretRight
+                size={verticalScale(20)}
+                weight="bold"
+                color={colors.white}
+            />
+        </TouchableOpacity>
+    );
 
     return (
-        <ScreenWrapper style={{ backgroundColor: colors.black}}>
+        <ScreenWrapper>
             <View style={styles.container}>
+            <Header title='Personal Collections' style={{marginTop: spacingY._10}}/>
 
-                {/* collection sets */}
-                <View style={styles.sets}>
-                    <View style={styles.flexRow} >
-                        <Typo size ={22} fontWeight={"500"} >
-                            Personal Collections
-                        </Typo>
-                        <TouchableOpacity onPress={()=> router.push("/(modals)/collectionModal")}>
-                            <Icons.PlusCircle
-                                weight="fill"
-                                color={colors.primary}
-                                size={verticalScale(33)}
-                            />
-                        </TouchableOpacity>
-                    </View>
+                <TouchableOpacity 
+                    style={styles.newImage} 
+                    onPress={()=> router.push("/(modals)/collectionModal")}>
+                        <Icons.Plus 
+                            weight="bold"
+                            color={colors.primary}
+                            size={verticalScale(66)}
+                        />
+                </TouchableOpacity>
 
-                    {/* mess with background color in sets to get it to work with the collections list */}
+                <FlatList
+                    data={collects.slice().reverse()}
+                    renderItem={renderCollection}
+                    keyExtractor={(item, index) => index.toString()}  
+                />
 
-                </View>
             </View>
         </ScreenWrapper>
     )
@@ -40,27 +73,47 @@ const Collections = () => {
 
 export default Collections
 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: spacingX._20,
+        padding: spacingY._5,
+        paddingHorizontal: spacingX._10,
+        gap: spacingY._20,
+        
     },
-    flexRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: spacingY._10,
+    card: { 
+        flexDirection: 'row', 
+        alignItems: 'center',
+        marginBottom: 20 
     },
-    sets: {
+    newImage: { 
+        backgroundColor: colors.neutral700,
+        width: width * 0.35, 
+        height: width * 0.35, 
+        borderRadius: 10,
+        borderColor: colors.neutral500,
+        borderWidth: 1,
+        marginRight: 30,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    collectionImage: { 
+        width: width * 0.35, 
+        height: width * 0.35, 
+        borderRadius: 10,
+        borderColor: colors.neutral500,
+        borderWidth: 1,
+        marginRight: 30 
+    },
+    collectionInfo: {     
         flex: 1,
-        backgroundColor: colors.neutral900,
-        borderTopRightRadius: radius._30,
-        borderTopLeftRadius: radius._30,
-        padding: spacingX._20,
-        paddingTop: spacingX._25,
+        justifyContent: 'center', 
     },
-    listStyle: {
-        paddingVertical: spacingY._25,
-        paddingTop: spacingY._15,
-    }
+    collectionName: { 
+        fontSize: 20, 
+        fontWeight: 'bold',
+        color: colors.white,
+    },
+    
 })

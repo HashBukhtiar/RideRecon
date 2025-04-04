@@ -1,9 +1,8 @@
-import BackButton from '@/components/BackButton'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { colors, radius, spacingX, spacingY } from '@/constants/theme'
+import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import React, { useState } from 'react'
-import { Alert, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, View } from 'react-native'
 import Typo from '@/components/Typo'
 import Header from '@/components/Header'
 import Input from '@/components/Input'
@@ -24,17 +23,36 @@ const Home = () => {
 
     const onPickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ['images'],
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
             aspect: [4, 3],
             quality: 0.5,
-        })
+        });
+
+        if (!result.canceled) {
+            setIdentification({...identification, image: result.assets[0]});
+        }
     }
 
     const onSubmit = async() => {
-        let{name, image} = identification;
-        if(!name.trim() && !image){
-            Alert.alert('User', 'Please fill all the fields')
+        let {name, image} = identification;
+        if(!image) {
+            Alert.alert('Vehicle Identification', 'Please upload an image of the vehicle')
             return
+        }
+        
+        setLoading(true);
+        
+        try {
+            // Pass the image URI when navigating
+            router.push({
+                pathname: '/(experts)/identify',
+                params: { imageUri: image.uri }
+            });
+        } catch (error) {
+            console.error("Navigation error:", error);
+            Alert.alert("Error", "Could not navigate to results screen");
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -52,7 +70,7 @@ const Home = () => {
                         <ImageUpload 
                             file={identification.image} 
                             onClear={()=> setIdentification({...identification, image: null})}
-                            onSelect={file=> setIdentification({...identification, image: file})} 
+                            onSelect={onPickImage} 
                             placeholder='Upload Image'
                         />
                     </View>
@@ -68,11 +86,12 @@ const Home = () => {
                 </ScrollView>
             </View>
 
+
             {/* footer */}
             <View style = {styles.footer}> 
                 
                 <View style={styles.buttonContainer}>
-                    <Button onPress={()=> router.push('/(auth)/register')}>
+                    <Button onPress={onSubmit} loading={loading} >
                         <Typo size={20} color={colors.neutral900} fontWeight={"600"}>
                             Identify
                         </Typo>

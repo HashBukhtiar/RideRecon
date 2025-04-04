@@ -1,13 +1,13 @@
 import { colors } from '@/constants/theme'
 import React, { useEffect } from 'react'
-import { Image, StyleSheet, View, Text } from 'react-native'
+import { Image, StyleSheet, View } from 'react-native'
 import { useRouter } from 'expo-router';
 
 const index = () => {
     const router = useRouter();
     useEffect(()=>{
         setTimeout(() => {
-            router.push("../(modals)/identifiedModal")
+            router.push("../(auth)/welcome")
         }, 100);
 
     },[])

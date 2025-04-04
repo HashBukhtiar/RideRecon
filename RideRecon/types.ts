@@ -32,6 +32,7 @@ export type accountOptionType = {
     title: string;
     icon: React.ReactNode;
     routeName?: any;
+    params?: Record<string, any>;
 };
 
 export type TypoProps = {
@@ -163,16 +164,23 @@ export type ResponseType = {
 };
 
 export type CollectionType = {
-    id?: string;
     name: string;
-    total?: number;
-    image: any;
-    uid?: string;
-    created?: Date;
+    imageUri: string;
 }
 
 export type IdentificationType = {
     id?: string;
     name: string;
-    image: any;
+    imageUri: string;
+    cars: CarType[];
 }
+
+export type CarType = {
+    imageUri: string;
+    make: string;
+    model: string;
+    confidence: string,
+    funFact: string,
+    purchaseLinks: string[],
+}
+

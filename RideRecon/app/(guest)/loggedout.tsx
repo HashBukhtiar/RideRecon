@@ -1,8 +1,8 @@
 import React from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import ScreenWrapper from '../../components/ScreenWrapper';
 import { colors, spacingX, spacingY } from '@/constants/theme';
-import { scale, verticalScale } from '@/utils/styling';
+import { verticalScale } from '@/utils/styling';
 import Typo from '@/components/Typo';
 import { Dimensions } from "react-native";
 import Button from '../../components/Button';

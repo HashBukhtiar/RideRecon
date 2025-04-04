@@ -13,11 +13,7 @@ import { UserDataType } from '@/types'
 import Button from '@/components/Button'
 import Header from '@/components/Header'
 
-
-
 const AccountModal = () => {
-
-    {/* UPDATE ONCE FIREBASE IS DONE (everything after 34:11 on video 6*/}
 
     const [userData, setUserData] = useState<UserDataType>({
         name: "",

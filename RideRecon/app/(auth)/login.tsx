@@ -1,5 +1,4 @@
 import BackButton from '@/components/BackButton'
-import Input from '@/components/Input'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
