@@ -33,6 +33,25 @@ const Home = () => {
             setIdentification({...identification, image: result.assets[0]});
         }
     }
+    
+    const onTakePhoto = async () => {
+        const { status } = await ImagePicker.requestCameraPermissionsAsync();
+        
+        if (status !== 'granted') {
+            Alert.alert('Permission required', 'Camera access is needed to take a photo');
+            return;
+        }
+        
+        let result = await ImagePicker.launchCameraAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            aspect: [4, 3],
+            quality: 0.5,
+        });
+
+        if (!result.canceled) {
+            setIdentification({...identification, image: result.assets[0]});
+        }
+    }
 
     const onSubmit = async() => {
         let {name, image} = identification;
@@ -83,13 +102,27 @@ const Home = () => {
                     showsVerticalScrollIndicator={false}
                 >
                     <View style={styles.inputContainer}>
-                        <Typo color={colors.neutral200} style={{marginLeft:spacingX._15}}>Collection Icon</Typo>
-                        <ImageUpload 
-                            file={identification.image} 
-                            onClear={()=> setIdentification({...identification, image: null})}
-                            onSelect={onPickImage} 
-                            placeholder='Upload Image'
-                        />
+                        <Typo color={colors.neutral200} style={{marginLeft:spacingX._15}}>Vehicle Image</Typo>
+                        
+                        {identification.image ? (
+                            <View style={styles.imagePreviewContainer}>
+                                <ImageUpload 
+                                    file={identification.image} 
+                                    onClear={()=> setIdentification({...identification, image: null})}
+                                    onSelect={onPickImage} 
+                                    placeholder='Upload Image'
+                                />
+                            </View>
+                        ) : (
+                            <View style={styles.imageButtonsContainer}>
+                                <Button style={styles.imageButton} onPress={onPickImage}>
+                                    <Typo color="#ffffff" fontWeight="500">Gallery</Typo>
+                                </Button>
+                                <Button style={styles.imageButton} onPress={onTakePhoto}>
+                                    <Typo color="#ffffff" fontWeight="500">Camera</Typo>
+                                </Button>
+                            </View>
+                        )}
                     </View>
 
                     <View style={styles.inputContainer}>
@@ -135,6 +168,18 @@ const styles = StyleSheet.create({
     },
     inputContainer: {
         gap: spacingY._15,
+    },
+    imageButtonsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        gap: spacingX._10,
+    },
+    imageButton: {
+        flex: 1,
+        height: verticalScale(52),
+    },
+    imagePreviewContainer: {
+        width: '100%',
     },
     footer: {
         backgroundColor: colors.neutral900,
