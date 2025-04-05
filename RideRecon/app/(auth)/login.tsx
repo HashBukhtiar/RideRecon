@@ -5,7 +5,7 @@ import Typo from '@/components/Typo'
 import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import React, { useRef, useState } from 'react'
-import { Pressable, Alert, StyleSheet, Text, View } from 'react-native'
+import { Pressable, Alert, StyleSheet, Text, View, TouchableWithoutFeedback, Keyboard } from 'react-native'
 import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
@@ -81,71 +81,73 @@ const Login = () => {
     }
 
     return (
-        <ScreenWrapper>
-            <View style={styles.container}>
-                <BackButton iconSize={28} />
+        <ScreenWrapper style={styles.wrapper}>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                <View style={styles.container}>
+                    <BackButton iconSize={28} />
 
-                <View style={{gap: 5, marginTop: spacingY._20}}>
-                    <Typo size = {30} fontWeight={"800"}>
-                        Welcome!
-                    </Typo>
-                </View>
-
-                {/* form */}
-                <View style={styles.form}>
-                    <Typo size={16} color={colors.textLighter}>
-                        Login now to track identifications and create collections
-                    </Typo>
-                    <InputSmaller 
-                        placeholder="Enter your email" 
-                        onChangeText={value=> emailRef.current = value}
-                        keyboardType="email-address"
-                        autoCapitalize="none"
-                        icon={
-                        <Icons.At 
-                            size={verticalScale(26)} 
-                            color={colors.neutral300} 
-                            weight="fill"
-                        />}
-                    />
-                    <InputSmaller 
-                        placeholder="Enter your password" 
-                        secureTextEntry
-                        onChangeText={value=> passwordRef.current = value}
-                        icon={
-                            <Icons.Lock 
-                              size={verticalScale(26)} 
-                              color={colors.neutral300} 
-                              weight="fill"
-                            />
-                        }
-                    />
-                    
-                    {error ? (
-                        <Typo size={14} color={colors.error} style={{marginTop: -10}}>
-                            {error}
+                    <View style={{gap: 5, marginTop: spacingY._20}}>
+                        <Typo size = {30} fontWeight={"800"}>
+                            Welcome!
                         </Typo>
-                    ) : null}
-                    
-                    <Typo size={14} color={colors.text} style={{alignSelf: "flex-end"}}>
-                        Forgot Password?
-                    </Typo>
+                    </View>
 
-                    <Button loading={isLoading} onPress={handleSubmit}>
-                        <Typo fontWeight={"700"} color={colors.black} size={21}>
-                            Login
+                    {/* form */}
+                    <View style={styles.form}>
+                        <Typo size={16} color={colors.textLighter}>
+                            Login now to track identifications and create collections
                         </Typo>
-                    </Button>
-                </View>
+                        <InputSmaller 
+                            placeholder="Enter your email" 
+                            onChangeText={value=> emailRef.current = value}
+                            keyboardType="email-address"
+                            autoCapitalize="none"
+                            icon={
+                            <Icons.At 
+                                size={verticalScale(26)} 
+                                color={colors.neutral300} 
+                                weight="fill"
+                            />}
+                        />
+                        <InputSmaller 
+                            placeholder="Enter your password" 
+                            secureTextEntry
+                            onChangeText={value=> passwordRef.current = value}
+                            icon={
+                                <Icons.Lock 
+                                size={verticalScale(26)} 
+                                color={colors.neutral300} 
+                                weight="fill"
+                                />
+                            }
+                        />
+                        
+                        {error ? (
+                            <Typo size={14} color={colors.error} style={{marginTop: -10}}>
+                                {error}
+                            </Typo>
+                        ) : null}
+                        
+                        <Typo size={14} color={colors.text} style={{alignSelf: "flex-end"}}>
+                            Forgot Password?
+                        </Typo>
 
-                {/* footer */}
-                <View style = {styles.footer}>
-                    <Typo size={15}>Don't have an account?</Typo>
-                    <Pressable onPress={()=> router.push("/(auth)/register")}> 
-                        <Typo size={15} fontWeight={"700"} color={colors.primary}>Sign up</Typo>
-                    </Pressable>
+                        <Button loading={isLoading} onPress={handleSubmit}>
+                            <Typo fontWeight={"700"} color={colors.black} size={21}>
+                                Login
+                            </Typo>
+                        </Button>
+                    </View>
+
+                    {/* footer */}
+                    <View style={styles.footer}>
+                        <Typo size={15}>Don't have an account?</Typo>
+                        <Pressable onPress={()=> router.push("/(auth)/register")}> 
+                            <Typo size={15} fontWeight={"700"} color={colors.primary}>Sign up</Typo>
+                        </Pressable>
+                    </View>
                 </View>
-            </View>
+            </TouchableWithoutFeedback>
         </ScreenWrapper>
     )
 }
@@ -153,10 +155,15 @@ const Login = () => {
 export default Login
 
 const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+        backgroundColor: colors.neutral900,
+    },
     container: {
         flex: 1,
         gap: spacingY._30,
         paddingHorizontal: spacingX._20,
+        backgroundColor: colors.neutral900,
     },
     welcomeText: {
         fontSize: verticalScale(20),
@@ -176,6 +183,7 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         gap: 5,
+        marginBottom: spacingY._20,
     },
     footerText: {
         textAlign: "center",

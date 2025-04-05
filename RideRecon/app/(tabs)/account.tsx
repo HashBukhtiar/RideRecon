@@ -4,7 +4,7 @@ import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
 import React, { useEffect, useState, useCallback } from 'react'
-import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Alert, StyleSheet, Text, TouchableOpacity, View, SafeAreaView, StatusBar } from 'react-native';
 import { Image } from 'expo-image'
 import { getAccountImage } from '@/services/imageServices'
 import { accountOptionType } from '@/types'
@@ -39,8 +39,6 @@ const Account = () => {
         username: "",
         photoURL: null
     });
-    
-    const [refreshKey, setRefreshKey] = useState(0);
     
     // Function to fetch user data
     const fetchUserData = useCallback(async () => {
@@ -111,8 +109,7 @@ const Account = () => {
         try {
             await signOut(auth);
             console.log("User signed out successfully");
-            // Navigate to welcome screen after successful sign out
-            router.replace("/(auth)/welcome");
+            router.replace("/");
         } catch (error) {
             console.error("Error signing out: ", error);
             Alert.alert("Error", "Failed to sign out. Please try again.");
@@ -147,67 +144,83 @@ const Account = () => {
     }
 
     return (
-    <ModalWrapper>
-        <View style={styles.container}>
-            <Header title='Account Details' style={{marginVertical: spacingY._30}}/>
+        <View style={styles.outerContainer}>
+            <StatusBar backgroundColor={colors.neutral900} barStyle="light-content" />
+            <SafeAreaView style={styles.safeArea}>
+                <ModalWrapper style={styles.modalWrapper}>
+                    <View style={styles.container}>
+                        <Header title='Account Details' style={{marginVertical: spacingY._30}}/>
 
-            {/* user info */}
-            <View style={styles.userInfo}>
+                        {/* user info */}
+                        <View style={styles.userInfo}>
 
-                {/* avatar */}
-                <View>
-                    <Image
-                        source={getAccountImage(userData.photoURL)}
-                        style={styles.avatar}
-                        contentFit='cover'
-                        transition={100}
-                    />
-                </View>
-
-                {/* user info */}
-                <View style={styles.nameContainer}>
-                    <Typo size={24} fontWeight={'600'} color={colors.neutral100}>
-                        {userData.name}
-                    </Typo>
-                    <Typo size={15} color={colors.neutral400}>
-                        {userData.email}
-                    </Typo>
-                </View>  
-            </View>
-
-            {/* account options */}
-            <View style={styles.accountOptions}>
-                {
-                    accountOptions.map((item, index) => {
-                        return(
-                            <View key={index} style={styles.listItem}>
-                                <TouchableOpacity style={styles.flexRow} onPress={() => handlePress(item)}>
-                                    {/* icon */}
-                                    <View style={[styles.listIcon]}>
-                                        {item.icon && item.icon}
-                                    </View>
-                                    <Typo size={16} style={{ flex: 1 }} fontWeight={'500'}>
-                                        {item.title}
-                                    </Typo>
-                                    <Icons.CaretRight
-                                        size={verticalScale(20)}
-                                        weight="bold"
-                                        color={colors.white}
-                                    />
-                                </TouchableOpacity>
+                            {/* avatar */}
+                            <View>
+                                <Image
+                                    source={getAccountImage(userData.photoURL)}
+                                    style={styles.avatar}
+                                    contentFit='cover'
+                                    transition={100}
+                                />
                             </View>
-                        )
-                    })
-                }
-            </View>
+
+                            {/* user info */}
+                            <View style={styles.nameContainer}>
+                                <Typo size={24} fontWeight={'600'} color={colors.neutral100}>
+                                    {userData.name}
+                                </Typo>
+                                <Typo size={15} color={colors.neutral400}>
+                                    {userData.email}
+                                </Typo>
+                            </View>  
+                        </View>
+
+                        {/* account options */}
+                        <View style={styles.accountOptions}>
+                            {
+                                accountOptions.map((item, index) => {
+                                    return(
+                                        <View key={index} style={styles.listItem}>
+                                            <TouchableOpacity style={styles.flexRow} onPress={() => handlePress(item)}>
+                                                {/* icon */}
+                                                <View style={[styles.listIcon]}>
+                                                    {item.icon && item.icon}
+                                                </View>
+                                                <Typo size={16} style={{ flex: 1 }} fontWeight={'500'}>
+                                                    {item.title}
+                                                </Typo>
+                                                <Icons.CaretRight
+                                                    size={verticalScale(20)}
+                                                    weight="bold"
+                                                    color={colors.white}
+                                                />
+                                            </TouchableOpacity>
+                                        </View>
+                                    )
+                                })
+                            }
+                        </View>
+                    </View>
+                </ModalWrapper>
+            </SafeAreaView>
         </View>
-    </ModalWrapper>
     )
 }
 
 export default Account
 
 const styles = StyleSheet.create({
+    outerContainer: {
+        flex: 1,
+        backgroundColor: colors.neutral900, // This will extend to the entire screen
+    },
+    safeArea: {
+        flex: 1, 
+        backgroundColor: colors.neutral900, // Ensures safe area has the correct background
+    },
+    modalWrapper: {
+        backgroundColor: colors.neutral900, // Set background color for modal wrapper
+    },
     container: {
         flex: 1,
         paddingHorizontal: spacingX._20,
