@@ -1,11 +1,10 @@
 import BackButton from '@/components/BackButton'
 import ScreenWrapper from '@/components/ScreenWrapper'
-import { colors, radius, spacingX, spacingY } from '@/constants/theme'
+import { colors, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
 import React, { useState } from 'react'
-import { Alert, Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { Alert, ScrollView, StyleSheet, View } from 'react-native'
 import Typo from '@/components/Typo'
-import Header from '@/components/Header'
 import Input from '@/components/Input'
 import ImageUpload from '@/components/ImageUpload'
 import * as ImagePicker from 'expo-image-picker';
