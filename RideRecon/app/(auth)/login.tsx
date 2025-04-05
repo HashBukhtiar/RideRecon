@@ -57,7 +57,7 @@ const Login = () => {
             console.log("User logged in:", user.uid);
             
             // Navigate to home screen or dashboard
-            router.push("/(coll)");
+            router.push("/(tabs)");
         } catch (error) {
             console.error("Login error:", error);
             

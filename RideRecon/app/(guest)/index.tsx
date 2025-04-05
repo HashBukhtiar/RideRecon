@@ -116,10 +116,10 @@ const Home = () => {
                         ) : (
                             <View style={styles.imageButtonsContainer}>
                                 <Button style={styles.imageButton} onPress={onPickImage}>
-                                    <Typo color="#ffffff" fontWeight="500">Gallery</Typo>
+                                    <Typo color={colors.neutral900} fontWeight="500">Gallery</Typo>
                                 </Button>
                                 <Button style={styles.imageButton} onPress={onTakePhoto}>
-                                    <Typo color="#ffffff" fontWeight="500">Camera</Typo>
+                                    <Typo color={colors.neutral900} fontWeight="500">Camera</Typo>
                                 </Button>
                             </View>
                         )}
