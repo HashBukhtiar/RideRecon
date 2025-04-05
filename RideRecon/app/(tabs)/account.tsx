@@ -3,7 +3,7 @@ import ModalWrapper from '@/components/ModalWrapper'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image'
 import { getAccountImage } from '@/services/imageServices'
@@ -11,10 +11,41 @@ import { accountOptionType } from '@/types'
 import * as Icons from 'phosphor-react-native'
 import { verticalScale } from '@/utils/styling';
 import { router, useRouter } from 'expo-router';
+import { getAuth, signOut } from 'firebase/auth';
+import { initializeApp } from 'firebase/app';
 
+// Initialize Firebase (if not done elsewhere)
+const firebaseConfig = {
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
+};
+
+// Initialize Firebase app
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const Account = () => {
     const router = useRouter();
+    const [userData, setUserData] = useState({
+        name: "Loading...",
+        email: "Loading..."
+    });
+    
+    // Get user data on component mount
+    useEffect(() => {
+        const user = auth.currentUser;
+        if (user) {
+            setUserData({
+                name: user.displayName || "User",
+                email: user.email || "No email"
+            });
+        }
+    }, []);
 
     const accountOptions: accountOptionType[] = [
         {
@@ -33,32 +64,48 @@ const Account = () => {
         }
     ]
 
-    {/* FIX: Video #6 @ 19:17 */}
-    const showLogoutAlert = ()=>{
-        Alert.alert("Confirm", "Are you sure you want to sign out?",[
-            {
-                text: "Cancel",
-                onPress: ()=> console.log('cancel sign out'),
-                style: 'cancel'
-            },
-            {
-                text: "Logout",
-                onPress: ()=> console.log('sign out needs to be fixed'),
-                style: 'cancel'
-            }
-        ])
+    // Sign out function
+    const handleSignOut = async () => {
+        try {
+            await signOut(auth);
+            console.log("User signed out successfully");
+            // Navigate to login screen after successful sign out
+            router.replace("../");
+        } catch (error) {
+            console.error("Error signing out: ", error);
+            Alert.alert("Error", "Failed to sign out. Please try again.");
+        }
+    };
+
+    const showLogoutAlert = () => {
+        Alert.alert(
+            "Confirm", 
+            "Are you sure you want to sign out?",
+            [
+                {
+                    text: "Cancel",
+                    onPress: () => console.log('cancel sign out'),
+                    style: 'cancel'
+                },
+                {
+                    text: "Logout",
+                    onPress: handleSignOut,
+                    style: 'destructive' // Red text on iOS
+                }
+            ]
+        );
     }
 
     const handlePress = async (item: accountOptionType) => {
-        if (item.title == 'Sign Out'){
+        if (item.title === 'Sign Out'){
             showLogoutAlert();
+        } else if(item.routeName) {
+            router.push(item.routeName);
         }
-
-        if(item.routeName) router.push(item.routeName);
     }
 
     return (
-    <ModalWrapper >
+    <ModalWrapper>
         <View style={styles.container}>
             <Header title='Account Details' style={{marginVertical: spacingY._30}}/>
 
@@ -67,27 +114,21 @@ const Account = () => {
 
                 {/* avatar */}
                 <View>
-                    {/* insert user_image */}
-                    {/* must be fixed */}
                     <Image
-                        source={getAccountImage(null)}
+                        source={getAccountImage(auth.currentUser?.photoURL)}
                         style={styles.avatar}
-                        contentFit ='cover'
+                        contentFit='cover'
                         transition={100}
-
                     />
                 </View>
 
-
                 {/* user info */}
                 <View style={styles.nameContainer}>
-                    {/* insert name (6:58)*/}
                     <Typo size={24} fontWeight={'600'} color={colors.neutral100}>
-                        insert_name
+                        {userData.name}
                     </Typo>
-                    {/* insert email (6:58)*/}
                     <Typo size={15} color={colors.neutral400}>
-                        insert_email
+                        {userData.email}
                     </Typo>
                 </View>  
             </View>
@@ -95,9 +136,9 @@ const Account = () => {
             {/* account options */}
             <View style={styles.accountOptions}>
                 {
-                    accountOptions.map((item)=>{
+                    accountOptions.map((item, index) => {
                         return(
-                            <View style={styles.listItem}>
+                            <View key={index} style={styles.listItem}>
                                 <TouchableOpacity style={styles.flexRow} onPress={() => handlePress(item)}>
                                     {/* icon */}
                                     <View style={[styles.listIcon]}>
