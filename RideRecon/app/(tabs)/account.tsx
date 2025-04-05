@@ -3,16 +3,17 @@ import ModalWrapper from '@/components/ModalWrapper'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import { Alert, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image'
 import { getAccountImage } from '@/services/imageServices'
 import { accountOptionType } from '@/types'
 import * as Icons from 'phosphor-react-native'
 import { verticalScale } from '@/utils/styling';
-import { router, useRouter } from 'expo-router';
+import { router, useRouter, useFocusEffect } from 'expo-router';
 import { getAuth, signOut } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
+import { getFirestore, doc, getDoc } from 'firebase/firestore';
 
 // Initialize Firebase (if not done elsewhere)
 const firebaseConfig = {
@@ -28,24 +29,65 @@ const firebaseConfig = {
 // Initialize Firebase app
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const db = getFirestore(app);
 
 const Account = () => {
     const router = useRouter();
     const [userData, setUserData] = useState({
         name: "Loading...",
-        email: "Loading..."
+        email: "Loading...",
+        username: "",
+        photoURL: null
     });
     
-    // Get user data on component mount
-    useEffect(() => {
-        const user = auth.currentUser;
-        if (user) {
-            setUserData({
-                name: user.displayName || "User",
-                email: user.email || "No email"
-            });
+    const [refreshKey, setRefreshKey] = useState(0);
+    
+    // Function to fetch user data
+    const fetchUserData = useCallback(async () => {
+        try {
+            const user = auth.currentUser;
+            if (!user) {
+                console.log("No user is signed in");
+                return;
+            }
+
+            // Get additional user data from Firestore
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            if (userDoc.exists()) {
+                const firestoreData = userDoc.data();
+                setUserData({
+                    name: user.displayName || firestoreData.name || "User",
+                    email: user.email || "No email",
+                    username: firestoreData.username || "",
+                    photoURL: user.photoURL || firestoreData.photoURL
+                });
+            } else {
+                setUserData({
+                    name: user.displayName || "User",
+                    email: user.email || "No email",
+                    username: "",
+                    photoURL: user.photoURL
+                });
+            }
+        } catch (error) {
+            console.error("Error fetching user data:", error);
+            Alert.alert("Error", "Failed to load user data");
         }
     }, []);
+    
+    // Fetch data whenever screen comes into focus
+    useFocusEffect(
+        useCallback(() => {
+            console.log("Account screen is focused - refreshing data");
+            fetchUserData();
+            return () => {}; // cleanup function
+        }, [fetchUserData])
+    );
+    
+    // Also fetch on initial mount
+    useEffect(() => {
+        fetchUserData();
+    }, [fetchUserData]);
 
     const accountOptions: accountOptionType[] = [
         {
@@ -69,8 +111,8 @@ const Account = () => {
         try {
             await signOut(auth);
             console.log("User signed out successfully");
-            // Navigate to login screen after successful sign out
-            router.replace("../");
+            // Navigate to welcome screen after successful sign out
+            router.replace("/(auth)/welcome");
         } catch (error) {
             console.error("Error signing out: ", error);
             Alert.alert("Error", "Failed to sign out. Please try again.");
@@ -115,7 +157,7 @@ const Account = () => {
                 {/* avatar */}
                 <View>
                     <Image
-                        source={getAccountImage(auth.currentUser?.photoURL)}
+                        source={getAccountImage(userData.photoURL)}
                         style={styles.avatar}
                         contentFit='cover'
                         transition={100}
