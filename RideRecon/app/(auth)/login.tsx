@@ -10,22 +10,74 @@ import * as Icons from 'phosphor-react-native'
 import Button from '@/components/Button'
 import { useRouter } from 'expo-router'
 import InputSmaller from '@/components/InputSmaller'
+import { initializeApp } from 'firebase/app'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
+
+// Initialize Firebase
+const firebaseConfig = {
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const Login = () => {
-
     const emailRef = useRef("")
     const passwordRef = useRef("")
     const[isLoading, setIsLoading] = useState(false);
     const router = useRouter();
+    const [error, setError] = useState("");
 
-    const handleSubmit = async()=> {
+    const handleSubmit = async() => {
         if (!emailRef.current || !passwordRef.current) {
-            Alert.alert("Login", "Please fill all the fields")
+            Alert.alert("Login", "Please fill all the fields");
             return;
         }
-        console.log("email: ", emailRef.current)
-        console.log("password: ", passwordRef.current)
-        console.log("good to go");
+        
+        setIsLoading(true);
+        setError("");
+        
+        try {
+            // Sign in with Firebase
+            const userCredential = await signInWithEmailAndPassword(
+                auth, 
+                emailRef.current, 
+                passwordRef.current
+            );
+            
+            // User signed in successfully
+            const user = userCredential.user;
+            console.log("User logged in:", user.uid);
+            
+            // Navigate to home screen or dashboard
+            router.push("/(coll)");
+        } catch (error) {
+            console.error("Login error:", error);
+            
+            // Handle specific Firebase auth errors
+            if (error.code === 'auth/invalid-email') {
+                setError("Invalid email address");
+            } else if (error.code === 'auth/user-not-found') {
+                setError("No account found with this email");
+            } else if (error.code === 'auth/wrong-password') {
+                setError("Incorrect password");
+            } else if (error.code === 'auth/too-many-requests') {
+                setError("Too many failed login attempts. Try again later");
+            } else {
+                setError("Failed to login. Please try again");
+            }
+            
+            Alert.alert("Login Failed", error.message || "Failed to login");
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -47,6 +99,8 @@ const Login = () => {
                     <InputSmaller 
                         placeholder="Enter your email" 
                         onChangeText={value=> emailRef.current = value}
+                        keyboardType="email-address"
+                        autoCapitalize="none"
                         icon={
                         <Icons.At 
                             size={verticalScale(26)} 
@@ -66,6 +120,13 @@ const Login = () => {
                             />
                         }
                     />
+                    
+                    {error ? (
+                        <Typo size={14} color={colors.error} style={{marginTop: -10}}>
+                            {error}
+                        </Typo>
+                    ) : null}
+                    
                     <Typo size={14} color={colors.text} style={{alignSelf: "flex-end"}}>
                         Forgot Password?
                     </Typo>
@@ -120,7 +181,9 @@ const styles = StyleSheet.create({
         textAlign: "center",
         color: colors.text,
         fontSize: verticalScale(15),
+    },
+    error: {
+        color: 'red',
+        marginBottom: spacingY._10,
     }
 })
-
-
