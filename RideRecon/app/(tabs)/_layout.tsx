@@ -3,9 +3,7 @@ import { router, Tabs, useRouter } from 'expo-router'
 import React, { useEffect } from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-
 const _layout = () => {
-
     return (
         <Tabs 
             tabBar={TabBar} 
