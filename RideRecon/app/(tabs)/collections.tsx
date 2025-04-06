@@ -1,38 +1,134 @@
+import Button from '@/components/Button'
 import ScreenWrapper from '@/components/ScreenWrapper'
 import Typo from '@/components/Typo'
 import { colors, radius, spacingX, spacingY } from '@/constants/theme'
 import { verticalScale } from '@/utils/styling'
-import { router, useRouter } from 'expo-router'
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import * as Icons from "phosphor-react-native"
+import { router, useFocusEffect } from 'expo-router'
+import React, { useCallback, useState } from 'react'
+import { StyleSheet, View, FlatList, Image, TouchableOpacity, ActivityIndicator } from 'react-native'
+import * as Icons from 'phosphor-react-native'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+
+// Type for collection items
+type CollectionItem = {
+  id: string;
+  name: string;
+  imageUri: string | null;
+  createdAt: string;
+}
 
 const Collections = () => {
+    const [collections, setCollections] = useState<CollectionItem[]>([]);
+    const [loading, setLoading] = useState(true);
 
-    const router = useRouter()
+    // Fetch collections whenever screen comes into focus
+    useFocusEffect(
+        useCallback(() => {
+            console.log("Collections screen focused - fetching collections");
+            fetchCollections();
+            return () => {}; // Cleanup function
+        }, [])
+    );
+
+    const fetchCollections = async () => {
+        setLoading(true);
+        try {
+            // Get collections from AsyncStorage
+            const collectionsString = await AsyncStorage.getItem('collections');
+            console.log("Collections from storage:", collectionsString);
+            
+            const collections = collectionsString 
+                ? JSON.parse(collectionsString) 
+                : [];
+            
+            setCollections(collections);
+        } catch (error) {
+            console.error("Error fetching collections:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderCollectionItem = ({ item }: { item: CollectionItem }) => (
+        <TouchableOpacity 
+            style={styles.collectionItem}
+            onPress={() => {
+                // Handle collection item press
+                // For example, navigate to collection details
+                console.log("Pressed collection:", item.name);
+            }}
+        >
+            <View style={styles.imageContainer}>
+                {item.imageUri ? (
+                    <Image 
+                        source={{ uri: item.imageUri }} 
+                        style={styles.collectionImage}
+                        resizeMode="cover"
+                    />
+                ) : (
+                    <View style={styles.placeholderContainer}>
+                        <Icons.FolderSimple 
+                            size={50} 
+                            color={colors.neutral400} 
+                        />
+                    </View>
+                )}
+            </View>
+            
+            <View style={styles.collectionInfo}>
+                <Typo size={16} fontWeight="600" numberOfLines={1}>
+                    {item.name}
+                </Typo>
+            </View>
+        </TouchableOpacity>
+    );
 
     return (
-        <ScreenWrapper style={{ backgroundColor: colors.black}}>
+        <ScreenWrapper>
             <View style={styles.container}>
-
-                {/* collection sets */}
-                <View style={styles.sets}>
-                    <View style={styles.flexRow} >
-                        <Typo size ={22} fontWeight={"500"} >
-                            Personal Collections
+                <View style={styles.header}>
+                    <Typo size={24} fontWeight="600" style={styles.title}>
+                        My Collections
+                    </Typo>
+                    
+                    <Button 
+                        onPress={() => router.push('/(modals)/collectionModal')} 
+                        style={styles.addButton}
+                    >
+                        <Typo size={16} color={colors.neutral900} fontWeight={"600"}>
+                            Add New Collection
                         </Typo>
-                        <TouchableOpacity onPress={()=> router.push("/(modals)/collectionModal")}>
-                            <Icons.PlusCircle
-                                weight="fill"
-                                color={colors.primary}
-                                size={verticalScale(33)}
-                            />
-                        </TouchableOpacity>
-                    </View>
-
-                    {/* mess with background color in sets to get it to work with the collections list */}
-
+                    </Button>
                 </View>
+
+                {loading ? (
+                    <View style={styles.loadingContainer}>
+                        <ActivityIndicator size="large" color={colors.primary} />
+                        <Typo size={16} color={colors.neutral300} style={{marginTop: spacingY._10}}>
+                            Loading collections...
+                        </Typo>
+                    </View>
+                ) : collections.length === 0 ? (
+                    <View style={styles.emptyContainer}>
+                        <Icons.FolderSimple size={60} color={colors.neutral500} />
+                        <Typo size={18} fontWeight="500" style={{marginTop: spacingY._20}}>
+                            No collections yet
+                        </Typo>
+                        <Typo size={14} color={colors.neutral400} style={{textAlign: 'center', marginTop: spacingY._5}}>
+                            Create your first collection to organize your identified vehicles
+                        </Typo>
+                    </View>
+                ) : (
+                    <FlatList
+                        data={collections}
+                        renderItem={renderCollectionItem}
+                        keyExtractor={item => item.id}
+                        numColumns={2}
+                        contentContainerStyle={styles.gridContainer}
+                        columnWrapperStyle={styles.columnWrapper}
+                        showsVerticalScrollIndicator={false}
+                    />
+                )}
             </View>
         </ScreenWrapper>
     )
@@ -43,24 +139,60 @@ export default Collections
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingTop: spacingX._20,
+        paddingHorizontal: spacingX._20,
     },
-    flexRow: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
+    header: {
+        paddingVertical: spacingY._20,
+        gap: spacingY._15,
+    },
+    title: {
+        textAlign: 'center',
+    },
+    addButton: {
         marginBottom: spacingY._10,
     },
-    sets: {
+    loadingContainer: {
         flex: 1,
-        backgroundColor: colors.neutral900,
-        borderTopRightRadius: radius._30,
-        borderTopLeftRadius: radius._30,
-        padding: spacingX._20,
-        paddingTop: spacingX._25,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
-    listStyle: {
-        paddingVertical: spacingY._25,
-        paddingTop: spacingY._15,
-    }
+    emptyContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        paddingHorizontal: spacingX._30,
+    },
+    gridContainer: {
+        paddingBottom: spacingY._20,
+    },
+    columnWrapper: {
+        justifyContent: 'space-between',
+        marginBottom: spacingY._15,
+    },
+    collectionItem: {
+        width: '48%',
+        borderRadius: radius._15,
+        borderCurve: 'continuous',
+        backgroundColor: colors.neutral800,
+        overflow: 'hidden',
+    },
+    imageContainer: {
+        height: verticalScale(120),
+        width: '100%',
+    },
+    collectionImage: {
+        width: '100%',
+        height: '100%',
+    },
+    placeholderContainer: {
+        width: '100%',
+        height: '100%',
+        backgroundColor: colors.neutral700,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    collectionInfo: {
+        padding: spacingY._10,
+        alignItems: 'center',
+    },
 })
