@@ -1,104 +1,118 @@
-import { ImageUploadProps } from "@/types";
-import React from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import * as Icons from "phosphor-react-native";
-import { colors, radius } from "@/constants/theme";
-import Typo from "./Typo";
-import { Image } from "expo-image";
-import { scale, verticalScale } from "@/utils/styling";
-import * as ImagePicker from "expo-image-picker";
+import React, { useState, useEffect } from 'react';
+import { Image, Pressable, StyleSheet, View, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors, radius, spacingX, spacingY } from '@/constants/theme';
+import Typo from './Typo';
 
-const { width, height } = Dimensions.get("window");
+const { width: screenWidth } = Dimensions.get('window');
+const MAX_HEIGHT = 400; // Maximum height constraint
+const MAX_WIDTH = screenWidth - 40; // Maximum width (accounting for padding)
 
-const ImageUpload = ({
-  file = null,
-  onSelect,
-  onClear,
-  containerStyle,
-  imageStyle,
-  placeholder = "",
-}: ImageUploadProps) => {
-  const pickImage = async () => {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      aspect: [4, 3],
-      quality: 0.5,
-    });
-    if (!result.canceled) {
-      onSelect(result.assets[0]);
+const ImageUpload = ({ file, onSelect, onClear, placeholder }) => {
+  console.log("Image file in ImageUpload:", file);
+  const [imageDimensions, setImageDimensions] = useState({ width: 0, height: 0 });
+  
+  useEffect(() => {
+    if (file && file.uri) {
+      // Get image dimensions from the file if available
+      if (file.width && file.height) {
+        calculateDimensions(file.width, file.height);
+      } else {
+        // Or fetch them if not available
+        Image.getSize(file.uri, (width, height) => {
+          calculateDimensions(width, height);
+        }, (error) => {
+          console.error("Failed to get image dimensions:", error);
+          // Fallback to default dimensions
+          setImageDimensions({ width: MAX_WIDTH, height: 200 });
+        });
+      }
     }
+  }, [file]);
+  
+  // Calculate dimensions maintaining aspect ratio
+  const calculateDimensions = (originalWidth, originalHeight) => {
+    let newWidth = originalWidth;
+    let newHeight = originalHeight;
+    
+    // Scale down if wider than screen
+    if (newWidth > MAX_WIDTH) {
+      const ratio = MAX_WIDTH / newWidth;
+      newWidth = MAX_WIDTH;
+      newHeight = newHeight * ratio;
+    }
+    
+    // Scale down if too tall
+    if (newHeight > MAX_HEIGHT) {
+      const ratio = MAX_HEIGHT / newHeight;
+      newHeight = MAX_HEIGHT;
+      newWidth = newWidth * ratio;
+    }
+    
+    setImageDimensions({ width: newWidth, height: newHeight });
   };
+
   return (
-    <View>
-      {!file && (
-        <TouchableOpacity
-          onPress={pickImage}
-          style={[styles.inputContainer, containerStyle && containerStyle]}
-        >
-          <Icons.UploadSimple color={colors.neutral200} />
-          {placeholder && <Typo size={15}>{placeholder}</Typo>}
-        </TouchableOpacity>
-      )}
-
-      {file && (
-        <View style={[styles.image, imageStyle && imageStyle]}>
-          <Image
-            style={{ flex: 1 }}
-            source={{ uri: file.uri }}
-            contentFit="cover"
-            transition={100}
+    <View style={styles.container}>
+      {file ? (
+        <View style={[
+          styles.imageContainer, 
+          { 
+            width: imageDimensions.width || '100%', 
+            height: imageDimensions.height || 200,
+            alignSelf: 'center'
+          }
+        ]}>
+          <Image 
+            source={{ uri: file.uri }} 
+            style={styles.image} 
+            resizeMode="contain"
           />
-
-          <TouchableOpacity style={styles.deleteIcon} onPress={onClear}>
-            <Icons.XCircle
-              size={verticalScale(24)}
-              weight="fill"
-              color={colors.white}
-            />
-          </TouchableOpacity>
+          <Pressable style={styles.clearButton} onPress={onClear}>
+            <Ionicons name="close-circle" size={24} color={colors.error} />
+          </Pressable>
         </View>
+      ) : (
+        <Pressable style={styles.uploadButton} onPress={onSelect}>
+          <Ionicons name="cloud-upload-outline" size={24} color={colors.text} />
+          <Typo>{placeholder || 'Upload Image'}</Typo>
+        </Pressable>
       )}
     </View>
   );
 };
 
-export default ImageUpload;
-
 const styles = StyleSheet.create({
-  inputContainer: {
-    width: height * 0.2,
-    height: height * 0.2,
-    backgroundColor: colors.neutral700,
-    borderRadius: radius._15,
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    gap: 10,
+  container: {
+    width: '100%',
+  },
+  uploadButton: {
     borderWidth: 1,
-    borderColor: colors.neutral500,
-    borderStyle: "dashed",
+    borderStyle: 'dashed',
+    borderColor: colors.neutral600,
+    borderRadius: radius._10,
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.neutral800,
+  },
+  imageContainer: {
+    position: 'relative',
+    borderRadius: radius._10,
+    overflow: 'hidden',
+    marginVertical: spacingY._10,
   },
   image: {
-    height: scale(150),
-    width: scale(150),
-    borderRadius: radius._15,
-    borderCurve: "continuous",
-    overflow: "hidden",
+    width: '100%',
+    height: '100%',
   },
-  deleteIcon: {
-    position: "absolute",
-    top: scale(6),
-    right: scale(6),
-    shadowColor: colors.black,
-    shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 1,
-    shadowRadius: 10,
+  clearButton: {
+    position: 'absolute',
+    right: 8,
+    top: 8,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 15,
   },
 });
+
+export default ImageUpload;

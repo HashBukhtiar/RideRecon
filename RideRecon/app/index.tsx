@@ -1,38 +1,61 @@
-import { colors } from '@/constants/theme'
-import React, { useEffect } from 'react'
-import { Image, StyleSheet, View, Text } from 'react-native'
-import { useRouter } from 'expo-router';
+import Button from '@/components/Button'
+import ScreenWrapper from '@/components/ScreenWrapper'
+import Typo from '@/components/Typo'
+import { colors, spacingX, spacingY } from '@/constants/theme'
+import { useRouter } from 'expo-router'
+import React from 'react'
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-const index = () => {
+const Welcome = () => {
     const router = useRouter();
-    useEffect(()=>{
-        setTimeout(() => {
-            router.push("../(auth)/welcome")
-        }, 100);
-
-    },[])
     return (
-        <View style={styles.container}>
-            <Image
-            style={styles.logo}
-            resizeMode="contain"
-            source={require("../assets/images/design/logo.png")}
-            />
-        </View>
+        <ScreenWrapper>
+            <View style={styles.container}>
+                
+                <View style={styles.buttonContainer}>
+                    <Button onPress={()=> router.push('../(auth)/login')}>
+                        <Typo size={22} color={colors.neutral900} fontWeight={"600"}>
+                            Account Access
+                        </Typo>
+                    </Button>
+
+                    <Image
+                    style={styles.logo}
+                    resizeMode="contain"
+                    source={require("../assets/images/design/logo.png")}
+                    />
+
+                    <Button onPress={()=> router.push('../(guest)')}>
+                        <Typo size={22} color={colors.neutral900} fontWeight={"600"}>
+                            Guest Access
+                        </Typo>
+                    </Button>
+                </View>
+
+            </View>
+            
+        </ScreenWrapper>
     )
 }
 
-export default index
+export default Welcome
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: colors.neutral900,
+        justifyContent: "center", 
+        alignItems: "center"
+
+    },
+    buttonContainer: {
+        width: "100%",
+        paddingHorizontal: spacingX._25,
+        gap: spacingY._3,
+        marginVertical: 30
     },
     logo: {
         height: 250,
         aspectRatio: 1,
-    }
+        alignSelf: "center",
+    },
 })

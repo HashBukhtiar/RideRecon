@@ -11,6 +11,24 @@ def similarity(s1, s2):
     
     return SequenceMatcher(None, s1, s2).ratio()
 
+def get_common_marketplaces(make, model):
+    make_model = f"{make} {model}".replace(" ", "+")
+    
+    return [
+        {
+            "name": "AutoTrader",
+            "url": f"https://www.autotrader.com/cars-for-sale/{make_model}"
+        },
+        {
+            "name": "Cars.com",
+            "url": f"https://www.cars.com/shopping/results/?stock_type=all&makes%5B%5D={make}&models%5B%5D={model}"
+        },
+        {
+            "name": "CarGurus",
+            "url": f"https://www.cargurus.com/Cars/l-Used-{make}-{model}-d138"
+        }
+    ]
+
 def finalize(image_path):
     print(f"Processing image at path: {image_path}")
     print(f"File exists: {os.path.exists(image_path)}")
@@ -33,22 +51,37 @@ def finalize(image_path):
         confidence += 16.75*similarity(response['make'], gpt4o_response_json['make']) + 16.75*similarity(response['model'], gpt4o_response_json['model'])
     
     final_result = {
-        "make": final_make.title(),
-        "model": final_model.title(),
-        "confidence": f"{round(confidence,2)}%"
+        "4o-make": gpt4o_response_json['make'],
+        "4o-model": gpt4o_response_json['model'],
+        "gemini-make": gemini_response_json['make'],
+        "gemini-model": gemini_response_json['model'],
+        "ris-make": ris_response_json['make'],
+        "ris-model": ris_response_json['model'],
+        "make": final_make,
+        "model": final_model,
+        "confidence": f"{round(confidence,2)}%",
     }
+
+    fun_fact = gpt4o_fact(final_result['make'], final_result['model'])
+    print(fun_fact)
+
+    purchase_sources = get_common_marketplaces(final_result['make'], final_result['model'])
+    purchase_urls = [purchase_sources[0]['url'], purchase_sources[1]['url'], purchase_sources[2]['url']]
+
+    print(purchase_urls)
+
+    final_result['fact'] = fun_fact
+    final_result['source'] = purchase_urls
     
-    print("\nFinal identification:", final_result)
+    print("\n\nFinal identification:", final_result)    
+
     return final_result
 
 
 if __name__ == "__main__":
-    # Calculate the correct path to the current file
     current_file = Path(__file__)
-    # Find the project root - the directory containing the assets folder
     project_root = None
     
-    # Start from the current directory and go up until we find assets/images
     check_dir = current_file.parent
     for _ in range(5):  # Try up to 5 levels up
         if (check_dir / "assets" / "images").exists():
@@ -57,7 +90,6 @@ if __name__ == "__main__":
         check_dir = check_dir.parent
     
     if not project_root:
-        # Fallback to the expected structure
         project_root = Path(__file__).parent.parent
     
     print(f"Project root: {project_root}")
@@ -77,20 +109,8 @@ if __name__ == "__main__":
     print(f"SVJ exists: {os.path.exists(svj_path)}")
     
     # Choose image
-    #finalize(gt3rs_path)
+    finalize(gt3rs_path)
     #finalize(f150_path)
     #finalize(camry_path)
     #finalize(wagon_path)
-    finalize(svj_path)
-
-    '''image_to_use = None
-    for img_path in [gt3rs_path, f150_path, camry_path]:
-        if os.path.exists(img_path):
-            image_to_use = img_path
-            break
-    
-    if image_to_use:
-        print(f"Using image: {image_to_use}")
-        finalize(image_to_use)
-    else:
-        print("No valid images found!")'''
+    #finalize(svj_path) 
