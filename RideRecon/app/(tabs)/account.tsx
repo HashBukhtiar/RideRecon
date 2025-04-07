@@ -101,6 +101,11 @@ const Account = () => {
             title: 'Identification History',
             icon: <Icons.ClockCounterClockwise size={26} color={colors.white}/>,
             routeName: '(modals)/historyModal',
+        },
+        {
+            title: 'FAQ',
+            icon: <Icons.Question size={26} color={colors.white} />,
+            routeName: '/faq',
         }
     ]
 
