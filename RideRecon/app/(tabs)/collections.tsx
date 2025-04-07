@@ -53,9 +53,8 @@ const Collections = () => {
         <TouchableOpacity 
             style={styles.collectionItem}
             onPress={() => {
-                // Handle collection item press
-                // For example, navigate to collection details
-                console.log("Pressed collection:", item.name);
+                // Navigate to collection details
+                router.push(`/(collections)/${item.id}`);
             }}
         >
             <View style={styles.imageContainer}>
