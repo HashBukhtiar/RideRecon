@@ -114,7 +114,7 @@ const Account = () => {
         try {
             await signOut(auth);
             console.log("User signed out successfully");
-            router.replace("/");
+            router.replace("../(auth)/login");
         } catch (error) {
             console.error("Error signing out: ", error);
             Alert.alert("Error", "Failed to sign out. Please try again.");

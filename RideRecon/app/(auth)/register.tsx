@@ -37,6 +37,7 @@ const Register = () => {
     const usernameRef = useRef("")
     const[isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
     const router = useRouter();
 
     const handleSubmit = async() => {
@@ -163,18 +164,30 @@ const Register = () => {
                                     weight="fill"
                                 />}
                             />
-                            <InputSmaller 
-                                placeholder="Enter your password" 
-                                secureTextEntry
-                                onChangeText={value=> passwordRef.current = value}
-                                icon={
-                                    <Icons.Lock 
-                                    size={verticalScale(26)} 
-                                    color={colors.neutral300} 
-                                    weight="fill"
-                                    />
-                                }
-                            />
+                            <View style={styles.passwordContainer}>
+                                <InputSmaller 
+                                    placeholder="Enter your password" 
+                                    secureTextEntry={!showPassword}
+                                    onChangeText={value=> passwordRef.current = value}
+                                    icon={
+                                        <Icons.Lock 
+                                        size={verticalScale(26)} 
+                                        color={colors.neutral300} 
+                                        weight="fill"
+                                        />
+                                    }
+                                />
+                                <Pressable 
+                                    style={styles.eyeIcon} 
+                                    onPress={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? (
+                                        <Icons.Eye size={verticalScale(22)} color={colors.neutral300} />
+                                    ) : (
+                                        <Icons.EyeClosed size={verticalScale(22)} color={colors.neutral300} />
+                                    )}
+                                </Pressable>
+                            </View>
                             
                             {error ? (
                                 <Typo size={14} color={colors.error} style={{marginTop: -10}}>
@@ -238,5 +251,15 @@ const styles = StyleSheet.create({
     error: {
         color: 'red',
         marginBottom: spacingY._10,
+    },
+    passwordContainer: {
+        position: 'relative',
+    },
+    eyeIcon: {
+        position: 'absolute',
+        right: 15,
+        top: 0,
+        bottom: 0,
+        justifyContent: 'center',
     }
 })
