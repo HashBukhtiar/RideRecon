@@ -15,7 +15,8 @@ export default {
         adaptiveIcon: {
           foregroundImage: "./assets/images/adaptive-icon.png",
           backgroundColor: "#ffffff"
-        }
+        },
+        package: "com.hashbrqwn.riderecon"
       },
       web: {
         bundler: "metro",
@@ -38,7 +39,10 @@ export default {
         typedRoutes: true
       },
       extra: {
-        apiUrl: process.env.EXPO_PUBLIC_API_URL
+        apiUrl: process.env.EXPO_PUBLIC_API_URL,
+        eas: {
+          projectId: "b8ceaf0c-0e69-448b-b0ec-b2c5fb686693"
+        }
       }
     }
 };
